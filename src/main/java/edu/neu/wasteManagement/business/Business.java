@@ -4,10 +4,22 @@
  */
 package edu.neu.wasteManagement.business;
 
+import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
+
 /**
  *
  * @author ingale.r
  */
 public class Business {
+    
+    private UserAccountDirectory userAccountDir;
+
+    public UserAccountDirectory getUserAccountDir() {
+        return userAccountDir;
+    }
+
+    public void setUserAccountDir(UserAccountDirectory userAccountDir) {
+        this.userAccountDir = userAccountDir;
+    }
     
 }

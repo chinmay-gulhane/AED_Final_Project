@@ -4,16 +4,22 @@
  */
 package edu.neu.wasteManagement.ui;
 
+import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.utility.Utility;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author ingale.r
  */
-public class LoginJPanel extends javax.swing.JPanel {
+public class LoginJPanel extends BaseJPanel {
 
-    /**
-     * Creates new form LoginJPanel
-     */
-    public LoginJPanel() {
+    public LoginJPanel(Business business) {
+        super(business);
         initComponents();
     }
 
@@ -26,19 +32,143 @@ public class LoginJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblWelcome = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        btnSubmit = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        lblWelcome.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
+        lblWelcome.setText("Welcome back !");
+
+        lblName.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblName.setText("Username");
+
+        txtUsername.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
+
+        lblEmail.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblEmail.setText("Password");
+
+        btnSubmit.setBackground(new java.awt.Color(105, 155, 247));
+        btnSubmit.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        txtPassword.setPreferredSize(new java.awt.Dimension(61, 23));
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(575, 575, 575)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblWelcome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(780, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(lblWelcome)
+                .addGap(41, 41, 41)
+                .addComponent(lblName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblEmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(504, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+//        // get user by username & password and find user in userdirectory
+//        User loggedIn = business.getUserDir().validateLogins(txtUsername.getText(), txtPassword.getText());
+//        
+//        if(loggedIn != null){
+//            business.setLoggedInUser(loggedIn);
+//            showHomePage(loggedIn);
+//        }else 
+//            JOptionPane.showMessageDialog(this, "User not found!");
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void showHomePage(){//User loggedIn){
+//        switch(loggedIn.getRole()){
+//            case ADMIN:
+//                Utility.switchPanel(new AdminJPanel(business),business.getWorkArea());
+//                break;
+//               
+//            case PROFESSOR:
+//                Utility.switchPanel(new ProfJPanel(business),business.getWorkArea());
+//                break;
+//                
+//            case STUDENT:
+//                 Utility.switchPanel(new StudentJPanel(business),business.getWorkArea());
+//                 break;
+//                 
+//            case AUTHORITY:
+//                 Utility.switchPanel(new AuthorityJPanel(business),business.getWorkArea());
+//                 break;
+//                
+//            case EMPLOYER:
+//                 Utility.switchPanel(new EmployerJPanel(business),business.getWorkArea());
+//                 break;
+//
+//        }
+//        
+//        // Rename SignUp & Login option
+//        for(Component comp: business.getHeader().getComponents()){
+//            JLabel jComp = (JLabel)comp;
+//            if(jComp.getText().equals("Sign Up"))
+//                jComp.setText("");
+//            if(jComp.getText().equals("Log In"))
+//                jComp.setText("Log Out");
+//        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblWelcome;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

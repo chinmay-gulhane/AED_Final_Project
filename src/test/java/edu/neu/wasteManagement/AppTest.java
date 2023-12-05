@@ -1,4 +1,4 @@
-package edu.neu.waste-management;
+package edu.neu.wasteManagement;
 
 import static org.junit.Assert.assertTrue;
 

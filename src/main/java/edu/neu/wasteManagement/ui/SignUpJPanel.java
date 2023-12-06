@@ -150,7 +150,7 @@ public class SignUpJPanel extends BaseJPanel {
                 return;
             }
             else 
-                system.getUserAccountDir().addUserAccount(name, password, RoleType.PRINCIPAL_USER, true);
+                system.getUserAccountDir().addUserAccount(name, password, new PrincipalUser(), true);
             
             JOptionPane.showMessageDialog(this, "Sign up completed!");
              

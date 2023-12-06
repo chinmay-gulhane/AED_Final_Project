@@ -26,8 +26,8 @@ public class UserAccountDirectory {
         return users;
     }
     
-    public UserAccount addUserAccount(String username, String password, RoleType type, boolean Active) throws Exception{
-        UserAccount user = new UserAccount(username, password, type, Active);
+    public UserAccount addUserAccount(String username, String password, Role role, boolean Active) throws Exception{
+        UserAccount user = new UserAccount(username, password, role, Active);
         users.add(user);
         return user;
     }

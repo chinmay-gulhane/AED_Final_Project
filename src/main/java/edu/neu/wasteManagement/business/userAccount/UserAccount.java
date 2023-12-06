@@ -20,15 +20,15 @@ public class UserAccount {
     private boolean Active;
     private List<String> usedPasswords;
     private Person person;
-    private RoleType type;
+    private Role role;
     private String salt = BCrypt.gensalt();
 
-    public UserAccount(String username, String password, RoleType type, boolean Active) throws Exception {
+    public UserAccount(String username, String password, Role role, boolean Active) throws Exception {
         this.usedPasswords = new ArrayList<>();
         this.username = username;
         this.setPassword(password);
         this.Active = Active;
-        this.type = type;
+        this.role = role;
     }
 
     public boolean isActive() {
@@ -76,13 +76,14 @@ public class UserAccount {
         this.person = person;
     }
 
-    public RoleType getType() {
-        return type;
+    public Role getRole() {
+        return role;
     }
 
-    public void setType(RoleType type) {
-        this.type = type;
+    public void setRole(Role role) {
+        this.role = role;
     }
+
     
      public boolean isValidPassword(String password){
         String pattern = "^[a-zA-Z0-9]+.*$";  // Allows letters and digits at the beginning

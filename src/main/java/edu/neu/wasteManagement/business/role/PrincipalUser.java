@@ -13,6 +13,7 @@ import javax.swing.JPanel;
  * @author ingale.r
  */
 public class PrincipalUser extends Role{
+    
 
     @Override
     public JPanel createWorkArea(Ecosystem business) {

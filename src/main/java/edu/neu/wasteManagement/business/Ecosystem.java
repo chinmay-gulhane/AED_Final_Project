@@ -6,6 +6,7 @@ package edu.neu.wasteManagement.business;
 
 import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.role.Role;
+import edu.neu.wasteManagement.business.territory.CityRegistry;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 public class Ecosystem extends Organization{
     
     private UserAccountDirectory userAccountDir;
+    private CityRegistry cityReg;
     private UserAccount loggedInUser;
     private JPanel header;
     private JPanel mainWorkArea;
@@ -34,6 +36,7 @@ public class Ecosystem extends Organization{
     private Ecosystem(){
         super();
         this.userAccountDir = new UserAccountDirectory();
+        this.cityReg = new CityRegistry();
     }
 
     public JPanel getHeader() {

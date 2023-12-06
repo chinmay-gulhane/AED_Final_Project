@@ -20,8 +20,8 @@ import javax.swing.JPanel;
  */
 public class LoginJPanel extends BaseJPanel {
 
-    public LoginJPanel(Ecosystem business) {
-        super(business);
+    public LoginJPanel(Ecosystem system) {
+        super(system);
         initComponents();
     }
 
@@ -132,36 +132,17 @@ public class LoginJPanel extends BaseJPanel {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void showHomePage (UserAccount loggedIn){
-        switch(loggedIn.getType()){
-//            case ADMIN:
-//                Utility.switchPanel(new AdminJPanel(business),business.getWorkArea());
-//                break;
-//               
-//            case PROFESSOR:
-//                Utility.switchPanel(new ProfJPanel(business),business.getWorkArea());
-//                break;
-//                
-               case PRINCIPAL_USER:
-                     Utility.switchPanel(new PrincipalUserWorkArea(system),system.getWorkArea());
-                     break;
-                 
-//            case AUTHORITY:
-//                 Utility.switchPanel(new AuthorityJPanel(business),business.getWorkArea());
-//                 break;
-//                
-//            case EMPLOYER:
-//                 Utility.switchPanel(new EmployerJPanel(business),business.getWorkArea());
-//                 break;
-//
-        }
-//        
-           // Rename SignUp & Login option
-         for(Component comp: system.getHeader().getComponents()){
-            JLabel jComp = (JLabel)comp;
-            if(jComp.getText().equals("Sign Up"))
-                jComp.setText("");
-            if(jComp.getText().equals("Log In"))
-                jComp.setText("Log Out");
+        Utility.switchPanel(loggedIn.getRole().createWorkArea(system), system.getWorkArea());
+        loginLogoutChange();
+    }
+    
+    private void loginLogoutChange(){
+      for(Component comp: system.getHeader().getComponents()){
+         JLabel jComp = (JLabel)comp;
+         if(jComp.getText().equals("Sign Up"))
+             jComp.setText("");
+         if(jComp.getText().equals("Log In"))
+             jComp.setText("Log Out");
         }
     }
 

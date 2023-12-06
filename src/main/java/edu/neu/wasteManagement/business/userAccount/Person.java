@@ -4,6 +4,10 @@
  */
 package edu.neu.wasteManagement.business.userAccount;
 
+import edu.neu.wasteManagement.business.territory.City;
+import edu.neu.wasteManagement.business.territory.County;
+import edu.neu.wasteManagement.business.territory.Neighbourhood;
+
 /**
  *
  * @author ingale.r
@@ -11,6 +15,9 @@ package edu.neu.wasteManagement.business.userAccount;
 public class Person {
     private String name;
     private String email;
+    private Neighbourhood neighbourhood;
+    private County county;
+    private City city;
 
     public String getName() {
         return name;

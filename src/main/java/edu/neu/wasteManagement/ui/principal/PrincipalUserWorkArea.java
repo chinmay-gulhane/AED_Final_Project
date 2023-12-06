@@ -23,8 +23,8 @@ import javax.swing.JPanel;
  */
 public class PrincipalUserWorkArea extends BaseJPanel {
 
-    public PrincipalUserWorkArea(Ecosystem business) {
-        super(business);
+    public PrincipalUserWorkArea(Ecosystem system) {
+        super(system);
         initComponents();
         initialSetup();
     }
@@ -76,7 +76,7 @@ public class PrincipalUserWorkArea extends BaseJPanel {
 
         lblViewCertificates.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblViewCertificates.setForeground(new java.awt.Color(0, 153, 255));
-        lblViewCertificates.setText("Register for events >");
+        lblViewCertificates.setText("My Profile >");
         lblViewCertificates.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblViewCertificatesMouseClicked(evt);
@@ -135,7 +135,7 @@ public class PrincipalUserWorkArea extends BaseJPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(12916, Short.MAX_VALUE))
+                .addContainerGap(12941, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,17 +174,17 @@ public class PrincipalUserWorkArea extends BaseJPanel {
 
     private void lblReviewProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReviewProfessorMouseClicked
         // TODO add your handling code here:
-//       Utility.switchPanel(new ReviewProfessorJPanel(business), business.getWorkArea());
+       Utility.switchPanel(new GarbageCollectRequestJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_lblReviewProfessorMouseClicked
 
     private void lblViewCertificatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewCertificatesMouseClicked
         // TODO add your handling code here:
-//        Utility.switchPanel(new ViewCertificatesJPanel(business), business.getWorkArea());
+        Utility.switchPanel(new UserProfileJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_lblViewCertificatesMouseClicked
 
     private void lblMyGradesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMyGradesMouseClicked
         // TODO add your handling code here:
-//         Utility.switchPanel(new StudentGradesJPanel(business), business.getWorkArea());     
+         Utility.switchPanel(new UserTrashJPanel(system), system.getWorkArea());     
 
     }//GEN-LAST:event_lblMyGradesMouseClicked
     

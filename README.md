@@ -17,3 +17,12 @@ Feel free to contribute by submitting pull requests or opening issues to enhance
 ## License
 
 This project is licensed under the [MIT License](LICENSE), allowing you to use, modify, and distribute the code as needed.
+
+## Setup
+
+### DB4O
+
+Move the appropriate .jar file in src/main/resources and run the below command,
+```
+mvn install:install-file -Dfile=/Users/ingale.r/code/waste-management-main/final-project-teamcrp/src/main/resources/db4o-8.0.184.15484-all-java5.jar -DgroupId=com.db4o -DartifactId=db4o-all -Dversion=8.0.184.15484 -Dpackaging=jar
+```

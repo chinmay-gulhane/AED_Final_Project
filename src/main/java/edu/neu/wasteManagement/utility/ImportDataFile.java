@@ -1,6 +1,6 @@
 package edu.neu.wasteManagement.utility;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ImportDataFile {
 
-    public static void read(Business business, String filePath) {
+    public static void read(Ecosystem business, String filePath) {
         try (FileInputStream fileInputStream = new FileInputStream(new File(filePath));
             Workbook workbook = new XSSFWorkbook(fileInputStream)) {
             readCustomer(business, workbook);
@@ -22,7 +22,7 @@ public class ImportDataFile {
         }
     }
 
-    private static void readCustomer(Business business, Workbook workbook){
+    private static void readCustomer(Ecosystem business, Workbook workbook){
         Sheet custom = workbook.getSheetAt(0);
         Iterator<Row> customerSheet = custom.iterator();
         while (customerSheet.hasNext()) {

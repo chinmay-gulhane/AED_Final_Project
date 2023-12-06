@@ -10,4 +10,11 @@ package edu.neu.wasteManagement.business.organization;
  */
 public enum Type {
     
+    REGIONAL_WASTE_MANAGEMENT_ORG,
+    MUNICIPAL_WASTE_PROCESSING_ORG,
+    REUSABLE_MATERIALS_MANAGEMENT_ORG,
+    RETAIL_WASTE_PROCESSING_ORG,
+    PRODUCT_CONVERSION_ORG,
+    MARKETPLACE_ORG
+    
 }

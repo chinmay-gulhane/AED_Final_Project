@@ -4,7 +4,9 @@
  */
 package edu.neu.wasteManagement.ui;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
 import edu.neu.wasteManagement.utility.Utility;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,7 +20,7 @@ import javax.swing.JPanel;
  */
 public class LoginJPanel extends BaseJPanel {
 
-    public LoginJPanel(Business business) {
+    public LoginJPanel(Ecosystem business) {
         super(business);
         initComponents();
     }
@@ -115,22 +117,22 @@ public class LoginJPanel extends BaseJPanel {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-//        // get user by username & password and find user in userdirectory
-//        User loggedIn = business.getUserDir().validateLogins(txtUsername.getText(), txtPassword.getText());
-//        
-//        if(loggedIn != null){
-//            business.setLoggedInUser(loggedIn);
-//            showHomePage(loggedIn);
-//        }else 
-//            JOptionPane.showMessageDialog(this, "User not found!");
+          // get user by username & password and find user in userdirectory 
+        UserAccount loggedIn = system.getUserAccountDir().validateLogins(txtUsername.getText(), txtPassword.getText());
+            
+            if(loggedIn != null){
+                system.setLoggedInUser(loggedIn);
+                showHomePage(loggedIn);
+         }else 
+             JOptionPane.showMessageDialog(this, "User not found!");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void showHomePage(){//User loggedIn){
-//        switch(loggedIn.getRole()){
+    private void showHomePage (UserAccount loggedIn){
+        switch(loggedIn.getType()){
 //            case ADMIN:
 //                Utility.switchPanel(new AdminJPanel(business),business.getWorkArea());
 //                break;
@@ -139,10 +141,10 @@ public class LoginJPanel extends BaseJPanel {
 //                Utility.switchPanel(new ProfJPanel(business),business.getWorkArea());
 //                break;
 //                
-//            case STUDENT:
-//                 Utility.switchPanel(new StudentJPanel(business),business.getWorkArea());
-//                 break;
-//                 
+               case PRINCIPAL_USER:
+                     Utility.switchPanel(new PrincipalUserWorkArea(system),system.getWorkArea());
+                     break;
+                 
 //            case AUTHORITY:
 //                 Utility.switchPanel(new AuthorityJPanel(business),business.getWorkArea());
 //                 break;
@@ -151,16 +153,16 @@ public class LoginJPanel extends BaseJPanel {
 //                 Utility.switchPanel(new EmployerJPanel(business),business.getWorkArea());
 //                 break;
 //
-//        }
+        }
 //        
-//        // Rename SignUp & Login option
-//        for(Component comp: business.getHeader().getComponents()){
-//            JLabel jComp = (JLabel)comp;
-//            if(jComp.getText().equals("Sign Up"))
-//                jComp.setText("");
-//            if(jComp.getText().equals("Log In"))
-//                jComp.setText("Log Out");
-//        }
+           // Rename SignUp & Login option
+         for(Component comp: system.getHeader().getComponents()){
+            JLabel jComp = (JLabel)comp;
+            if(jComp.getText().equals("Sign Up"))
+                jComp.setText("");
+            if(jComp.getText().equals("Log In"))
+                jComp.setText("Log Out");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

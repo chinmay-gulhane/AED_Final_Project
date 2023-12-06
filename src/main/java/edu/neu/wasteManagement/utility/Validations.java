@@ -71,8 +71,6 @@ public class Validations {
     if (!password.matches(pattern)) {
         return false; // Must start with a letter or digit
     }
-
-    // Add more password validation rules here
     if (!containsUppercase(password)) {
         return false; // Requires at least one uppercase letter
     }

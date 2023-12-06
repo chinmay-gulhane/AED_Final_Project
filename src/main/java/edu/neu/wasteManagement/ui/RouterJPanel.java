@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package edu.neu.wasteManagement.ui;
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.utility.Utility;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,12 +20,12 @@ import javax.swing.JPanel;
  */
 public class RouterJPanel extends BaseJPanel {
 
-    public RouterJPanel(Business business) {
+    public RouterJPanel(Ecosystem business) {
         super(business);
         initComponents();
         business = business;
-//        business.setHeader(header);
-//        business.setWorkArea(workArea);
+        business.setHeader(header);
+        business.setWorkArea(workArea);
     }
 
     /**
@@ -100,22 +100,21 @@ public class RouterJPanel extends BaseJPanel {
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(lblLogo)
-                .addGap(1050, 1050, 1050)
+                .addGap(1038, 1038, 1038)
                 .addComponent(btnSignUp)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(btnLogin)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLogin))
-                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogin))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(header);
@@ -160,21 +159,21 @@ public class RouterJPanel extends BaseJPanel {
 
     private void btnSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignUpMouseClicked
         // TODO add your handling code here:
-        Utility.switchPanel(new SignUpJPanel(business),workArea);
+        Utility.switchPanel(new SignUpJPanel(system),workArea);
     }//GEN-LAST:event_btnSignUpMouseClicked
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-//        // TODO add your handling code here:
-//        Utility.switchPanel(new LoginJPanel(business), workArea);
-//         for(Component comp: business.getHeader().getComponents()){
-//            JLabel jComp = (JLabel)comp;
-//            if(jComp.getText().equals("Log Out"))
-//                jComp.setText("Log In");
-//            if(jComp.getText().equals(""))
-//                jComp.setText("Sign Up");
-//        }
-//        
-//        business.setLoggedInUser(null);
+       // TODO add your handling code here:
+        Utility.switchPanel(new LoginJPanel(system), workArea);
+            for(Component comp: system.getHeader().getComponents()){
+               JLabel jComp = (JLabel)comp;
+               if(jComp.getText().equals("Log Out"))
+                   jComp.setText("Log In");
+               if(jComp.getText().equals(""))
+                   jComp.setText("Sign Up");
+           }
+
+        system.setLoggedInUser(null);
     }//GEN-LAST:event_btnLoginMouseClicked
 
 

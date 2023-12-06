@@ -5,6 +5,7 @@
 package edu.neu.wasteManagement.business.enterprise;
 
 import edu.neu.wasteManagement.business.organization.Type;
+import edu.neu.wasteManagement.business.role.Role;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ public class GreenLivingSolution extends Enterprise{
 
     @Override
     public List<Type> getSupportedOrganizations() {
+        return null;
+    }
+
+    @Override
+    public List<Role> getSupportedRole() {
         return null;
     }
     

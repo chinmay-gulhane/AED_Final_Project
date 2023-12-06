@@ -4,11 +4,25 @@
  */
 package edu.neu.wasteManagement.business.organization;
 
+import edu.neu.wasteManagement.business.role.Role;
+import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
+import edu.neu.wasteManagement.business.workQueue.WorkQueue;
+import java.util.List;
+
 /**
  *
  * @author ingale.r
  */
-public class Organization {
+public abstract class Organization {
     
     private Type type;
+    private String name;
+    private WorkQueue workQueue;
+    private EmployeeDirectory employeeDir;
+    private UserAccountDirectory userAccountDir;
+    private int orgId;
+    
+    public abstract List<Role> getSupportedRole();
+        
+  
 }

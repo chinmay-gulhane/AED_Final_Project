@@ -4,9 +4,10 @@
  */
 package edu.neu.wasteManagement.ui;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.role.RoleType;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
+import edu.neu.wasteManagement.persistence.DB4OUtil;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.util.Date;
@@ -24,11 +25,12 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    private Business business;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private Ecosystem system;
+
     public MainJFrame() throws Exception {
         initComponents();
-        business = new Business();
-        business.setUserAccountDir(new UserAccountDirectory());
+        system = dB4OUtil.retrieveSystem();
         setRouter();
         initialSetup();
     }
@@ -117,7 +119,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     
     private void setRouter() {
-        JPanel router = new RouterJPanel(business);
+        JPanel router = new RouterJPanel(system);
         mainWorkArea.add("LoginScreen",router);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
@@ -128,7 +130,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initialSetup() throws Exception {
-        business.getUserAccountDir().addUserAccount("admin", "A1bcdf", RoleType.ADMIN, true);
+        // this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", RoleType.ADMIN, true);
     }
     
 }

@@ -4,7 +4,7 @@
  */
 package edu.neu.wasteManagement.business.role;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import javax.swing.JPanel;
 
 /**
@@ -15,5 +15,5 @@ public abstract class Role {
     private RoleType roleType;
     
     // Every Role must create it's own workArea
-    public abstract JPanel createWorkArea(JPanel userProcessContainer, Business business);
+    public abstract JPanel createWorkArea(Ecosystem business);
 }

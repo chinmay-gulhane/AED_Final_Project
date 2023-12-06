@@ -34,4 +34,6 @@ public abstract class Enterprise extends Organization {
     public void setOrganizationDir(OrganizationDirectory organizationDir) {
         this.organizationDir = organizationDir;
     }
+    
+    
 }

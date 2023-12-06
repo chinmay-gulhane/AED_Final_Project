@@ -4,7 +4,7 @@
  */
 package edu.neu.wasteManagement.business.role;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import javax.swing.JPanel;
 
 /**
@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class Admin extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, Business business) {
+    public JPanel createWorkArea(Ecosystem business) {
         return null;
     }
     

@@ -4,7 +4,7 @@
  */
 package edu.neu.wasteManagement.ui;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -21,11 +21,11 @@ public class BaseJPanel extends javax.swing.JPanel {
      * Creates new form SignUpJPanel
      */
 
-    public Business business;
+    public Ecosystem system;
 
-    public BaseJPanel(Business business) {
+    public BaseJPanel(Ecosystem system) {
         initComponents();
-        this.business = business;
+        this.system = system;
     }
 
     /**

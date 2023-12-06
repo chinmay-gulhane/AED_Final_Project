@@ -4,9 +4,12 @@
  */
 package edu.neu.wasteManagement.ui;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.role.PrincipalUser;
 import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.persistence.DB4OUtil;
 import edu.neu.wasteManagement.utility.Validations;
+import static java.time.Clock.system;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,8 +24,11 @@ public class SignUpJPanel extends BaseJPanel {
     /**
      * Creates new form SignUpJPanel
      */
-    public SignUpJPanel(Business business) {
-        super(business);
+    
+    private DB4OUtil dB4OUtil;
+    public SignUpJPanel(Ecosystem system) {
+        super(system);
+        this.dB4OUtil = DB4OUtil.getInstance();
         initComponents();
     }
 
@@ -142,18 +148,22 @@ public class SignUpJPanel extends BaseJPanel {
             if(!checkValidate()){
                 JOptionPane.showMessageDialog(this, "Please enter valid details !!");
                 return;
-            } else {
-                
-            business.getUserAccountDir().addUserAccount(name, password, RoleType.PRINCIPAL_USER, true);
-
-            JOptionPane.showMessageDialog(this, "Sign up completed!");
-            clearFields();
             }
+            else 
+                system.getUserAccountDir().addUserAccount(name, password, RoleType.PRINCIPAL_USER, true);
+            
+            JOptionPane.showMessageDialog(this, "Sign up completed!");
+             
+            clearFields();
+           
         } catch (Exception ex) {
             Logger.getLogger(SignUpJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-      
+    
+        System.out.println(system);
+        dB4OUtil.storeSystem(system);
+        System.out.println(system);
     }//GEN-LAST:event_btnSubmitActionPerformed
     
 

@@ -17,7 +17,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
-
+    
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -46,13 +46,28 @@
         <artifactId>jbcrypt</artifactId>
         <version>0.4</version>
     </dependency>
-
     
+    <dependency>
+        <groupId>com.db4o</groupId>
+        <artifactId>db4o-all</artifactId>
+        <version>8.0.184.15484</version>
+    </dependency>
+
+
+
   </dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <!-- Allow JUnit to access the test classes -->
+              <argLine>--add-opens edu.neu.wasteManagement=ALL-UNNAMED</argLine>
+            </configuration>
+          </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>

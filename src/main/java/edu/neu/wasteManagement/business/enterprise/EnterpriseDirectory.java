@@ -4,15 +4,15 @@
  */
 package edu.neu.wasteManagement.business.enterprise;
 
+import java.util.List;
+
 /**
  *
  * @author ingale.r
  */
-public enum EnterpriseType {
-    
-    WASTE_MANAGEMENT_CORP,
-    MUNICIPAL_WASTE_SERVICES,
-    RETAIL_WASTE_ENTERPRISE,
-    GREEN_LIVING_SOLUTIONS
+public class EnterpriseDirectory {
+   
+    private List<Enterprise> enterpriseList;
+
     
 }

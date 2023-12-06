@@ -4,7 +4,7 @@
  */
 package edu.neu.wasteManagement.ui.principal;
 
-import edu.neu.wasteManagement.business.Business;
+import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.ui.BaseJPanel;
 import edu.neu.wasteManagement.utility.Utility;
 import static edu.neu.wasteManagement.utility.Utility.imageResize;
@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class PrincipalUserWorkArea extends BaseJPanel {
 
-    public PrincipalUserWorkArea(JPanel userContainer, Business business) {
+    public PrincipalUserWorkArea(Ecosystem business) {
         super(business);
         initComponents();
         initialSetup();

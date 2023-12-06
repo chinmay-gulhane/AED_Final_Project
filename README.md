@@ -26,3 +26,20 @@ Move the appropriate .jar file in src/main/resources and run the below command,
 ```
 mvn install:install-file -Dfile=/Users/ingale.r/code/waste-management-main/final-project-teamcrp/src/main/resources/db4o-8.0.184.15484-all-java5.jar -DgroupId=com.db4o -DartifactId=db4o-all -Dversion=8.0.184.15484 -Dpackaging=jar
 ```
+
+### JDK Setup:
+
+For this project we need to downgrade our java version to jdk 1.8 because there is a dependency on the db4o library
+
+```
+brew tap AdoptOpenJDK/openjdk   
+brew install --cask adoptopenjdk8    
+
+```
+
+Use the directory to find the installed jdk version :
+
+```
+/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+```
+

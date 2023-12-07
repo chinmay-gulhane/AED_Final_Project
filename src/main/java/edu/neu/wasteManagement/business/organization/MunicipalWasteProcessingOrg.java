@@ -13,16 +13,10 @@ import java.util.List;
  *
  * @author ingale.r
  */
-public class MarketplaceOrg extends Organization {
-    
-    PrincipalUser user;
-    //Add other users who will have access to the market
-    ProductCatalog catalog;
+public class MunicipalWasteProcessingOrg extends Organization {
 
-    public MarketplaceOrg(String name) {
+    public MunicipalWasteProcessingOrg(String name) {
         super(name);
-        this.catalog =  new ProductCatalog();
-        this.user = new PrincipalUser();
     }
 
     @Override

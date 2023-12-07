@@ -20,12 +20,11 @@ import javax.swing.JPanel;
  */
 public class RouterJPanel extends BaseJPanel {
 
-    public RouterJPanel(Ecosystem business) {
-        super(business);
+    public RouterJPanel(Ecosystem system) {
+        super(system);
         initComponents();
-        business = business;
-        business.setHeader(header);
-        business.setWorkArea(workArea);
+        system.setHeader(header);
+        system.setWorkArea(workArea);
     }
 
     /**
@@ -193,24 +192,8 @@ public class RouterJPanel extends BaseJPanel {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
-        // TODO add your handling code here:
-//        if(business.getLoggedInUser() != null){
-//            switch(business.getLoggedInUser().getRole()){
-//                case PROFESSOR:
-//                    Utility.switchPanel(new ProfJPanel(business),workArea);
-//                    break;
-//                    
-//                case STUDENT:
-//                    Utility.switchPanel(new StudentJPanel(business),workArea);
-//                    break;
-//                    
-//                case ADMIN:
-//                    Utility.switchPanel(new AdminJPanel(business), workArea);
-//                    break;
-//
-//            }
-//        }
-//        
+        // TODO add your handling code here: 
+        Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system),workArea);           
     }//GEN-LAST:event_lblLogoMouseClicked
 
 

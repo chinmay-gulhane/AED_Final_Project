@@ -6,6 +6,8 @@ package edu.neu.wasteManagement.business.userAccount;
 
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.business.territory.Neighbourhood;
+import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import java.util.ArrayList;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
@@ -22,13 +24,24 @@ public class UserAccount {
     private Person person;
     private Role role;
     private String salt = BCrypt.gensalt();
+    private Neighbourhood neighbourhood;
+    private WorkQueue queue;
 
     public UserAccount(String username, String password, Role role, boolean Active) throws Exception {
         this.usedPasswords = new ArrayList<>();
+        this.queue = new WorkQueue();
         this.username = username;
         this.setPassword(password);
         this.Active = Active;
         this.role = role;
+    }
+
+    public WorkQueue getQueue() {
+        return queue;
+    }
+
+    public void setQueue(WorkQueue queue) {
+        this.queue = queue;
     }
 
     public boolean isActive() {
@@ -105,5 +118,13 @@ public class UserAccount {
      
       public String toString(){
         return this.username;
+    }
+
+    public void setNeighbourhood(Neighbourhood hood) {
+        this.neighbourhood = hood;
+    }
+
+    public Neighbourhood getNeighbourhood() {
+        return neighbourhood;
     }
 }

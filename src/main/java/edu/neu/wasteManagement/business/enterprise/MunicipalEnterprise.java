@@ -6,20 +6,31 @@ package edu.neu.wasteManagement.business.enterprise;
 
 import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.business.role.Role;
+import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import java.util.List;
 
 /**
  *
  * @author ingale.r
  */
-public class GreenLivingSolution extends Enterprise{
+public class MunicipalEnterprise extends Enterprise {
+    
+    private Neighbourhood hood;
+
+    public Neighbourhood getHood() {
+        return hood;
+    }
+
+    public void setHood(Neighbourhood hood) {
+        this.hood = hood;
+    }
 
     @Override
     public List<Type> getSupportedOrganizations() {
         return null;
     }
 
-    public GreenLivingSolution(String name, EnterpriseType type) {
+    public MunicipalEnterprise(String name, EnterpriseType type) {
         super(name, type);
     }
 

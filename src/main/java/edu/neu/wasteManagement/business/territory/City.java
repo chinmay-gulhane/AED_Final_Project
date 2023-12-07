@@ -12,11 +12,22 @@ import java.util.List;
  * @author ingale.r
  */
 public class City {
+    private String name;
     private List<County> counties;
     
-    public City(){
+    public City(String name){
+        this.name = name;
         this.counties = new ArrayList<>();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     
     public County add(String name){
         County hood = new County(name);
@@ -29,5 +40,11 @@ public class City {
             if(county.getName().equals(name))
                 return county;
         return null;               
+    }
+
+    public County addCounty(String name) {
+        County county = new County(name);
+        this.counties.add(county);
+        return county;
     }
 }

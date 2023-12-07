@@ -5,23 +5,19 @@
 package edu.neu.wasteManagement.business.role;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
 import javax.swing.JPanel;
 
 /**
  *
  * @author ingale.r
  */
-public abstract class Role {
-    private RoleType roleType;
+public class WasteSegregator extends Role{
+    
 
-    public RoleType getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
+    @Override
+    public JPanel createWorkArea(Ecosystem business) {
+        return new PrincipalUserWorkArea(business);
     }
     
-    // Every Role must create it's own workArea
-    public abstract JPanel createWorkArea(Ecosystem business);
 }

@@ -41,7 +41,7 @@ public class UserAccountDirectory {
                 
     }
     
-        public UserAccount findUserAccountByPerson(Person person){
+    public UserAccount findUserAccountByPerson(Person person){
         for(UserAccount user : users){
             if(user.getPerson().equals(person))
                 return user;
@@ -49,6 +49,14 @@ public class UserAccountDirectory {
         return null;
                 
     } 
+    
+    public UserAccount findUserAccountByRole(RoleType type){
+        for(UserAccount user : users){
+            if(user.getRole().getRoleType().equals(type))
+                return user;
+        }
+        return null;
+    }
         
    //validate logins
        public UserAccount validateLogins(String username, String password){

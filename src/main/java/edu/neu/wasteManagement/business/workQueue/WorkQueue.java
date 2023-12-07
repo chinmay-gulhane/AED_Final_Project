@@ -23,10 +23,8 @@ public class WorkQueue {
     }
     
     public WorkRequest addWorkRequest(WorkRequest workRequest){
-        
-        WorkRequest request = new WorkRequest();
-        workRequestList.add(request);
-        return request;
+        workRequestList.add(workRequest);
+        return workRequest;
         
     }
     

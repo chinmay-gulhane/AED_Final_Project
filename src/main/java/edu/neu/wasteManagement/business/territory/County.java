@@ -41,4 +41,10 @@ public class County {
                 return hood;
         return null;               
     }
+
+    public Neighbourhood addNeighbourhood(String name) {
+        Neighbourhood hood = new Neighbourhood(name);
+        this.neighbourhoods.add(hood);
+        return hood;
+    }
 }

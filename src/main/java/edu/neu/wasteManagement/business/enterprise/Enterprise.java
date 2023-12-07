@@ -14,8 +14,24 @@ import java.util.List;
  * @author ingale.r
  */
 public abstract class Enterprise extends Organization {
+    private String name;
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDir;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+        
+    public Enterprise(String name,EnterpriseType type){
+        super(name);
+        this.enterpriseType=type;
+        organizationDir=new OrganizationDirectory();
+    }
     
     public abstract List<Type> getSupportedOrganizations();
 

@@ -12,14 +12,14 @@ import java.util.List;
  *
  * @author ingale.r
  */
-public class GreenLivingSolution extends Enterprise{
+public class WasteManagementCorpEnterprise extends Enterprise{
 
     @Override
     public List<Type> getSupportedOrganizations() {
         return null;
     }
 
-    public GreenLivingSolution(String name, EnterpriseType type) {
+    public WasteManagementCorpEnterprise(String name, EnterpriseType type) {
         super(name, type);
     }
 

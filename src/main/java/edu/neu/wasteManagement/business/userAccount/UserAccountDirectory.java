@@ -34,7 +34,7 @@ public class UserAccountDirectory {
     
     public UserAccount findUserAccount(String username, String password){
         for(UserAccount user : users){
-            if(user.getUsername().equals(username) && user.getPassword().equals(password))
+            if(user.getUsername().equals(username) && BCrypt.checkpw(password,user.getPassword()))
                 return user;
         }
         return null;

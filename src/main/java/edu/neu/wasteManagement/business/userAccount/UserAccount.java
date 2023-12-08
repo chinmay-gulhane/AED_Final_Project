@@ -26,7 +26,7 @@ public class UserAccount {
     private String salt = BCrypt.gensalt();
     private Neighbourhood neighbourhood;
     private WorkQueue queue;
-
+    
     public UserAccount(String username, String password, Role role, boolean Active) throws Exception {
         this.usedPasswords = new ArrayList<>();
         this.queue = new WorkQueue();

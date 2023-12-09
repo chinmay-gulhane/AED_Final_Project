@@ -7,6 +7,10 @@ package edu.neu.wasteManagement.ui;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.role.PrincipalUser;
 import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.business.territory.City;
+import edu.neu.wasteManagement.business.territory.County;
+import edu.neu.wasteManagement.business.territory.Neighbourhood;
+import edu.neu.wasteManagement.business.userAccount.Person;
 import edu.neu.wasteManagement.persistence.DB4OUtil;
 import edu.neu.wasteManagement.utility.Validations;
 import static java.time.Clock.system;
@@ -49,10 +53,19 @@ public class SignUpJPanel extends BaseJPanel {
         btnSubmit = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
+        lblPassword1 = new javax.swing.JLabel();
+        lblPassword2 = new javax.swing.JLabel();
+        lblPassword3 = new javax.swing.JLabel();
+        lblPassword4 = new javax.swing.JLabel();
+        txtAddr = new javax.swing.JTextField();
+        txtNeighbourhood = new javax.swing.JTextField();
+        txtCounty = new javax.swing.JTextField();
+        txtCity = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         lblWelcome.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWelcome.setText("Welcome to trashIQ !");
 
         lblName.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
@@ -86,48 +99,100 @@ public class SignUpJPanel extends BaseJPanel {
         });
 
         lblPassword.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblPassword.setText("Password");
+        lblPassword.setText("Address");
+
+        lblPassword1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblPassword1.setText("Password");
+
+        lblPassword2.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblPassword2.setText("Neighbourhood");
+
+        lblPassword3.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblPassword3.setText("County");
+
+        lblPassword4.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblPassword4.setText("City");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(588, 588, 588)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPassword)
-                    .addComponent(lblEmail)
-                    .addComponent(lblName)
-                    .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtName)
-                    .addComponent(txtEmail)
-                    .addComponent(txtPassword)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(122, 122, 122)))
-                .addContainerGap(690, Short.MAX_VALUE))
+                .addGap(240, 240, 240)
+                .addComponent(btnSubmit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblName)
+                                .addComponent(lblEmail))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPassword)
+                                    .addComponent(lblPassword1)
+                                    .addComponent(lblPassword2)
+                                    .addComponent(lblPassword4)
+                                    .addComponent(lblPassword3))
+                                .addGap(3, 3, 3)))
+                        .addGap(99, 99, 99)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNeighbourhood, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 96, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtEmail, txtName});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(26, 26, 26)
                 .addComponent(lblWelcome)
-                .addGap(41, 41, 41)
-                .addComponent(lblName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPassword1)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(lblPassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(469, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPassword)
+                    .addComponent(txtAddr, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPassword2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNeighbourhood)
+                        .addGap(1, 1, 1)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(btnSubmit))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtEmail, txtName});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -144,13 +209,23 @@ public class SignUpJPanel extends BaseJPanel {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String password = txtPassword.getText();
+            String address = txtAddr.getText();
+            String City = txtCity.getText();
+            String Neighbourhood = txtNeighbourhood.getText();
+            String County = txtCounty.getText();
             
             if(!checkValidate()){
                 JOptionPane.showMessageDialog(this, "Please enter valid details !!");
                 return;
             }
             else 
-                system.getUserAccountDir().addUserAccount(name, password, new PrincipalUser(), true);
+            {system.getUserAccountDir().addUserAccount(name, password, new PrincipalUser(), true);
+            Neighbourhood neighbourhood = new Neighbourhood(Neighbourhood);
+            County  county = new County(County);      
+            City city = new City(City);
+            Person person = new Person(name,email,neighbourhood, county,city, address);
+            system.getUserAccountDir().findUserAccount(name, password).setPerson(person);
+            }
             
             JOptionPane.showMessageDialog(this, "Sign up completed!");
              
@@ -169,9 +244,17 @@ public class SignUpJPanel extends BaseJPanel {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPassword1;
+    private javax.swing.JLabel lblPassword2;
+    private javax.swing.JLabel lblPassword3;
+    private javax.swing.JLabel lblPassword4;
     private javax.swing.JLabel lblWelcome;
+    private javax.swing.JTextField txtAddr;
+    private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtCounty;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNeighbourhood;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
      

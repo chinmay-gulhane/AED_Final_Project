@@ -41,8 +41,6 @@ public class LoginJPanel extends BaseJPanel {
         btnSubmit = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
         lblWelcome.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
         lblWelcome.setText("Welcome back !");
 

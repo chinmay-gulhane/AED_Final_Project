@@ -6,6 +6,7 @@ package edu.neu.wasteManagement.ui.common;
 
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.ui.BaseJPanel;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class UserTrashJPanel extends BaseJPanel {
         super(system);
         initComponents();
         initSetup();
+        populateTrashHistory();
     }
 
     /**
@@ -37,13 +39,11 @@ public class UserTrashJPanel extends BaseJPanel {
         jLabel1 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblStudentRating = new javax.swing.JTable();
+        tblTrashHistory = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("My Trash");
 
         btnSubmit.setBackground(new java.awt.Color(105, 155, 247));
@@ -56,22 +56,22 @@ public class UserTrashJPanel extends BaseJPanel {
             }
         });
 
-        tblStudentRating.setModel(new javax.swing.table.DefaultTableModel(
+        tblTrashHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Trash", "Comment"
+                "Request Date", "Trash Request ID", "Status", "Receiver", "Resolve Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -82,20 +82,15 @@ public class UserTrashJPanel extends BaseJPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblStudentRating.addKeyListener(new java.awt.event.KeyAdapter() {
+        tblTrashHistory.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tblStudentRatingKeyPressed(evt);
+                tblTrashHistoryKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tblStudentRatingKeyReleased(evt);
+                tblTrashHistoryKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(tblStudentRating);
-        if (tblStudentRating.getColumnModel().getColumnCount() > 0) {
-            tblStudentRating.getColumnModel().getColumn(0).setResizable(false);
-            tblStudentRating.getColumnModel().getColumn(1).setResizable(false);
-            tblStudentRating.getColumnModel().getColumn(2).setResizable(false);
-        }
+        jScrollPane1.setViewportView(tblTrashHistory);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -110,16 +105,16 @@ public class UserTrashJPanel extends BaseJPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14234, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(661, 661, 661)
+                .addGap(663, 663, 663)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(68, 68, 68)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(283, 283, 283)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,23 +126,43 @@ public class UserTrashJPanel extends BaseJPanel {
      //   Course offered = (Course)listCourse.getSelectedItem();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void tblStudentRatingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblStudentRatingKeyPressed
+    private void tblTrashHistoryKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTrashHistoryKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblStudentRatingKeyPressed
+    }//GEN-LAST:event_tblTrashHistoryKeyPressed
 
-    private void tblStudentRatingKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblStudentRatingKeyReleased
+    private void tblTrashHistoryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTrashHistoryKeyReleased
 
-    }//GEN-LAST:event_tblStudentRatingKeyReleased
+    }//GEN-LAST:event_tblTrashHistoryKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblStudentRating;
+    private javax.swing.JTable tblTrashHistory;
     // End of variables declaration//GEN-END:variables
 
     private void initSetup() {
+    }
+
+    private void populateTrashHistory() {
+        List<WorkRequest> History = system.getLoggedInUser().getQueue().getWorkRequestList();
+         DefaultTableModel model = (DefaultTableModel) tblTrashHistory.getModel();
+        model.setRowCount(0);
+        for (WorkRequest history : History) {
+
+            Object[] row = new Object[5];
+            row[0] = history;
+            row[1] = history.getRequestDate();
+            row[2] = history.getId();
+            row[3] = history.getStatus();
+            row[4] = history.getReceiver();
+            row[5] = history.getResolveDate();
+            
+            
+           
+            model.addRow(row);
+        }
     }
    
 }

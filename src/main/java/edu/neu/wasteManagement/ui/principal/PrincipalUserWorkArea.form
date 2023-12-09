@@ -33,7 +33,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblViewCertificates" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMyProfile" min="-2" max="-2" attributes="0"/>
                           <Component id="lblReviewProfessor" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -79,7 +79,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblViewCertificates" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMyProfile" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblMyGrades" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -143,7 +143,7 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblReviewProfessorMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblViewCertificates">
+    <Component class="javax.swing.JLabel" name="lblMyProfile">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="STHeiti" size="24" style="1"/>
@@ -154,7 +154,7 @@
         <Property name="text" type="java.lang.String" value="My Profile &gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblViewCertificatesMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblMyProfileMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMyGrades">

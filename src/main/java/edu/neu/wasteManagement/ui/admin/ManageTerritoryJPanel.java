@@ -55,6 +55,8 @@ public class ManageTerritoryJPanel extends BaseJPanel {
 
         jLabel1.setText("jLabel1");
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel73.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel73.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel73.setText("Manage Territory");
@@ -113,26 +115,26 @@ public class ManageTerritoryJPanel extends BaseJPanel {
 
         CountyTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Name"
+                "Name", "City"
             }
         ));
         jScrollPane8.setViewportView(CountyTbl);
 
         NeighborhoodTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name"
+                "Name", "County", "City"
             }
         ));
         jScrollPane9.setViewportView(NeighborhoodTbl);
@@ -161,7 +163,6 @@ public class ManageTerritoryJPanel extends BaseJPanel {
                                 .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(21, 21, 21)
@@ -186,14 +187,15 @@ public class ManageTerritoryJPanel extends BaseJPanel {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jButton2))
                                             .addComponent(jLabel6)))))
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 82, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(40, 40, 40)
                 .addComponent(jLabel73)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

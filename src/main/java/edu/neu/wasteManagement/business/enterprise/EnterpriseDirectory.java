@@ -103,5 +103,35 @@ public class EnterpriseDirectory {
         }
         return null;
     }
-    
+
+// Method to delete an enterprise by name
+    public void deleteEnterpriseByName(String name) {
+        Enterprise enterpriseToRemove = null;
+        for (Enterprise ent : this.enterpriseList) {
+            if (ent.getName().equals(name)) {
+                enterpriseToRemove = ent;
+                break;
+            }
+        }
+
+        if (enterpriseToRemove != null) {
+            this.enterpriseList.remove(enterpriseToRemove);
+        }
+    }
+
+    // Method to delete an enterprise by type
+    public void deleteEnterpriseByType(EnterpriseType type) {
+        Enterprise enterpriseToRemove = null;
+        for (Enterprise ent : this.enterpriseList) {
+            if (ent.getEnterpriseType().equals(type)) {
+                enterpriseToRemove = ent;
+                break;
+            }
+        }
+
+        if (enterpriseToRemove != null) {
+            this.enterpriseList.remove(enterpriseToRemove);
+        }
+    }
+
 }

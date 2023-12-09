@@ -10,6 +10,7 @@ package edu.neu.wasteManagement.business.territory;
  */
 public class Neighbourhood {
     private String name;
+    private County county;
     
     public Neighbourhood(String name){
         this.name = name;
@@ -17,6 +18,14 @@ public class Neighbourhood {
 
     public String getName() {
         return name;
+    }
+
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
     }
 
     public void setName(String name) {

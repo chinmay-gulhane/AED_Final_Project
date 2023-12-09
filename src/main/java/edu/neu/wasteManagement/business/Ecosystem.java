@@ -23,6 +23,7 @@ import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -228,6 +229,7 @@ public class Ecosystem extends Organization{
                 amount += ((WasteProcessingRequest)req).getWasteAmount();
         return amount;
     }
+    
     public static class OrganizationEnterprise{
         public Organization org;
         public Enterprise ent;
@@ -242,9 +244,62 @@ public class Ecosystem extends Organization{
         organizationEnterpriseList.add(organizationEnterprise);
     }
     
-    public List<OrganizationEnterprise> fetchOrganizationForTable(){
+    public boolean isEnterpriseLinkedToOrganization(Enterprise enterprise) {
+        for (OrganizationEnterprise orgEnt : organizationEnterpriseList) {
+            if (orgEnt.ent == enterprise) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void updateOrganizationEnterpriseLink(Organization org, Enterprise newEnt) {
+        // Find the existing link for the organization
+        for (OrganizationEnterprise organizationEnterprise : organizationEnterpriseList) {
+            if (organizationEnterprise.org.equals(org)) {
+                // Remove the existing link
+                organizationEnterpriseList.remove(organizationEnterprise);
+                break; // Exit the loop after removing the existing link
+            }
+        }
+
+        // Add a new link with the updated enterprise
+        OrganizationEnterprise newOrganizationEnterprise = new OrganizationEnterprise(org, newEnt);
+        organizationEnterpriseList.add(newOrganizationEnterprise);
+    }
+
+    public void deleteOrganization(Organization organizationToDelete) {
+        for (Enterprise enterprise : getEnterpriseDir().getEnterpriseList()) {
+            // Using iterator to remove elements
+            Iterator<Organization> iterator = enterprise.getOrganizationDir().getOrganizationList().iterator();
+            while (iterator.hasNext()) {
+                Organization organization = iterator.next();
+                if (organization == organizationToDelete) {
+                    iterator.remove();
+                    break; 
+                }
+            }
+
+            // Remove the organization from the organizationEnterpriseList
+            removeOrganizationEnterpriseByOrganization(organizationToDelete);
+        }
+    }
+
+    public void removeOrganizationEnterpriseByOrganization(Organization organizationToRemove) {
+        Iterator<OrganizationEnterprise> iterator = organizationEnterpriseList.iterator();
+        while (iterator.hasNext()) {
+            OrganizationEnterprise orgEnt = iterator.next();
+            if (orgEnt.org == organizationToRemove) {
+                iterator.remove();
+                break; 
+            }
+        }
+    }
+
+    public List<OrganizationEnterprise> fetchOrganizationForTable() {
         return organizationEnterpriseList;
     }
+<<<<<<< HEAD
     
     public Organization getOrganizationByUserAccount(UserAccount user){
         //Step 1 : Iterate over all organization
@@ -258,4 +313,26 @@ public class Ecosystem extends Organization{
         }
         return null;
     }
+=======
+
+    public Enterprise findEnterpriseByName(String enterpriseName) {
+        for (Enterprise enterprise : enterpriseDir.getEnterpriseList()) {
+            if (enterprise.getName().equals(enterpriseName)) {
+                return enterprise;
+            }
+        }
+        return null;
+    }
+
+    public Organization findOrganizationByName(String orgName) {
+        for (Enterprise enterprise : getEnterpriseDir().getEnterpriseList()) {
+            for (Organization organization : enterprise.getOrganizationDir().getOrganizationList()) {
+                if (organization.getName().equals(orgName)) {
+                    return organization;
+                }
+            }
+        }
+        return null; // Not found
+    }
+>>>>>>> 4aec4a5bc1dfa36604c0748a6625538f91397524
 }

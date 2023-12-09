@@ -13,4 +13,5 @@ public enum RoleType {
     WASTE_CORDINATOR,
     ADMIN,
     WASTE_SEGREGATOR,
+    WASTE_COLLECTOR,
 }

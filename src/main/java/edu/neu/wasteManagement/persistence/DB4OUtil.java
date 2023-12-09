@@ -83,7 +83,7 @@ public class DB4OUtil {
         return system;
         }
         catch(Exception ex){
-            System.out.println("Here2");
+            
             System.out.print(ex.getMessage());
         }
         return null;

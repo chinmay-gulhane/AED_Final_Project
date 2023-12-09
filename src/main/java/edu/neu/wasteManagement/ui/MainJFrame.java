@@ -5,6 +5,7 @@
 package edu.neu.wasteManagement.ui;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.role.Admin;
 import edu.neu.wasteManagement.business.role.RoleType;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.persistence.DB4OUtil;
@@ -130,7 +131,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initialSetup() throws Exception {
-        // this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", RoleType.ADMIN, true);
+         this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", new Admin(), true);
     }
     
 }

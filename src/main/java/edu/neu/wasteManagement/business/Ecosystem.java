@@ -4,6 +4,7 @@
  */
 package edu.neu.wasteManagement.business;
 
+import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseDirectory;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.organization.Organization;
@@ -18,6 +19,7 @@ import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.WasteSegregationRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
@@ -164,4 +166,22 @@ public class Ecosystem extends Organization{
                         .getOrganizationDir().findOrganizationByType(type);
     }
     
+    public List<Enterprise> getAllEnterprises() {
+        List<Enterprise> allEnterprises = new ArrayList<>();
+        for (Enterprise enterprise : getEnterpriseDir().getEnterpriseList()) {
+            allEnterprises.add(enterprise);
+        }
+        return allEnterprises;
+    }
+
+    public List<Organization> getAllOrganizations() {
+        List<Organization> allOrganizations = new ArrayList<>();
+        for (Enterprise enterprise : getEnterpriseDir().getEnterpriseList()) {
+            for (Organization organization : enterprise.getOrganizationDir().getOrganizationList()) {
+                allOrganizations.add(organization);
+            }
+        }
+        return allOrganizations;
+    }
+
 }

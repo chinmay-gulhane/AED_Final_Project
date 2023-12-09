@@ -119,11 +119,11 @@ public class Ecosystem extends Organization{
                 
                 // Find org
                 org = findOrgByHood(hood,EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
+                
                 // Add request to org
                 org.getWorkQueue().addWorkRequest(request);
                 
-                ((UserWasteCollectionRequest)request).setHood(hood); // Set neighbourhood
-                reciever = findUserByNeighbourhood(hood, EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG, RoleType.WASTE_CORDINATOR);
+                ((UserWasteCollectionRequest)request).setHood(hood); 
                 break;
                 
             case WASTE_SEGREGATION_REQUEST:
@@ -131,9 +131,7 @@ public class Ecosystem extends Organization{
                 // Find org
                 org = findOrgByHood(hood,EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
                 // Add request to org
-                org.getWorkQueue().addWorkRequest(request);
-                
-                reciever = findUserByNeighbourhood(hood, EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG, RoleType.WASTE_SEGREGATOR);
+                org.getWorkQueue().addWorkRequest(request);                
                 break;
         }
         

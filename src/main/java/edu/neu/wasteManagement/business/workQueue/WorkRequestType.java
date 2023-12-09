@@ -11,5 +11,6 @@ package edu.neu.wasteManagement.business.workQueue;
 public enum WorkRequestType {
     USER_WASTE_COLLECTION_REQUEST,
     RETAIL_WASTE_COLLECTION_REQUEST,
+    MUNICIPAL_WASTE_COLLECTION_REQUEST,
     WASTE_SEGREGATION_REQUEST,
 }

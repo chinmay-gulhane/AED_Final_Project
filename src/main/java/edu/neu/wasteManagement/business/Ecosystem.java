@@ -18,7 +18,7 @@ import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
-import edu.neu.wasteManagement.business.workQueue.WasteSegregationRequest;
+import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import java.util.ArrayList;
@@ -129,7 +129,7 @@ public class Ecosystem extends Organization{
                 break;
                 
             case WASTE_PROCESSING_REQUEST:
-                request = new WasteSegregationRequest();
+                request = new WasteProcessingRequest();
                 // Find org
                 org = findOrgByHood(hood,EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
                 // Add request to org
@@ -154,6 +154,9 @@ public class Ecosystem extends Organization{
         request.setRequestDate(new Date());
         request.setSender(sender);
         request.setStatus("Raised");
+        
+        // Add request to sender queue
+        sender.getQueue().addWorkRequest(request);
         
         return request;
         }
@@ -196,7 +199,31 @@ public class Ecosystem extends Organization{
     }
 
     private Organization findOrgByCounty(County county, EnterpriseType enterpriseType, Type type) {
-            Enterprise entFound = this.getEnterpriseDir().findEnterpriseByTypeAndCounty(county, enterpriseType);
+        Enterprise entFound = this.getEnterpriseDir().findEnterpriseByTypeAndCounty(county, enterpriseType);
         return entFound.getOrganizationDir().findOrganizationByType(type);
+    }
+
+    public double getUserNetTrashGenerated(UserAccount account) {
+         double amount = 0;
+         for(WorkRequest req: account.getQueue().getWorkRequestList())
+             if(req instanceof UserWasteCollectionRequest )
+                amount += ((UserWasteCollectionRequest)req).getWasteAmount();
+         return amount;
+    }
+
+    public double getOrganizationNetTrashGenerated(Organization org) {
+        double amount = 0;
+        for(WorkRequest req: org.getWorkQueue().getWorkRequestList())
+             if(req instanceof MunicipalWasteCollectionRequest )
+                amount += ((MunicipalWasteCollectionRequest)req).getWasteAmount();
+        return amount;
+    }
+
+    public double getOrganizationNetTrashProcessed(Organization org) {
+        double amount = 0;
+        for(WorkRequest req: org.getWorkQueue().getWorkRequestList())
+             if(req instanceof WasteProcessingRequest )
+                amount += ((WasteProcessingRequest)req).getWasteAmount();
+        return amount;
     }
 }

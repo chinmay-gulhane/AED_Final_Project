@@ -29,8 +29,8 @@ public class MunicipalWasteProcessingOrg extends Organization {
         this.county = county;
     }
     
-    public MunicipalWasteProcessingOrg(String name) {
-        super(name);
+    public MunicipalWasteProcessingOrg(String name, Type type) {
+        super(name, type);
     }
 
     @Override

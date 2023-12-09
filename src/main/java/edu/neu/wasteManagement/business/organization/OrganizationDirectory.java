@@ -21,18 +21,18 @@ public class OrganizationDirectory {
         return organizationList;
     }
     
-    public Organization createOrganization(Type type){
+    public Organization createOrganization(String orgName, Type type){
         Organization organization = null;
         if (Type.MARKETPLACE_ORG == type){
-            organization = new MarketplaceOrg(Type.MARKETPLACE_ORG.name());
+            organization = new MarketplaceOrg(orgName, Type.MARKETPLACE_ORG);
             organizationList.add(organization);
         }
         else if (Type.MUNICIPAL_WASTE_PROCESSING_ORG == type){
-            organization = new MunicipalWasteProcessingOrg(Type.MUNICIPAL_WASTE_PROCESSING_ORG.name());
+            organization = new MunicipalWasteProcessingOrg(orgName, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
             organizationList.add(organization);
         }
         else if (Type.REGIONAL_WASTE_MANAGEMENT_ORG == type){
-            organization = new RegionalWasteManagementOrg(Type.REGIONAL_WASTE_MANAGEMENT_ORG.name());
+            organization = new RegionalWasteManagementOrg(orgName, Type.REGIONAL_WASTE_MANAGEMENT_ORG);
             organizationList.add(organization);
         }
         organization.setType(type);

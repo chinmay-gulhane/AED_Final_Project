@@ -20,6 +20,9 @@ import edu.neu.wasteManagement.business.territory.City;
 import edu.neu.wasteManagement.business.territory.County;
 import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import java.util.logging.Level;
@@ -50,10 +53,10 @@ public class ConfigureASystem {
        Neighbourhood backbay = suffolk.addNeighbourhood("Backbay");
        
        // Create GreenLiving Solution
-       Enterprise greenLiving = system.getEnterpriseDir().createAndAddEnterprise("GreenLivingSolution", EnterpriseType.GREEN_LIVING_SOLUTIONS);
+       Enterprise greenLiving = system.getEnterpriseDir().createAndAddEnterprise("Green Living Solution Enterprise", EnterpriseType.GREEN_LIVING_SOLUTIONS);
        
        // Create Marketplace Org
-       Organization marketplace = greenLiving.getOrganizationDir().createOrganization(Type.MARKETPLACE_ORG);
+       Organization marketplace = greenLiving.getOrganizationDir().createOrganization("Marketplace Organization",Type.MARKETPLACE_ORG);
        
        // Create principal User
        UserAccount andy = system.getUserAccountDir().addUserAccount("andy", "Abcd1ef", new PrincipalUser(), true);
@@ -68,11 +71,11 @@ public class ConfigureASystem {
        ((WasteManagementCorpEnterprise)suffolkWasteManagementEnt).setCounty(suffolk);
        
        // Create Municipal Waste Processing org
-       Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization(Type.MUNICIPAL_WASTE_PROCESSING_ORG);
+       Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization("Suffolk Municipal Waste Organization",Type.MUNICIPAL_WASTE_PROCESSING_ORG);
        ((MunicipalWasteProcessingOrg)municipalWasteOrg).setCounty(suffolk);
        
         // Create Regional Waste Management org
-       Organization regionalWasteManagementOrg = suffolkWasteManagementEnt.getOrganizationDir().createOrganization(Type.REGIONAL_WASTE_MANAGEMENT_ORG);
+       Organization regionalWasteManagementOrg = suffolkWasteManagementEnt.getOrganizationDir().createOrganization("Suffolk Regional Waste Management Organization",Type.REGIONAL_WASTE_MANAGEMENT_ORG);
        ((RegionalWasteManagementOrg)regionalWasteManagementOrg).setCounty(suffolk);
        
        // Create Waste Cordinator for Municipal waste services:
@@ -80,14 +83,20 @@ public class ConfigureASystem {
        UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl", "Abcd1ef", new WasteCollector(), true); wasteCollector.setNeighbourhood(backbay);
        UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbws", "Abcd1ef", new WasteSegregator(), true); wasteSegregator.setNeighbourhood(backbay);
      
-       // Create Waste Collection Request
+       //  -------- Create Waste Collection Request ----------
        WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
+       ((UserWasteCollectionRequest)garbageCollectRequest).addActualWasteToRequest(Waste.WasteType.RECYCLABLE, 15);
+       ((UserWasteCollectionRequest)garbageCollectRequest).addActualWasteToRequest(Waste.WasteType.E_WASTE, 1);
+
        
        // Assign Waste collection Request to Waste Collector
        garbageCollectRequest.setReceiver(wasteCollector);
        
        // Waste Collector - Mark Status as completed
        garbageCollectRequest.setStatus("Completed");
+       ((UserWasteCollectionRequest)garbageCollectRequest).addActualWasteToRequest(Waste.WasteType.RECYCLABLE, 10);
+       ((UserWasteCollectionRequest)garbageCollectRequest).addActualWasteToRequest(Waste.WasteType.E_WASTE, 2);
+
        
        // Waste Cordinator create new Waste Processing request
        WorkRequest processingRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, wasteCordinator);
@@ -103,12 +112,16 @@ public class ConfigureASystem {
        
        // Step 1 - Create MUNICIPAL_WASTE_COLLECTION_REQUEST
        WorkRequest municipalWasteColReq = system.createWorkRequest(WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST, wasteCordinator);
-       
+       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.RECYCLABLE, 15);
+       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.E_WASTE, 1);
        System.out.println(regionalWasteManagementOrg.getWorkQueue());
         
-        
-        
        
+       // --------- Display the User's statistic -------
+       System.out.println("Amount of Waste generated by " + andy.getUsername() + " is " + system.getUserNetTrashGenerated(andy));
+       System.out.println("Amount of Waste generated by " + municipalWasteOrg.getName() + " is " + system.getOrganizationNetTrashGenerated(municipalWasteOrg));
+       System.out.println("Amount of Waste processed by " + municipalWasteOrg.getName() + " is " + system.getOrganizationNetTrashProcessed(municipalWasteOrg));
+
    }
     
 }

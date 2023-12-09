@@ -6,7 +6,6 @@ package edu.neu.wasteManagement.business.workQueue;
 
 import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
-import edu.neu.wasteManagement.business.workQueue.Waste.WasteType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +13,15 @@ import java.util.List;
  *
  * @author ingale.r
  */
-public class UserWasteCollectionRequest extends WorkRequest{
-
-    public UserWasteCollectionRequest() {
+public class WasteProcessingRequest extends WorkRequest{
+    
+    public WasteProcessingRequest() {
         super();
-        this.estimatedWasteToCollect = new ArrayList<>();
-        this.actualWasteCollected = new ArrayList<>();
+        this.actualWasteProcessed = new ArrayList<>();
     }
 
     private Neighbourhood hood;
-    private List<Waste> estimatedWasteToCollect;
-    private List<Waste> actualWasteCollected;
+    private List<Waste> actualWasteProcessed;
     
     public Neighbourhood getHood() {
         return hood;
@@ -34,22 +31,16 @@ public class UserWasteCollectionRequest extends WorkRequest{
         this.hood = hood;
     }
     
-    public void addEstimatedWasteToRequest(WasteType type, double amount){
-        Waste estimatedWaste = new Waste(type, amount);
-        this.estimatedWasteToCollect.add(estimatedWaste);
-    }
-    
-    public void addActualWasteToRequest(WasteType type, double amount){
+    public void addActualWasteToRequest(Waste.WasteType type, double amount){
         Waste actualWaste = new Waste(type, amount);
-        this.actualWasteCollected.add(actualWaste);
+        this.actualWasteProcessed.add(actualWaste);
     }
     
     public double getWasteAmount(){
         double amount = 0;
-        for(Waste actualWaste: actualWasteCollected)
+        for(Waste actualWaste: actualWasteProcessed)
             amount += actualWaste.getAmount();
         return amount;
     }
-    
-    
 }
+

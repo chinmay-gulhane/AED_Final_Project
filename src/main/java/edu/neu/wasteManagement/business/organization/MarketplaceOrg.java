@@ -19,8 +19,8 @@ public class MarketplaceOrg extends Organization {
     //Add other users who will have access to the market
     ProductCatalog catalog;
 
-    public MarketplaceOrg(String name) {
-        super(name);
+    public MarketplaceOrg(String name, Type type) {
+        super(name, type);
         this.catalog =  new ProductCatalog();
         this.user = new PrincipalUser();
     }

@@ -53,7 +53,7 @@ public abstract class Enterprise extends Organization {
     }
     
     public String toString(){
-        return "Enterprise Name: " + this.getName() + "\n" + this.organizationDir + this.getEnterpriseType();
+        return this.getName();
     }
     
 }

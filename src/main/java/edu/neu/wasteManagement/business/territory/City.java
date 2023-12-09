@@ -55,4 +55,12 @@ public class City {
         }
         return null;
     }
+
+    public List<County> getCounties() {
+        return counties;
+    }
+
+    public void setCounties(List<County> counties) {
+        this.counties = counties;
+    }
 }

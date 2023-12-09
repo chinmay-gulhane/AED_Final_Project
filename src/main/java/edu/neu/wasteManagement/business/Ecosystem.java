@@ -34,6 +34,7 @@ public class Ecosystem extends Organization{
     
     private UserAccountDirectory userAccountDir;
     private EnterpriseDirectory enterpriseDir;
+    private List<OrganizationEnterprise> organizationEnterpriseList;
 
     public EnterpriseDirectory getEnterpriseDir() {
         return enterpriseDir;
@@ -61,6 +62,7 @@ public class Ecosystem extends Organization{
         this.userAccountDir = new UserAccountDirectory();
         this.enterpriseDir = new EnterpriseDirectory();
         this.cityReg = new CityRegistry();
+        this.organizationEnterpriseList = new ArrayList<>();
     }
 
     public JPanel getHeader() {
@@ -225,5 +227,22 @@ public class Ecosystem extends Organization{
              if(req instanceof WasteProcessingRequest )
                 amount += ((WasteProcessingRequest)req).getWasteAmount();
         return amount;
+    
+    public static class OrganizationEnterprise{
+        public Organization org;
+        public Enterprise ent;
+        public OrganizationEnterprise(Organization org,Enterprise ent){
+            this.org = org;
+            this.ent = ent;
+        }
+    }
+    
+    public void addOrganizationEnterprise(Organization org, Enterprise ent) {
+        OrganizationEnterprise organizationEnterprise = new OrganizationEnterprise(org, ent);
+        organizationEnterpriseList.add(organizationEnterprise);
+    }
+    
+    public List<OrganizationEnterprise> fetchOrganizationForTable(){
+        return organizationEnterpriseList;
     }
 }

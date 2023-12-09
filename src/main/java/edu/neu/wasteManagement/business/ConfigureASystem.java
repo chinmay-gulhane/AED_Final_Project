@@ -105,10 +105,10 @@ public class ConfigureASystem {
        WorkRequest municipalWasteColReq = system.createWorkRequest(WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST, wasteCordinator);
        
        System.out.println(regionalWasteManagementOrg.getWorkQueue());
-        
-        
-        
        
+       system.addOrganizationEnterprise(marketplace, greenLiving);
+       system.addOrganizationEnterprise(municipalWasteOrg, municipalWasteEnt);
+             
    }
     
 }

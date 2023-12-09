@@ -36,6 +36,10 @@ public class UserAccount {
         this.role = role;
     }
 
+    public UserAccount() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public WorkQueue getQueue() {
         return queue;
     }

@@ -61,12 +61,13 @@ public class ConfigureASystem {
        
        // Create Municipal Waste Processing org
        Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization(Type.MUNICIPAL_WASTE_PROCESSING_ORG);
+
        
        // Create Waste Cordinator for Municipal waste services:
        UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbwcd", "Abcd1ef", new WasteCordinator(), true);
        UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl", "Abcd1ef", new WasteCollector(), true);
        UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbws", "Abcd1ef", new WasteSegregator(), true);
-       
+     
        // Create Waste Collection Request
        system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
        

@@ -16,10 +16,15 @@ import java.util.List;
  */
 public class EnterpriseDirectory {
    
-    private ArrayList<Enterprise> enterpriseList;
+    private List<Enterprise> enterpriseList;
+    
+     public EnterpriseDirectory(){
+        enterpriseList=new ArrayList<Enterprise>();
+    }
+
     
     public ArrayList<Enterprise> getEnterpriseList() {
-        return enterpriseList;
+         return (ArrayList<Enterprise>) enterpriseList;
     }
 
     public Enterprise getEnterpriseByName(String name){
@@ -48,21 +53,20 @@ public class EnterpriseDirectory {
         return null;
     }
     
-    public void setEnterpriseList(ArrayList<Enterprise> enterpriseList) {
-        this.enterpriseList = enterpriseList;
-    }
     
-    public EnterpriseDirectory(){
-        enterpriseList=new ArrayList<Enterprise>();
-    }
+    public void setEnterpriseList(List<Enterprise> enterpriseList) {
+    this.enterpriseList = enterpriseList;
+}
+    
+   
     
     public Enterprise findEnterpriseByType(EnterpriseType type){
         return null;
     }
     
     //Create enterprise
-    public Enterprise createAndAddEnterprise(String name,EnterpriseType type){
-        Enterprise enterprise=null;
+    public Enterprise createAndAddEnterprise(String name , EnterpriseType type){
+        Enterprise enterprise = null;
             if(type == EnterpriseType.GREEN_LIVING_SOLUTIONS){
                 enterprise = new GreenLivingSolution(name,type);
                 enterpriseList.add(enterprise);

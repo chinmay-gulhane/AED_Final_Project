@@ -17,7 +17,7 @@ public abstract class Enterprise extends Organization {
     private String name;
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDir;
-
+   
     public String getName() {
         return name;
     }
@@ -29,8 +29,9 @@ public abstract class Enterprise extends Organization {
         
     public Enterprise(String name,EnterpriseType type){
         super(name);
-        this.enterpriseType=type;
-        organizationDir=new OrganizationDirectory();
+        this.name = name;
+        this.enterpriseType = type;
+        organizationDir = new OrganizationDirectory();
     }
     
     public abstract List<Type> getSupportedOrganizations();
@@ -51,5 +52,8 @@ public abstract class Enterprise extends Organization {
         this.organizationDir = organizationDir;
     }
     
+    public String toString(){
+        return "Enterprise Name: " + this.getName() + "\n" + this.organizationDir;
+    }
     
 }

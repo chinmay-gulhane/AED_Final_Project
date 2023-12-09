@@ -4,6 +4,7 @@
  */
 package edu.neu.wasteManagement.business.workQueue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +12,10 @@ import java.util.List;
  * @author ingale.r
  */
 public class WorkQueue {
+    
+    public WorkQueue(){
+        this.workRequestList = new ArrayList<>();
+    }
     
     private List<WorkRequest> workRequestList;
 
@@ -26,6 +31,10 @@ public class WorkQueue {
         workRequestList.add(workRequest);
         return workRequest;
         
+    }
+    
+    public String toString(){
+        return this.workRequestList.size() > 0 ? "Work Queue has " + this.workRequestList.size() + " requests" : "Work Queue is empty";
     }
     
    

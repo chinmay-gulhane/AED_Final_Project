@@ -7,6 +7,9 @@ package edu.neu.wasteManagement.business.organization;
 import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.business.role.PrincipalUser;
 import edu.neu.wasteManagement.business.role.Role;
+import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
+import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import java.util.List;
 
 /**

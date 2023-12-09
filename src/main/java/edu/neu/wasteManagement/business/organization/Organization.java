@@ -75,9 +75,14 @@ public abstract class Organization {
 
     public Organization(String name) {
         this.name = name;
+        this.workQueue = new WorkQueue();
+        this.employeeDir = new EmployeeDirectory();
+        this.userAccountDir = new UserAccountDirectory();
     }
     
     
-        
+    public String toString(){
+        return "Organization Name: " + this.getName();
+    }
   
 }

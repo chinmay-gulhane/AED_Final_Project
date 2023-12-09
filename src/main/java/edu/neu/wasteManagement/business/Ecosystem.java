@@ -4,6 +4,7 @@
  */
 package edu.neu.wasteManagement.business;
 
+import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseDirectory;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.organization.Organization;
@@ -119,10 +120,9 @@ public class Ecosystem extends Organization{
                 
                 // Find org
                 org = findOrgByHood(hood,EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
-                
-                // Add request to org
+                System.out.println("Printing Queue:" + org.getWorkQueue());
                 org.getWorkQueue().addWorkRequest(request);
-                
+     
                 ((UserWasteCollectionRequest)request).setHood(hood); 
                 break;
                 
@@ -137,17 +137,13 @@ public class Ecosystem extends Organization{
         
         // Add request details
         request.setMessage(type.name());
-        request.setReceiver(reciever);
         request.setRequestDate(new Date());
         request.setSender(sender);
         request.setStatus("Raised");
         
-        // Add request to workqueue
-        reciever.getQueue().addWorkRequest(request);
-        
         return request;
-        
-    }
+        }
+    
     
     private UserAccount findUserByNeighbourhood(Neighbourhood hood,EnterpriseType entType,Type orgType, RoleType roleType){
         return this.getEnterpriseDir()
@@ -157,9 +153,10 @@ public class Ecosystem extends Organization{
     }
 
     private Organization findOrgByHood(Neighbourhood hood,EnterpriseType enterpriseType, Type type) {
-        return this.getEnterpriseDir()
-                    .findEnterpriseByTypeAndNeighbourhood(hood, enterpriseType)
-                        .getOrganizationDir().findOrganizationByType(type);
+        Enterprise entFound = this.getEnterpriseDir()
+                    .findEnterpriseByTypeAndNeighbourhood(hood, enterpriseType);
+        return entFound.getOrganizationDir().findOrganizationByType(type);
+                       
     }
     
 }

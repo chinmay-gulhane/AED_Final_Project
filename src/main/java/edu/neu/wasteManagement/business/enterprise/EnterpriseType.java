@@ -14,5 +14,6 @@ public enum EnterpriseType {
     MUNICIPAL_WASTE_SERVICES,
     RETAIL_WASTE_ENTERPRISE,
     GREEN_LIVING_SOLUTIONS
+  
     
 }

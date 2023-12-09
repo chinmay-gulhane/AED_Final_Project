@@ -31,6 +31,7 @@ public class OrganizationDirectory {
             organization = new MunicipalWasteProcessingOrg(Type.MUNICIPAL_WASTE_PROCESSING_ORG.name());
             organizationList.add(organization);
         }
+        organization.setType(type);
         return organization;
     }
     
@@ -40,5 +41,12 @@ public class OrganizationDirectory {
                 return organization; 
         }
         return null;
+    }
+    
+    public String toString(){
+        String ret = "";
+        for(Organization org: this.organizationList)
+            ret = org + "\n";
+        return "Organization Directory\n" + ret;
     }
 }

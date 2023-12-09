@@ -38,6 +38,7 @@ public class ConfigureASystem {
        try {
            Ecosystem system = Ecosystem.getInstance();
            createData(system);
+           createDataForWasteManageCorp(system);
            return system;
        } catch (Exception ex) {
            Logger.getLogger(ConfigureASystem.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,8 +82,12 @@ public class ConfigureASystem {
        // Create Waste Cordinator for Municipal waste services:
        UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbwcd", "Abcd1ef", new WasteCordinator(), true); wasteCordinator.setNeighbourhood(backbay); 
        municipalWasteOrg.getUserAccountDir().associateUser(wasteCordinator);
-       UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl", "Abcd1ef", new WasteCollector(), true); wasteCollector.setNeighbourhood(backbay);
+       UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl1", "Abcd1ef", new WasteCollector(), true); wasteCollector.setNeighbourhood(backbay);
        municipalWasteOrg.getUserAccountDir().associateUser(wasteCollector);
+       
+       UserAccount wasteCollector2 = system.getUserAccountDir().addUserAccount("bbwcl2", "Abcd1ef", new WasteCollector(), true); wasteCollector.setNeighbourhood(backbay);
+       municipalWasteOrg.getUserAccountDir().associateUser(wasteCollector2);
+
 
        UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbws", "Abcd1ef", new WasteSegregator(), true); wasteSegregator.setNeighbourhood(backbay);
        municipalWasteOrg.getUserAccountDir().associateUser(wasteSegregator);
@@ -135,6 +140,29 @@ public class ConfigureASystem {
        // Raise WCR
      system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST, andy);
              
+   }
+   
+   private static void createDataForWasteManageCorp(Ecosystem system) throws Exception{
+        //findEnterprise for WasteManagementCorp:
+        County county = system.getCityReg().getCountyByName("Suffolk");
+        Enterprise ent = system.getEnterpriseDir().findEnterpriseByTypeAndCounty(county, EnterpriseType.WASTE_MANAGEMENT_CORP);
+        Organization org = ent.getOrganizationDir().findOrganizationByType(Type.REGIONAL_WASTE_MANAGEMENT_ORG);
+        
+        UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("sfwcd", "Abcd1ef", new WasteCordinator(), true);
+        org.getUserAccountDir().associateUser(wasteCordinator);
+        
+        //Waste segregator:
+        UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("sfws", "Abcd1ef", new WasteSegregator(), true);
+        org.getUserAccountDir().associateUser(wasteSegregator);
+        
+        //Waste Collector:
+        UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("sfwcl", "Abcd1ef", new WasteCollector(), true);
+        org.getUserAccountDir().associateUser(wasteCollector);
+        
+        UserAccount wasteCollector2 = system.getUserAccountDir().addUserAccount("sfwcl2", "Abcd1ef", new WasteCollector(), true);
+        org.getUserAccountDir().associateUser(wasteCollector2);
+
+       
    }
     
 }

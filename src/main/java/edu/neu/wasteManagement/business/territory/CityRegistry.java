@@ -41,4 +41,12 @@ public class CityRegistry {
     public void setCities(List<City> cities) {
         this.cities = cities;
     }
+
+    public County getCountyByName(String name) {
+        for(City c : cities)
+            if(c.countyExists(name))
+                return c.getCountyByName(name);      
+        return null;
+    }
+   
 }

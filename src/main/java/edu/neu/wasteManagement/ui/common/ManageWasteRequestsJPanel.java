@@ -351,17 +351,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
     }//GEN-LAST:event_btnViewMouseClicked
 
     private void btnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshMouseClicked
-//             int selectedRowIndex = tblUser.getSelectedRow();
-//           if (selectedRowIndex < 0) {
-//               JOptionPane.showMessageDialog(this, "Please select a row to delete!");
-//           }
-//           DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
-//           selectedUser = (User) model.getValueAt(selectedRowIndex, 0);
-//
-//           business.getUserDir().deleteUser(selectedUser);
-//           JOptionPane.showMessageDialog(this, "User Deleted!");
-//
-//           resetPage();
+
     }//GEN-LAST:event_btnRefreshMouseClicked
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -371,41 +361,6 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 
     private void btnCompleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompleteMouseClicked
         // TODO add your handling code here:
-//        int selectedRowIndex = tblUser.getSelectedRow();
-//
-//        if (selectedRowIndex < 0) {
-//
-//            JOptionPane.showMessageDialog(this, "Please select a row to update");
-//
-//        } else {
-//
-//            DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
-//            selectedUser = (User) model.getValueAt(selectedRowIndex, 0);
-//
-//            String userName = txtUsername.getText();
-//            String password = txtPassword.getText();
-//            String nuId = txtnuId.getText();
-//
-//            if (!checkValidate()) {
-//                JOptionPane.showMessageDialog(this, "Please enter valid details");
-//            } else {
-//                
-//                try{
-//                    if(!txtPassword.getText().equals(selectedUser.getPassword()))
-//                        selectedUser.setPassword(password);
-//                }catch(Exception e){
-//                    JOptionPane.showMessageDialog(this, e.getMessage());
-//                    return;
-//                }
-//                selectedUser.setUsername(userName);
-//                selectedUser.setActive(chkActive.isSelected());
-//                
-//                JOptionPane.showMessageDialog(this, "Row updated successfully");
-//                resetPage();
-//
-//            }
-//
-//        } 
     }//GEN-LAST:event_btnCompleteMouseClicked
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
@@ -413,7 +368,6 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
        selectedRequest.setStatus("Completed");
        JOptionPane.showMessageDialog(this, "Request completed!!");
        initSetup();
-      // db4o.storeSystem(system);
     }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -474,8 +428,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 
     private void initSetup() {
         changePageStateByUserRole();
-        org = system.getOrganizationByUserAccount(system.getLoggedInUser());
-        populateTable(org.getWorkQueue().getWorkRequestList());
+        
     }
     
        
@@ -536,22 +489,9 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 
 
     private void resetPage() {
-        populateTable(org.getWorkQueue().getWorkRequestList());
-        initialButtonsState();
-        populateAssignee();
+        initSetup();
     }
 
-    private void initialButtonsState() {
-        btnComplete.setEnabled(false);
-    }
-//
-//
-//   public boolean checkValidate(){
-//        return Validations.isStringValid(txtUsername.getText()) &&
-//        Validations.isStringValid(txtPassword.getText()) && 
-//        Validations.isStringValid(txtnuId.getText());
-//    
-//    }
 
     private boolean isViewCollectionRequest(){
         return chkCollectionReq.isSelected();
@@ -588,12 +528,14 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
     private void changePageStateByUserRole() {
         
         RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
-        
+        List<WorkRequest> requests = null;
+        org = system.getOrganizationByUserAccount(system.getLoggedInUser());
         
         switch(roleType){
             case WASTE_CORDINATOR:
                 chkProcessingReq.setSelected(true);
                 chkCollectionReq.setSelected(true);
+                requests = org.getWorkQueue().getWorkRequestList();
                 break;
                 
             case WASTE_COLLECTOR:
@@ -601,6 +543,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
                 chkCollectionReq.setSelected(true);
                 chkProcessingReq.setEnabled(false);
                 chkCollectionReq.setEnabled(false);
+                requests = org.getWorkQueue().getWorkRequestByReceiver(system.getLoggedInUser());
                 break;
                 
              case WASTE_SEGREGATOR:
@@ -608,11 +551,16 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
                 chkCollectionReq.setSelected(false);
                 chkProcessingReq.setEnabled(false);
                 chkCollectionReq.setEnabled(false);
+                requests = org.getWorkQueue().getWorkRequestByReceiver(system.getLoggedInUser());
                 break;   
+         
         }
             
         btnAssign.setEnabled(false);
         btnComplete.setEnabled(false);
+        
+        //populate logic
+        populateTable(requests);
     }
     
     private boolean canAssign(){

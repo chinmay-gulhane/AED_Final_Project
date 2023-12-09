@@ -7,8 +7,11 @@ package edu.neu.wasteManagement.ui.admin;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.Ecosystem.OrganizationEnterprise;
 import edu.neu.wasteManagement.business.enterprise.Enterprise;
+import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import static edu.neu.wasteManagement.ui.admin.ManageEnterpriseJPanel.getEnterpriseType;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,10 +28,11 @@ public class ManageOrganizationJPanel extends BaseJPanel {
      */
     public ManageOrganizationJPanel(Ecosystem system) {
         super(system);
-                System.out.println("In manage Org");
         initComponents();
         populateTypeComboBox();
+        populateEnterpriseComboBox();
         populateOrgTable();
+        btnUpdateOrg.setEnabled(false);
     }
     
  
@@ -37,34 +41,74 @@ public class ManageOrganizationJPanel extends BaseJPanel {
         JTableHeader header = OrgTbl.getTableHeader();
         header.setFont(new Font("Dialog", Font.BOLD, 14));
         model.setRowCount(0);
-        System.out.println(system.getEnterpriseDir().getEnterpriseList());
-        System.out.println(system.getEnterpriseDir().getEnterpriseList());
         for (OrganizationEnterprise obj : system.fetchOrganizationForTable()) {
             System.out.println("org name"+ obj.org.getName());
             System.out.println("ent name"+obj.ent.getName());
             Object[] row = new Object[4];
             row[0] = obj.org;
-            row[1] = obj.org.getName();
-            row[2] = obj.ent.getName();
+            row[1] = convertOrganizationToDisplayName(obj.org.getType());
+            row[2] = obj.ent;
             model.addRow(row);
         }
     }
     
     
     public void populateTypeComboBox() {
-        
-//    REGIONAL_WASTE_MANAGEMENT_ORG,
-//    MUNICIPAL_WASTE_PROCESSING_ORG,
-//    REUSABLE_MATERIALS_MANAGEMENT_ORG,
-//    RETAIL_WASTE_PROCESSING_ORG,
-//    PRODUCT_CONVERSION_ORG,
-//    MARKETPLACE_ORG
-        orgTypeComboBox.addItem("Regional Waste Managemnt");
-        orgTypeComboBox.addItem("Municipal Waste Management");
-        orgTypeComboBox.addItem("Reusable Materials Management");
-        orgTypeComboBox.addItem("Retail Waste Processing");
-        orgTypeComboBox.addItem("Product Conversion");
-        orgTypeComboBox.addItem("Marketplace");
+        for (Type type : Type.values()) {
+            orgTypeComboBox.addItem(convertOrganizationToDisplayName(type));
+        }        
+    }
+    
+    public void populateEnterpriseComboBox() {
+        for (Enterprise ent : system.getAllEnterprises()) {
+            entrpiseComboBox.addItem(ent.getName());
+        }  
+    }
+    
+    public void clearOrgFields() {
+        txtOrgName.setText("");
+        btnSaveOrg.setEnabled(true);
+        btnUpdateOrg.setEnabled(false);
+    }
+    
+    public String convertOrganizationToDisplayName(Type orgType) {
+        switch (orgType) {
+            case REGIONAL_WASTE_MANAGEMENT_ORG:
+                return "Regional Waste Management Organization";
+            case MUNICIPAL_WASTE_PROCESSING_ORG:
+                return "Municipal Waste Processing Organization";
+            case REUSABLE_MATERIALS_MANAGEMENT_ORG:
+                return "Reusable Materials Management Organization";
+            case RETAIL_WASTE_PROCESSING_ORG:
+                return "Retail Waste Processing Organization";
+            case PRODUCT_CONVERSION_ORG:
+                return "Product Conversion Organization";
+            case MARKETPLACE_ORG:
+                return "Marketplace Organization";
+            default:
+                // Handle the default case or throw an exception if needed
+                throw new IllegalArgumentException("Invalid enterprise type");
+        }
+    }
+
+    public static Type getOrganizationType(String orgTypeName) {
+        switch (orgTypeName) {
+            case "Regional Waste Management Organization":
+                return Type.REGIONAL_WASTE_MANAGEMENT_ORG;
+            case "Municipal Waste Processing Organization":
+                return Type.MUNICIPAL_WASTE_PROCESSING_ORG;
+            case "Reusable Materials Management Organization":
+                return Type.REUSABLE_MATERIALS_MANAGEMENT_ORG;
+            case "Retail Waste Processing Organization":
+                return Type.RETAIL_WASTE_PROCESSING_ORG;
+            case "Product Conversion Organization":
+                return Type.PRODUCT_CONVERSION_ORG;
+            case "Marketplace Organization":
+                return Type.MARKETPLACE_ORG;
+            default:
+                // Handle the case when the input doesn't match any of the known types
+                return null;
+        }
     }
 
     /**
@@ -82,7 +126,7 @@ public class ManageOrganizationJPanel extends BaseJPanel {
         btnViewOrg = new javax.swing.JButton();
         jLabel73 = new javax.swing.JLabel();
         btnDeleteOrg = new javax.swing.JButton();
-        txtPerName = new javax.swing.JTextField();
+        txtOrgName = new javax.swing.JTextField();
         lblName1 = new javax.swing.JLabel();
         lblGender = new javax.swing.JLabel();
         orgTypeComboBox = new javax.swing.JComboBox<>();
@@ -194,10 +238,9 @@ public class ManageOrganizationJPanel extends BaseJPanel {
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblGender, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblName1))
-                            .addComponent(lblName2))
+                            .addComponent(lblName1)
+                            .addComponent(lblName2)
+                            .addComponent(lblGender))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -209,8 +252,8 @@ public class ManageOrganizationJPanel extends BaseJPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(entrpiseComboBox, 0, 250, Short.MAX_VALUE)
-                                    .addComponent(orgTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPerName))
+                                    .addComponent(txtOrgName)
+                                    .addComponent(orgTypeComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(123, 123, 123)
                                 .addComponent(btnViewOrg)
                                 .addGap(18, 18, 18)
@@ -235,22 +278,22 @@ public class ManageOrganizationJPanel extends BaseJPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnDeleteOrg)
                                 .addComponent(btnViewOrg))
-                            .addComponent(txtPerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(orgTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGender))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(entrpiseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(orgTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGender)))
+                            .addComponent(lblName2)))
                     .addComponent(lblName1))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveOrg)
                     .addComponent(btnUpdateOrg)
                     .addComponent(btnCancelOrg))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -262,77 +305,103 @@ public class ManageOrganizationJPanel extends BaseJPanel {
             JOptionPane.showMessageDialog(this, "Please select a row to update");
             return;
         }
+        
+        // Validation if any field is left empty
+        if(txtOrgName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter all the fields");
+            return;
+        }  
+        
+        DefaultTableModel model = (DefaultTableModel) OrgTbl.getModel();
+        Organization selectedOrgDetails = (Organization) model.getValueAt(selectedRowIndex, 0);
+        Enterprise selectedEnterpriseDetails = (Enterprise) model.getValueAt(selectedRowIndex, 2);
+        
+        String orgName = txtOrgName.getText();
+        selectedOrgDetails.setName(orgName);
+        
+        String entName = (String) entrpiseComboBox.getSelectedItem();
+        Enterprise selectedEnterprise = system.findEnterpriseByName(entName);
+        system.updateOrganizationEnterpriseLink(selectedOrgDetails, selectedEnterprise);
+        
+        Type orgType = getOrganizationType((String) orgTypeComboBox.getSelectedItem());
+        selectedOrgDetails.setType(orgType);
 
-        //        // Validation if any field is left empty
-        //        if (txtUserNuId.getText().isEmpty() || txtUserPassword.getText().isEmpty() || txtUserName.getText().isEmpty() || !(jRadioButtonEnabledStatusNo.isSelected() || jRadioButtonEnabledStatusYes.isSelected())) {
-            //            JOptionPane.showMessageDialog(null, "Please enter all the fields");
-            //            return;
-            //        }
-        //
-        //        DefaultTableModel model = (DefaultTableModel) UserTbl.getModel();
-        //        User user = (User) model.getValueAt(selectedRowIndex, 0);
-        //
-        //        String nuId = txtUserNuId.getText();
-        //        String userName = txtUserName.getText();
-        //        String password = txtUserPassword.getText();
-        //        String isActive = "No";
-        //        if (jRadioButtonEnabledStatusYes.isSelected()) {
-            //            isActive = "Yes";
-            //        }
-        //        boolean isPassWordValid = user.isPasswordValid(password);
-        //        if (!isPassWordValid) {
-            //            JOptionPane.showMessageDialog(null, "New password cannot be a previously used password. Please try again");
-            //            return;
-            //        }
-        //        user.setUserName(userName);
-        //        user.setPassword(password);
-        //        user.setEnabledStaus(isActive);
-        //        user.setNUID(nuId);
-        //
-        //        populateUserTable();
-        //        clearUserDetails();
-        JOptionPane.showMessageDialog(this, "User Information Updated");
+        populateOrgTable();
+        clearOrgFields();
+        JOptionPane.showMessageDialog(this, "Organization Information Updated");
     }//GEN-LAST:event_btnUpdateOrgActionPerformed
 
     private void btnCancelOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelOrgActionPerformed
         // TODO add your handling code here:
-        //        clearUserDetails();
+        clearOrgFields();
     }//GEN-LAST:event_btnCancelOrgActionPerformed
 
     private void btnSaveOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveOrgActionPerformed
         // TODO add your handling code here:
         // Validation if any field is left empty
-
-        JOptionPane.showMessageDialog(this, "User Information Saved");
+        String entName = (String) entrpiseComboBox.getSelectedItem();
+        Enterprise selectedEnterprise = system.findEnterpriseByName(entName);
+        
+        // Validation if any field is left empty
+        if(txtOrgName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter all the fields");
+            return;
+        }        
+        
+        String orgName = txtOrgName.getText();
+        Type otgType = getOrganizationType((String) orgTypeComboBox.getSelectedItem());
+        Organization newOrganization = selectedEnterprise.getOrganizationDir().createOrganization(orgName, otgType);
+        system.addOrganizationEnterprise(newOrganization, selectedEnterprise);
+        JOptionPane.showMessageDialog(this, "Organization Saved");
+        populateOrgTable();
+        clearOrgFields();
     }//GEN-LAST:event_btnSaveOrgActionPerformed
 
     private void btnViewOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrgActionPerformed
         // TODO add your handling code here:
         btnUpdateOrg.setEnabled(true);
         btnSaveOrg.setEnabled(false);
-        //        txtUserNuId.setEnabled(false);
-        //
-        //        int selectedRowIndex = UserTbl.getSelectedRow();
-        //        if (selectedRowIndex < 0) {
-            //            JOptionPane.showMessageDialog(this, "Please Select a Row to View.");
-            //            return;
-            //        }
-        //
-        //        DefaultTableModel model = (DefaultTableModel) UserTbl.getModel();
-        //        User selectedUserDetails = (User) model.getValueAt(selectedRowIndex, 0);
-        //
-        //        txtUserNuId.setText(selectedUserDetails.getNUID());
-        //        txtUserName.setText(selectedUserDetails.getUserName());
-        //        txtUserPassword.setText(selectedUserDetails.getPassword());
-        //        if (selectedUserDetails.getEnabledStaus() == "Yes") {
-            //            jRadioButtonEnabledStatusYes.setSelected(true);
-            //        } else {
-            //            jRadioButtonEnabledStatusNo.setSelected(true);
-            //        }
+
+        int selectedRowIndex = OrgTbl.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please Select a Row to View.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) OrgTbl.getModel();
+        Organization selectedOrgDetails = (Organization) model.getValueAt(selectedRowIndex, 0);
+        Enterprise selectedEnterpriseDetails = (Enterprise) model.getValueAt(selectedRowIndex, 2);
+
+        txtOrgName.setText(selectedOrgDetails.getName());
+        entrpiseComboBox.setSelectedItem(selectedEnterpriseDetails.getName());
+        orgTypeComboBox.setSelectedItem(convertOrganizationToDisplayName(selectedOrgDetails.getType()));
+
     }//GEN-LAST:event_btnViewOrgActionPerformed
 
     private void btnDeleteOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOrgActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = OrgTbl.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please Select a Row to View.");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) OrgTbl.getModel();
+        Organization selectedOrgDetails = (Organization) model.getValueAt(selectedRowIndex, 0);
+
+        // Show a warning dialog with Yes/No options
+        int userChoice = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete?",
+                "Warning",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        // Check the user's choice
+        if (userChoice == JOptionPane.YES_OPTION) {
+            system.deleteOrganization(selectedOrgDetails);
+            populateOrgTable();
+        }
     }//GEN-LAST:event_btnDeleteOrgActionPerformed
 
     private void orgTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgTypeComboBoxActionPerformed
@@ -358,6 +427,6 @@ public class ManageOrganizationJPanel extends BaseJPanel {
     private javax.swing.JLabel lblName1;
     private javax.swing.JLabel lblName2;
     private javax.swing.JComboBox<String> orgTypeComboBox;
-    private javax.swing.JTextField txtPerName;
+    private javax.swing.JTextField txtOrgName;
     // End of variables declaration//GEN-END:variables
 }

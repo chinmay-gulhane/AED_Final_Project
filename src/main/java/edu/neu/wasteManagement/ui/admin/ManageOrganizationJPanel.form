@@ -27,11 +27,9 @@
                   <Component id="jScrollPane7" alignment="1" min="-2" pref="803" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="lblGender" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblName1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblName1" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="lblName2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGender" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -45,8 +43,8 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="entrpiseComboBox" pref="250" max="32767" attributes="0"/>
-                                  <Component id="orgTypeComboBox" max="32767" attributes="0"/>
-                                  <Component id="txtPerName" max="32767" attributes="0"/>
+                                  <Component id="txtOrgName" max="32767" attributes="0"/>
+                                  <Component id="orgTypeComboBox" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                               <Component id="btnViewOrg" min="-2" max="-2" attributes="0"/>
@@ -80,17 +78,17 @@
                               <Component id="btnDeleteOrg" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnViewOrg" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtPerName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtOrgName" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="orgTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGender" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="entrpiseComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblName2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="orgTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGender" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="lblName1" min="-2" max="-2" attributes="0"/>
@@ -101,7 +99,7 @@
                   <Component id="btnUpdateOrg" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelOrg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="222" max="32767" attributes="0"/>
+              <EmptySpace pref="298" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -201,7 +199,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteOrgActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPerName">
+    <Component class="javax.swing.JTextField" name="txtOrgName">
     </Component>
     <Component class="javax.swing.JLabel" name="lblName1">
       <Properties>

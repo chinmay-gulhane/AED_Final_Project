@@ -30,6 +30,7 @@ public class ManageEnterpriseJPanel extends BaseJPanel {
         initComponents();
         populateTypeComboBox();
         populateOrgTable();
+       btnUpdateEnt.setEnabled(false);
     }
     
     
@@ -45,10 +46,7 @@ public class ManageEnterpriseJPanel extends BaseJPanel {
         JTableHeader header = EntTbl.getTableHeader();
         header.setFont(new Font("Dialog", Font.BOLD, 14));
         model.setRowCount(0);
-        System.out.println(system.getAllEnterprises());
         for (Enterprise ent : system.getAllEnterprises()) {
-            System.out.println("ent.getType()"+ent.getEnterpriseType());
-            System.out.println(ent.toString());
             Object[] row = new Object[4];
             row[0] = ent;
             row[1] = convertToDisplayName(ent.getEnterpriseType());
@@ -86,6 +84,10 @@ public class ManageEnterpriseJPanel extends BaseJPanel {
                 // Handle the case when the input doesn't match any of the known types
                 return null;
         }
+    }
+    
+    public void clearEntDetails(){
+        txtEntName.setText("");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -259,59 +261,51 @@ public class ManageEnterpriseJPanel extends BaseJPanel {
 
     private void btnUpdateEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEntActionPerformed
         // TODO add your handling code here:
-
+        if(txtEntName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter all the fields");
+            return;
+        }  
+        
         int selectedRowIndex = EntTbl.getSelectedRow();
         if(selectedRowIndex < 0){
             JOptionPane.showMessageDialog(this, "Please select a row to update");
             return;
         }
-
-//        // Validation if any field is left empty
-//        if (txtUserNuId.getText().isEmpty() || txtUserPassword.getText().isEmpty() || txtUserName.getText().isEmpty() || !(jRadioButtonEnabledStatusNo.isSelected() || jRadioButtonEnabledStatusYes.isSelected())) {
-//            JOptionPane.showMessageDialog(null, "Please enter all the fields");
-//            return;
-//        }
-//
-//        DefaultTableModel model = (DefaultTableModel) EntTbl.getModel();
-//        User user = (User) model.getValueAt(selectedRowIndex, 0);
-//
-//        String nuId = txtUserNuId.getText();
-//        String userName = txtUserName.getText();
-//        String password = txtUserPassword.getText();
-//        String isActive = "No";
-//        if (jRadioButtonEnabledStatusYes.isSelected()) {
-//            isActive = "Yes";
-//        }
-//        boolean isPassWordValid = user.isPasswordValid(password);
-//        if (!isPassWordValid) {
-//            JOptionPane.showMessageDialog(null, "New password cannot be a previously used password. Please try again");
-//            return;
-//        }
-//        user.setUserName(userName);
-//        user.setPassword(password);
-//        user.setEnabledStaus(isActive);
-//        user.setNUID(nuId);
-//
-//        populateUserTable();
-//        clearUserDetails();
-        JOptionPane.showMessageDialog(this, "User Information Updated");
+        
+        DefaultTableModel model = (DefaultTableModel) EntTbl.getModel();
+        Enterprise selectedEnterpriseDetails = (Enterprise) model.getValueAt(selectedRowIndex, 0);
+        
+        String entName = txtEntName.getText();
+        EnterpriseType entType = getEnterpriseType((String) entTypeComboBox.getSelectedItem());
+        
+        selectedEnterpriseDetails.setEnterpriseType(entType);
+        selectedEnterpriseDetails.setName(entName);
+        
+        populateOrgTable();
+        clearEntDetails();
+        JOptionPane.showMessageDialog(this, "Enterprise Information Updated");
+        btnUpdateEnt.setEnabled(false);
+        btnSaveEnt.setEnabled(true);
     }//GEN-LAST:event_btnUpdateEntActionPerformed
 
     private void btnCancelEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelEntActionPerformed
         // TODO add your handling code here:
-//        clearUserDetails();
+        clearEntDetails();
+        btnUpdateEnt.setEnabled(false);
+        btnSaveEnt.setEnabled(true);
     }//GEN-LAST:event_btnCancelEntActionPerformed
 
     private void btnSaveEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveEntActionPerformed
         // TODO add your handling code here:
         // Validation if any field is left empty
+        if(txtEntName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter all the fields");
+            return;
+        }  
         String entName = txtEntName.getText();
         EnterpriseType entType = getEnterpriseType((String) entTypeComboBox.getSelectedItem());
-        System.out.println("entName"+ entName);
-        System.out.println(entTypeComboBox.getSelectedItem());
-        System.out.println(getEnterpriseType((String) entTypeComboBox.getSelectedItem()));
         system.getEnterpriseDir().createAndAddEnterprise(entName, entType);
-        
+        populateOrgTable();
         JOptionPane.showMessageDialog(this, "Enterprise Information Saved");
     }//GEN-LAST:event_btnSaveEntActionPerformed
 
@@ -325,22 +319,43 @@ public class ManageEnterpriseJPanel extends BaseJPanel {
             JOptionPane.showMessageDialog(this, "Please Select a Row to View.");
             return;
         }
-//
+        
         DefaultTableModel model = (DefaultTableModel) EntTbl.getModel();
         Enterprise selectedEnterpriseDetails = (Enterprise) model.getValueAt(selectedRowIndex, 0);
-//
-//        txtUserNuId.setText(selectedUserDetails.getNUID());
-//        txtUserName.setText(selectedUserDetails.getUserName());
-//        txtUserPassword.setText(selectedUserDetails.getPassword());
-//        if (selectedUserDetails.getEnabledStaus() == "Yes") {
-//            jRadioButtonEnabledStatusYes.setSelected(true);
-//        } else {
-//            jRadioButtonEnabledStatusNo.setSelected(true);
-//        }
+        
+        txtEntName.setText(selectedEnterpriseDetails.getName());
+        entTypeComboBox.setSelectedItem(convertToDisplayName(selectedEnterpriseDetails.getEnterpriseType()));
     }//GEN-LAST:event_btnViewEntActionPerformed
 
     private void btnDeleteEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEntActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = EntTbl.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please Select a Row to Delete.");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) EntTbl.getModel();
+        Enterprise selectedEnterpriseDetails = (Enterprise) model.getValueAt(selectedRowIndex, 0);
+        if(system.isEnterpriseLinkedToOrganization(selectedEnterpriseDetails)){
+            JOptionPane.showMessageDialog(this, "Enterprise cannot be deleted as it is linked to one or more organizations","Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Show a warning dialog with Yes/No options
+        int userChoice = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete?",
+                "Warning",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        // Check the user's choice
+        if (userChoice == JOptionPane.YES_OPTION) {
+            system.getEnterpriseDir().deleteEnterpriseByName(selectedEnterpriseDetails.getName());
+            clearEntDetails();
+            populateOrgTable();
+            JOptionPane.showMessageDialog(this, "Enterprise deleted successfully");
+        }
     }//GEN-LAST:event_btnDeleteEntActionPerformed
 
 

@@ -47,6 +47,10 @@ public class OrganizationDirectory {
         return null;
     }
     
+    public void deleteOrganization(Organization organizationToDelete) {
+        organizationList.remove(organizationToDelete);
+    }
+    
     public String toString(){
         String ret = "";
         for(Organization org: this.organizationList)

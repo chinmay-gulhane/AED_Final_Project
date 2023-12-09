@@ -34,7 +34,11 @@ public class WorkQueue {
     }
     
     public String toString(){
-        return this.workRequestList.size() > 0 ? "Work Queue has " + this.workRequestList.size() + " requests" : "Work Queue is empty";
+        
+        String ret = "";
+        for(WorkRequest req: this.workRequestList)
+            ret += req + "\n";
+        return "Work Queue Capacity: " + this.workRequestList.size() + "\n" + ret ;
     }
     
    

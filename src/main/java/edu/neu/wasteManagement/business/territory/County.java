@@ -47,4 +47,8 @@ public class County {
         this.neighbourhoods.add(hood);
         return hood;
     }
+
+    public boolean containsNeighbourhood(Neighbourhood hood) {
+        return this.neighbourhoods.contains(hood);
+    }
 }

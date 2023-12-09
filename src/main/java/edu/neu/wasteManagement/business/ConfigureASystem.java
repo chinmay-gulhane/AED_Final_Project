@@ -7,7 +7,10 @@ package edu.neu.wasteManagement.business;
 import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.enterprise.MunicipalEnterprise;
+import edu.neu.wasteManagement.business.enterprise.WasteManagementCorpEnterprise;
+import edu.neu.wasteManagement.business.organization.MunicipalWasteProcessingOrg;
 import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.organization.RegionalWasteManagementOrg;
 import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.business.role.PrincipalUser;
 import edu.neu.wasteManagement.business.role.WasteCollector;
@@ -17,6 +20,7 @@ import edu.neu.wasteManagement.business.territory.City;
 import edu.neu.wasteManagement.business.territory.County;
 import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,18 +62,52 @@ public class ConfigureASystem {
        // Create Municipal Waste Enterprise
        Enterprise municipalWasteEnt = system.getEnterpriseDir().createAndAddEnterprise("Backbay Waste Processing Enterprise", EnterpriseType.MUNICIPAL_WASTE_SERVICES);
        ((MunicipalEnterprise)municipalWasteEnt).setHood(backbay);
+        
+       // Create Waste Management Enterprise
+       Enterprise suffolkWasteManagementEnt = system.getEnterpriseDir().createAndAddEnterprise("Suffolk Waste Management Enterprise", EnterpriseType.WASTE_MANAGEMENT_CORP);
+       ((WasteManagementCorpEnterprise)suffolkWasteManagementEnt).setCounty(suffolk);
        
        // Create Municipal Waste Processing org
        Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization(Type.MUNICIPAL_WASTE_PROCESSING_ORG);
-
+       ((MunicipalWasteProcessingOrg)municipalWasteOrg).setCounty(suffolk);
+       
+        // Create Regional Waste Management org
+       Organization regionalWasteManagementOrg = suffolkWasteManagementEnt.getOrganizationDir().createOrganization(Type.REGIONAL_WASTE_MANAGEMENT_ORG);
+       ((RegionalWasteManagementOrg)regionalWasteManagementOrg).setCounty(suffolk);
        
        // Create Waste Cordinator for Municipal waste services:
-       UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbwcd", "Abcd1ef", new WasteCordinator(), true);
-       UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl", "Abcd1ef", new WasteCollector(), true);
-       UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbws", "Abcd1ef", new WasteSegregator(), true);
+       UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbwcd", "Abcd1ef", new WasteCordinator(), true); wasteCordinator.setNeighbourhood(backbay);
+       UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl", "Abcd1ef", new WasteCollector(), true); wasteCollector.setNeighbourhood(backbay);
+       UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbws", "Abcd1ef", new WasteSegregator(), true); wasteSegregator.setNeighbourhood(backbay);
      
        // Create Waste Collection Request
-       system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
+       WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
+       
+       // Assign Waste collection Request to Waste Collector
+       garbageCollectRequest.setReceiver(wasteCollector);
+       
+       // Waste Collector - Mark Status as completed
+       garbageCollectRequest.setStatus("Completed");
+       
+       // Waste Cordinator create new Waste Processing request
+       WorkRequest processingRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, wasteCordinator);
+       
+       // Assign Waste Processing Request to Waste Segregator
+       processingRequest.setReceiver(wasteSegregator);
+        
+       // Waste Collector - Mark Status as completed
+       processingRequest.setStatus("Completed");
+       
+       
+       // -------- Municipal to Waste Management -------
+       
+       // Step 1 - Create MUNICIPAL_WASTE_COLLECTION_REQUEST
+       WorkRequest municipalWasteColReq = system.createWorkRequest(WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST, wasteCordinator);
+       
+       System.out.println(regionalWasteManagementOrg.getWorkQueue());
+        
+        
+        
        
    }
     

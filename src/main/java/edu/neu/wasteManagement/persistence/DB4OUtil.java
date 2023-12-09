@@ -73,7 +73,7 @@ public class DB4OUtil {
         EmbeddedObjectContainer conn = createConnection();
         ObjectSet<Ecosystem> systems = conn.query(Ecosystem.class); // Change to the object you want to save
         Ecosystem system;
-        if (systems.isEmpty() || systems == null || systems.size() == 0){
+        if (true || systems.isEmpty() || systems == null || systems.size() == 0){
             system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
         }
         else{

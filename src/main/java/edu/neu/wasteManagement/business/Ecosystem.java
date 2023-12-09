@@ -12,9 +12,11 @@ import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.role.RoleType;
 import edu.neu.wasteManagement.business.territory.CityRegistry;
+import edu.neu.wasteManagement.business.territory.County;
 import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
+import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.WasteSegregationRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
@@ -121,18 +123,29 @@ public class Ecosystem extends Organization{
                 
                 // Find org
                 org = findOrgByHood(hood,EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
-                System.out.println("Printing Queue:" + org.getWorkQueue());
                 org.getWorkQueue().addWorkRequest(request);
      
                 ((UserWasteCollectionRequest)request).setHood(hood); 
                 break;
                 
-            case WASTE_SEGREGATION_REQUEST:
+            case WASTE_PROCESSING_REQUEST:
                 request = new WasteSegregationRequest();
                 // Find org
                 org = findOrgByHood(hood,EnterpriseType.MUNICIPAL_WASTE_SERVICES, Type.MUNICIPAL_WASTE_PROCESSING_ORG);
                 // Add request to org
                 org.getWorkQueue().addWorkRequest(request);                
+                break;
+                
+            case MUNICIPAL_WASTE_COLLECTION_REQUEST:
+                // Create request
+                request = new MunicipalWasteCollectionRequest();
+                
+                // Find org
+                County county = this.getCountyByNeighbourhood(hood);
+                org = findOrgByCounty(county,EnterpriseType.WASTE_MANAGEMENT_CORP, Type.REGIONAL_WASTE_MANAGEMENT_ORG);
+                org.getWorkQueue().addWorkRequest(request);
+                
+                ((MunicipalWasteCollectionRequest)request).setCounty(county); 
                 break;
         }
         
@@ -178,4 +191,12 @@ public class Ecosystem extends Organization{
         return allOrganizations;
     }
 
+    public County getCountyByNeighbourhood(Neighbourhood hood){
+        return this.cityReg.getCountyByNeighbourhood(hood);
+    }
+
+    private Organization findOrgByCounty(County county, EnterpriseType enterpriseType, Type type) {
+            Enterprise entFound = this.getEnterpriseDir().findEnterpriseByTypeAndCounty(county, enterpriseType);
+        return entFound.getOrganizationDir().findOrganizationByType(type);
+    }
 }

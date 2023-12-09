@@ -5,6 +5,7 @@
 package edu.neu.wasteManagement.business.enterprise;
 
 import edu.neu.wasteManagement.business.role.Role;
+import edu.neu.wasteManagement.business.territory.County;
 import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import java.util.ArrayList;
@@ -75,6 +76,10 @@ public class EnterpriseDirectory {
                 enterprise = new MunicipalEnterprise(name,type);
                 enterpriseList.add(enterprise);
             }
+            else if(type == EnterpriseType.WASTE_MANAGEMENT_CORP){
+                enterprise = new WasteManagementCorpEnterprise(name,type);
+                enterpriseList.add(enterprise);
+            }
 //        else if(type==Enterprise.EnterpriseType.Government){
 //            enterprise=new GovernmentEnterprise(name);
 //            enterpriseList.add(enterprise);
@@ -89,6 +94,14 @@ public class EnterpriseDirectory {
 //            enterpriseList.add(enterprise);
 //        } 
         return enterprise;
+    }
+
+    public Enterprise findEnterpriseByTypeAndCounty(County county, EnterpriseType type) {
+        for(Enterprise ent:this.getEnterpriseList()){
+            if(ent.getEnterpriseType().equals(type) && ((WasteManagementCorpEnterprise)ent).getCounty().equals(county))
+                return ent;
+        }
+        return null;
     }
     
 }

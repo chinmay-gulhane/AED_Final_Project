@@ -31,6 +31,10 @@ public class OrganizationDirectory {
             organization = new MunicipalWasteProcessingOrg(Type.MUNICIPAL_WASTE_PROCESSING_ORG.name());
             organizationList.add(organization);
         }
+        else if (Type.REGIONAL_WASTE_MANAGEMENT_ORG == type){
+            organization = new RegionalWasteManagementOrg(Type.REGIONAL_WASTE_MANAGEMENT_ORG.name());
+            organizationList.add(organization);
+        }
         organization.setType(type);
         return organization;
     }

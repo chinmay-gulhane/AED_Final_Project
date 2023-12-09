@@ -83,4 +83,7 @@ public class WorkRequest {
         this.resolveDate = resolveDate;
     }
     
+    public String toString(){
+        return "WR Type: " + this.getClass().getSimpleName() + " Sender: " + this.sender + " Reciever: " + this.receiver;
+    }
 }

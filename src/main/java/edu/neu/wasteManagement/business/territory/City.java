@@ -47,4 +47,12 @@ public class City {
         this.counties.add(county);
         return county;
     }
+
+    public County getCountyByNeighbourhood(Neighbourhood hood) {
+        for(County county: counties){
+            if(county.containsNeighbourhood(hood))
+                return county;
+        }
+        return null;
     }
+}

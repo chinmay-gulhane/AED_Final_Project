@@ -2,19 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package edu.neu.wasteManagement.business.enterprise;
+package edu.neu.wasteManagement.business.organization;
 
-import edu.neu.wasteManagement.business.organization.Type;
+import edu.neu.wasteManagement.business.products.ProductCatalog;
+import edu.neu.wasteManagement.business.role.PrincipalUser;
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.territory.County;
+import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
+import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import java.util.List;
 
 /**
  *
  * @author ingale.r
  */
-public class WasteManagementCorpEnterprise extends Enterprise{
-    
+public class RegionalWasteManagementOrg extends Organization {
+
     private County county;
 
     public County getCounty() {
@@ -24,19 +28,15 @@ public class WasteManagementCorpEnterprise extends Enterprise{
     public void setCounty(County county) {
         this.county = county;
     }
-
-    @Override
-    public List<Type> getSupportedOrganizations() {
-        return null;
-    }
-
-    public WasteManagementCorpEnterprise(String name, EnterpriseType type) {
-        super(name, type);
+    
+    public RegionalWasteManagementOrg(String name) {
+        super(name);
     }
 
     @Override
     public List<Role> getSupportedRole() {
         return null;
     }
+    
     
 }

@@ -24,4 +24,13 @@ public class CityRegistry {
         this.cities.add(city);
         return city;
     }
+
+    public County getCountyByNeighbourhood(Neighbourhood hood) {
+        for(City city: cities){
+            County county = city.getCountyByNeighbourhood(hood);
+            if(county != null)
+                return county;
+        }
+        return null;
+    }
 }

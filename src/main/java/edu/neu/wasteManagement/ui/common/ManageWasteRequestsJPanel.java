@@ -58,7 +58,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         txtSearchbox = new javax.swing.JTextField();
         lblEmail3 = new javax.swing.JLabel();
         btnRefresh = new javax.swing.JButton();
-        btnAssign = new javax.swing.JButton();
+        btnComplete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         chkProcessingReq = new javax.swing.JCheckBox();
@@ -66,6 +66,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         cmbAssignee = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         chkCollectionReq = new javax.swing.JCheckBox();
+        btnAssign = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -142,15 +143,15 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
             }
         });
 
-        btnAssign.setText("Assign");
-        btnAssign.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnComplete.setText("Mark as Completed");
+        btnComplete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAssignMouseClicked(evt);
+                btnCompleteMouseClicked(evt);
             }
         });
-        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+        btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignActionPerformed(evt);
+                btnCompleteActionPerformed(evt);
             }
         });
 
@@ -184,6 +185,18 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
             }
         });
 
+        btnAssign.setText("Assign");
+        btnAssign.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAssignMouseClicked(evt);
+            }
+        });
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,19 +209,20 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
                 .addGap(240, 240, 240)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(372, 372, 372)
-                                .addComponent(lblEmail3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(418, 418, 418)
-                                .addComponent(btnAssign)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancel)))
+                        .addGap(372, 372, 372)
+                        .addComponent(lblEmail3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(chkProcessingReq, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkCollectionReq, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnView)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,16 +236,16 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(chkProcessingReq, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chkCollectionReq, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(jLabel2)))
+                                .addComponent(btnSearch)))
                         .addGap(0, 14210, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(616, 616, 616)
+                .addComponent(btnAssign)
+                .addGap(18, 18, 18)
+                .addComponent(btnComplete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancel)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(7753, Short.MAX_VALUE)
@@ -269,8 +283,9 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
                             .addComponent(btnRefresh))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssign)
-                    .addComponent(btnCancel))
+                    .addComponent(btnComplete)
+                    .addComponent(btnCancel)
+                    .addComponent(btnAssign))
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
                 .addContainerGap(648, Short.MAX_VALUE))
@@ -310,18 +325,20 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        btnView.setEnabled(true);
-        btnAssign.setEnabled(true);
-        btnRefresh.setEnabled(true);
-        txtSearchbox.setEnabled(false);
 
         int selectedRowIndex = tblRequests.getSelectedRow();
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Select the request to View!");
             return;
         }
+        
         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
         selectedRequest = (WorkRequest) model.getValueAt(selectedRowIndex, 0);
+        
+        if(canComplete()) btnComplete.setEnabled(true);
+        if(canAssign()) btnAssign.setEnabled(true);
+        btnRefresh.setEnabled(true);
+        txtSearchbox.setEnabled(false);
         populateAssignee();
 
         
@@ -352,7 +369,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         populateTable(org.getWorkQueue().getWorkRequestList());
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
+    private void btnCompleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompleteMouseClicked
         // TODO add your handling code here:
 //        int selectedRowIndex = tblUser.getSelectedRow();
 //
@@ -389,16 +406,15 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 //            }
 //
 //        } 
-    }//GEN-LAST:event_btnAssignMouseClicked
+    }//GEN-LAST:event_btnCompleteMouseClicked
 
-    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-       UserAccount reciever = (UserAccount) cmbAssignee.getSelectedItem();
-       selectedRequest.setReceiver(reciever);
-       selectedRequest.setStatus("Assigned");
-       populateTable(org.getWorkQueue().getWorkRequestList());
+       selectedRequest.setStatus("Completed");
+       JOptionPane.showMessageDialog(this, "Request completed!!");
+       initSetup();
       // db4o.storeSystem(system);
-    }//GEN-LAST:event_btnAssignActionPerformed
+    }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
@@ -417,10 +433,27 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_chkCollectionReqActionPerformed
 
+    private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAssignMouseClicked
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        UserAccount reciever = (UserAccount) cmbAssignee.getSelectedItem();
+        selectedRequest.setReceiver(reciever);
+        selectedRequest.setStatus("Assigned");
+        JOptionPane.showMessageDialog(this, "Request assigned!!");
+        initSetup();
+        
+      // db4o.storeSystem(system);
+        
+    }//GEN-LAST:event_btnAssignActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnComplete;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;
@@ -439,8 +472,8 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
     private javax.swing.JTextField txtSearchbox;
     // End of variables declaration//GEN-END:variables
 
-    private void initSetup() { 
-        initialButtonsState();
+    private void initSetup() {
+        changePageStateByUserRole();
         org = system.getOrganizationByUserAccount(system.getLoggedInUser());
         populateTable(org.getWorkQueue().getWorkRequestList());
     }
@@ -509,9 +542,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
     }
 
     private void initialButtonsState() {
-        btnAssign.setEnabled(false);
-        chkProcessingReq.setSelected(true);
-        chkCollectionReq.setSelected(true);
+        btnComplete.setEnabled(false);
     }
 //
 //
@@ -552,6 +583,46 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
        }
        
        
+    }
+
+    private void changePageStateByUserRole() {
+        
+        RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
+        
+        
+        switch(roleType){
+            case WASTE_CORDINATOR:
+                chkProcessingReq.setSelected(true);
+                chkCollectionReq.setSelected(true);
+                break;
+                
+            case WASTE_COLLECTOR:
+                chkProcessingReq.setSelected(false);
+                chkCollectionReq.setSelected(true);
+                chkProcessingReq.setEnabled(false);
+                chkCollectionReq.setEnabled(false);
+                break;
+                
+             case WASTE_SEGREGATOR:
+                chkProcessingReq.setSelected(true);
+                chkCollectionReq.setSelected(false);
+                chkProcessingReq.setEnabled(false);
+                chkCollectionReq.setEnabled(false);
+                break;   
+        }
+            
+        btnAssign.setEnabled(false);
+        btnComplete.setEnabled(false);
+    }
+    
+    private boolean canAssign(){
+        RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
+        return roleType.equals(RoleType.WASTE_CORDINATOR) && (selectedRequest.getReceiver() == null);   
+    }
+    
+    private boolean canComplete(){
+        RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
+        return !roleType.equals(RoleType.WASTE_CORDINATOR) && !(selectedRequest.getStatus().equals("Completed"));  
     }
 }
 

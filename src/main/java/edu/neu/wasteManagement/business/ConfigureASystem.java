@@ -130,6 +130,10 @@ public class ConfigureASystem {
        
        system.addOrganizationEnterprise(marketplace, greenLiving);
        system.addOrganizationEnterprise(municipalWasteOrg, municipalWasteEnt);
+       
+       
+       // Raise WCR
+     system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST, andy);
              
    }
     

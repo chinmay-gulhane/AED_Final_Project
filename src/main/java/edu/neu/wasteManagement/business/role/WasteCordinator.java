@@ -15,6 +15,9 @@ import javax.swing.JPanel;
  */
 public class WasteCordinator extends Role{
     
+    public WasteCordinator(){
+        super(RoleType.WASTE_CORDINATOR);
+    }
 
     @Override
     public JPanel createWorkArea(Ecosystem business) {

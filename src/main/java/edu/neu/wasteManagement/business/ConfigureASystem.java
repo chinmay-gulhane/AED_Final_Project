@@ -79,9 +79,14 @@ public class ConfigureASystem {
        ((RegionalWasteManagementOrg)regionalWasteManagementOrg).setCounty(suffolk);
        
        // Create Waste Cordinator for Municipal waste services:
-       UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbwcd", "Abcd1ef", new WasteCordinator(), true); wasteCordinator.setNeighbourhood(backbay);
+       UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbwcd", "Abcd1ef", new WasteCordinator(), true); wasteCordinator.setNeighbourhood(backbay); 
+       municipalWasteOrg.getUserAccountDir().associateUser(wasteCordinator);
        UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbwcl", "Abcd1ef", new WasteCollector(), true); wasteCollector.setNeighbourhood(backbay);
+       municipalWasteOrg.getUserAccountDir().associateUser(wasteCollector);
+
        UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbws", "Abcd1ef", new WasteSegregator(), true); wasteSegregator.setNeighbourhood(backbay);
+       municipalWasteOrg.getUserAccountDir().associateUser(wasteSegregator);
+
      
        //  -------- Create Waste Collection Request ----------
        WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);

@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 public class WasteCollector extends Role{
     
 
+    public WasteCollector(){
+        super(RoleType.WASTE_COLLECTOR);
+    }
+    
     @Override
     public JPanel createWorkArea(Ecosystem business) {
         return new PrincipalUserWorkArea(business);

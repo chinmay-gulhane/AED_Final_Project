@@ -14,7 +14,10 @@ import javax.swing.JPanel;
  */
 public class WasteSegregator extends Role{
     
-
+    public WasteSegregator(){
+        super(RoleType.WASTE_SEGREGATOR);
+    }
+    
     @Override
     public JPanel createWorkArea(Ecosystem business) {
         return new PrincipalUserWorkArea(business);

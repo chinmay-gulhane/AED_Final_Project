@@ -227,7 +227,7 @@ public class Ecosystem extends Organization{
              if(req instanceof WasteProcessingRequest )
                 amount += ((WasteProcessingRequest)req).getWasteAmount();
         return amount;
-    
+    }
     public static class OrganizationEnterprise{
         public Organization org;
         public Enterprise ent;
@@ -244,5 +244,18 @@ public class Ecosystem extends Organization{
     
     public List<OrganizationEnterprise> fetchOrganizationForTable(){
         return organizationEnterpriseList;
+    }
+    
+    public Organization getOrganizationByUserAccount(UserAccount user){
+        //Step 1 : Iterate over all organization
+        //step 2: Find provided user in organization useraccountDirectory
+        //Step 3: If user found in userAccountDirectory then return organization
+        
+        for(Enterprise ent : enterpriseDir.getEnterpriseList()){
+            for(Organization org : ent.getOrganizationDir().getOrganizationList())
+                if(org.getUserAccountDir().userAccountExists(user))
+                    return org;
+        }
+        return null;
     }
 }

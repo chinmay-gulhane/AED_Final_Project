@@ -82,7 +82,7 @@ public abstract class Organization {
     
     
     public String toString(){
-        return "Organization Name: " + this.getName();
+        return this.getName();
     }
   
 }

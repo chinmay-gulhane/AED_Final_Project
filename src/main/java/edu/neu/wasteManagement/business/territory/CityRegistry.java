@@ -33,4 +33,12 @@ public class CityRegistry {
         }
         return null;
     }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
 }

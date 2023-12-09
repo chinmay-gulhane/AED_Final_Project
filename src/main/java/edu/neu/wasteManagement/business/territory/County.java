@@ -15,6 +15,7 @@ public class County {
     
     private String name;
     private List<Neighbourhood> neighbourhoods;
+    private City city;
     
     public County(String name){
         this.name = name;
@@ -23,6 +24,22 @@ public class County {
 
     public String getName() {
         return name;
+    }
+
+    public List<Neighbourhood> getNeighbourhoods() {
+        return neighbourhoods;
+    }
+
+    public void setNeighbourhoods(List<Neighbourhood> neighbourhoods) {
+        this.neighbourhoods = neighbourhoods;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public void setName(String name) {

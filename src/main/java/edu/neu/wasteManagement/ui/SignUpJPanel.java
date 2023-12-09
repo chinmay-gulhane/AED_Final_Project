@@ -234,11 +234,8 @@ public class SignUpJPanel extends BaseJPanel {
         } catch (Exception ex) {
             Logger.getLogger(SignUpJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     
-        System.out.println(system);
         dB4OUtil.storeSystem(system);
-        System.out.println(system);
     }//GEN-LAST:event_btnSubmitActionPerformed
     
 

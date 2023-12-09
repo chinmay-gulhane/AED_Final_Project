@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package edu.neu.wasteManagement.ui.principal;
+package edu.neu.wasteManagement.ui.cordinator;
 
 import edu.neu.wasteManagement.ui.common.UserTrashJPanel;
 import edu.neu.wasteManagement.ui.common.UserProfileJPanel;
+import edu.neu.wasteManagement.ui.common.ManageWasteRequestsJPanel;
 import edu.neu.wasteManagement.ui.common.GarbageCollectRequestJPanel;
+import edu.neu.wasteManagement.ui.principal.*;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
@@ -25,9 +27,9 @@ import javax.swing.JPanel;
  *
  * @author ingale.r
  */
-public class PrincipalUserWorkArea extends BaseJPanel {
+public class WasteCordinatorWorkArea extends BaseJPanel {
 
-    public PrincipalUserWorkArea(Ecosystem system) {
+    public WasteCordinatorWorkArea(Ecosystem system) {
         super(system);
         initComponents();
         initialSetup();
@@ -46,7 +48,7 @@ public class PrincipalUserWorkArea extends BaseJPanel {
         lblGreetings = new javax.swing.JLabel();
         lblCourses = new javax.swing.JLabel();
         lblReviewProfessor = new javax.swing.JLabel();
-        lblMyProfile = new javax.swing.JLabel();
+        lblViewCertificates = new javax.swing.JLabel();
         lblMyGrades = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -62,7 +64,7 @@ public class PrincipalUserWorkArea extends BaseJPanel {
 
         lblCourses.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblCourses.setForeground(new java.awt.Color(0, 153, 255));
-        lblCourses.setText("Visit Marketplace >");
+        lblCourses.setText("Manage Waste Requests > ");
         lblCourses.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCoursesMouseClicked(evt);
@@ -71,25 +73,25 @@ public class PrincipalUserWorkArea extends BaseJPanel {
 
         lblReviewProfessor.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblReviewProfessor.setForeground(new java.awt.Color(0, 153, 255));
-        lblReviewProfessor.setText("Raise Request >");
+        lblReviewProfessor.setText("Raise Waste Collection Request >");
         lblReviewProfessor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblReviewProfessorMouseClicked(evt);
             }
         });
 
-        lblMyProfile.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblMyProfile.setForeground(new java.awt.Color(0, 153, 255));
-        lblMyProfile.setText("My Profile >");
-        lblMyProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblViewCertificates.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblViewCertificates.setForeground(new java.awt.Color(0, 153, 255));
+        lblViewCertificates.setText("My Profile >");
+        lblViewCertificates.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblMyProfileMouseClicked(evt);
+                lblViewCertificatesMouseClicked(evt);
             }
         });
 
         lblMyGrades.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblMyGrades.setForeground(new java.awt.Color(0, 153, 255));
-        lblMyGrades.setText("See my trash >");
+        lblMyGrades.setText("Waste Processing Statistics >");
         lblMyGrades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMyGradesMouseClicked(evt);
@@ -121,10 +123,10 @@ public class PrincipalUserWorkArea extends BaseJPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMyGrades)
                             .addComponent(lblCourses))
-                        .addGap(240, 240, 240)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblMyProfile)
-                            .addComponent(lblReviewProfessor)))
+                        .addGap(160, 160, 160)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblReviewProfessor)
+                            .addComponent(lblViewCertificates)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(lblGreetings))
@@ -139,7 +141,7 @@ public class PrincipalUserWorkArea extends BaseJPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(12941, Short.MAX_VALUE))
+                .addContainerGap(12632, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +159,7 @@ public class PrincipalUserWorkArea extends BaseJPanel {
                             .addComponent(lblReviewProfessor))
                         .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMyProfile)
+                            .addComponent(lblViewCertificates)
                             .addComponent(lblMyGrades))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,24 +169,24 @@ public class PrincipalUserWorkArea extends BaseJPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblEmail))
-                .addContainerGap(889, Short.MAX_VALUE))
+                .addContainerGap(941, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCoursesMouseClicked
         //Mouse Click
-//       Utility.switchPanel(new RegisterCourseJPanel(business), business.getWorkArea());     
+       Utility.switchPanel(new ManageWasteRequestsJPanel(system), system.getWorkArea());     
     }//GEN-LAST:event_lblCoursesMouseClicked
 
     private void lblReviewProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReviewProfessorMouseClicked
         // TODO add your handling code here:
-       Utility.switchPanel(new GarbageCollectRequestJPanel(system, WorkRequestType.USER_WASTE_COLLECTION_REQUEST), system.getWorkArea());
+       Utility.switchPanel(new GarbageCollectRequestJPanel(system, WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST), system.getWorkArea());
     }//GEN-LAST:event_lblReviewProfessorMouseClicked
 
-    private void lblMyProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMyProfileMouseClicked
+    private void lblViewCertificatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewCertificatesMouseClicked
         // TODO add your handling code here:
         Utility.switchPanel(new UserProfileJPanel(system), system.getWorkArea());
-    }//GEN-LAST:event_lblMyProfileMouseClicked
+    }//GEN-LAST:event_lblViewCertificatesMouseClicked
 
     private void lblMyGradesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMyGradesMouseClicked
         // TODO add your handling code here:
@@ -200,10 +202,10 @@ public class PrincipalUserWorkArea extends BaseJPanel {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGreetings;
     private javax.swing.JLabel lblMyGrades;
-    private javax.swing.JLabel lblMyProfile;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblProfilePic;
     private javax.swing.JLabel lblReviewProfessor;
+    private javax.swing.JLabel lblViewCertificates;
     // End of variables declaration//GEN-END:variables
 
     private void initialSetup() {

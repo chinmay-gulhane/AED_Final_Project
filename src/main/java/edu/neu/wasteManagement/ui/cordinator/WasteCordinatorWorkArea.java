@@ -10,6 +10,8 @@ import edu.neu.wasteManagement.ui.common.ManageWasteRequestsJPanel;
 import edu.neu.wasteManagement.ui.common.GarbageCollectRequestJPanel;
 import edu.neu.wasteManagement.ui.principal.*;
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
+import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
 import edu.neu.wasteManagement.utility.Utility;
@@ -54,6 +56,7 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
         jLabel3 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
+        lblReviewProfessor1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -110,6 +113,15 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
         lblEmail.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
         lblEmail.setText("jLabel4");
 
+        lblReviewProfessor1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblReviewProfessor1.setForeground(new java.awt.Color(0, 153, 255));
+        lblReviewProfessor1.setText("Raise Waste Segregation Request >");
+        lblReviewProfessor1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblReviewProfessor1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,12 +133,15 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
                         .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMyGrades)
-                            .addComponent(lblCourses))
-                        .addGap(160, 160, 160)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblReviewProfessor)
-                            .addComponent(lblViewCertificates)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMyGrades)
+                                    .addComponent(lblCourses))
+                                .addGap(160, 160, 160)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblReviewProfessor)
+                                    .addComponent(lblViewCertificates)))
+                            .addComponent(lblReviewProfessor1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(lblGreetings))
@@ -165,11 +180,13 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblName))
-                .addGap(24, 24, 24)
+                .addGap(7, 7, 7)
+                .addComponent(lblReviewProfessor1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblEmail))
-                .addContainerGap(941, Short.MAX_VALUE))
+                .addContainerGap(927, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -193,6 +210,17 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
          Utility.switchPanel(new UserTrashJPanel(system), system.getWorkArea());     
 
     }//GEN-LAST:event_lblMyGradesMouseClicked
+
+    private void lblReviewProfessor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReviewProfessor1MouseClicked
+        // TODO add your handling code here:
+        
+        int i = JOptionPane.showConfirmDialog(this, "Do you want to raise a segregation request?");
+        if(i == 0){
+            WorkRequest segregationRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, system.getLoggedInUser());
+            ((WasteProcessingRequest)segregationRequest).addActualWasteToRequest(system.fetchListOfEmptyWasteType());
+            JOptionPane.showMessageDialog(this, "Request Raised!!");
+        }
+    }//GEN-LAST:event_lblReviewProfessor1MouseClicked
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,6 +233,7 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblProfilePic;
     private javax.swing.JLabel lblReviewProfessor;
+    private javax.swing.JLabel lblReviewProfessor1;
     private javax.swing.JLabel lblViewCertificates;
     // End of variables declaration//GEN-END:variables
 

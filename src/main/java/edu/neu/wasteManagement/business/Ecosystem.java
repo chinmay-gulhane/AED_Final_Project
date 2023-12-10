@@ -18,6 +18,7 @@ import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.Waste.WasteType;
 import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
@@ -245,6 +246,13 @@ public class Ecosystem extends Organization{
 
     public List<WasteType> getWasteType() {
       return new ArrayList<>(EnumSet.allOf(WasteType.class));  
+    }
+
+    public List<Waste> fetchListOfEmptyWasteType() {
+        List<Waste> temp = new ArrayList<>();
+        for(WasteType type: this.getWasteType())
+            temp.add(new Waste(type,0.0));
+        return temp;
     }
     
     public static class OrganizationEnterprise{

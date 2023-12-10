@@ -17,11 +17,15 @@ public class WasteProcessingRequest extends WorkRequest{
     
     public WasteProcessingRequest() {
         super();
-        this.actualWasteProcessed = new ArrayList<>();
+        this.wasteToCollect = new ArrayList<>();
     }
 
     private Neighbourhood hood;
-    private List<Waste> actualWasteProcessed;
+    private List<Waste> wasteToCollect;
+
+    public List<Waste> getWasteToCollect() {
+        return wasteToCollect;
+    }
     
     public Neighbourhood getHood() {
         return hood;
@@ -31,14 +35,13 @@ public class WasteProcessingRequest extends WorkRequest{
         this.hood = hood;
     }
     
-    public void addActualWasteToRequest(Waste.WasteType type, double amount){
-        Waste actualWaste = new Waste(type, amount);
-        this.actualWasteProcessed.add(actualWaste);
+    public void addActualWasteToRequest(List<Waste> waste){
+        this.wasteToCollect.addAll(waste);
     }
     
     public double getWasteAmount(){
         double amount = 0;
-        for(Waste actualWaste: actualWasteProcessed)
+        for(Waste actualWaste: wasteToCollect)
             amount += actualWaste.getAmount();
         return amount;
     }

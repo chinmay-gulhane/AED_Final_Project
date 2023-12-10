@@ -9,6 +9,7 @@ import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
+import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
@@ -168,7 +169,14 @@ public class WasteProcessedJPanel extends BaseJPanel {
         DefaultTableModel model = (DefaultTableModel) tblWaste.getModel(); //Convert to TableModel to defaultTableModel
         model.setRowCount(0);
         
-        for (Waste waste : ((UserWasteCollectionRequest)request).getWasteToCollect()) {
+        List<Waste> wastes = null;
+        
+        if(request instanceof UserWasteCollectionRequest)
+            wastes = ((UserWasteCollectionRequest)request).getWasteToCollect();
+        else if( request instanceof WasteProcessingRequest)
+            wastes = ((WasteProcessingRequest)request).getWasteToCollect();
+        
+        for (Waste waste : wastes) {
 
             //to create lines or row (row is small array of object with 3 members)
             Object[] row = new Object[2];

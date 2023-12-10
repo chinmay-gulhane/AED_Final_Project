@@ -6,6 +6,7 @@ package edu.neu.wasteManagement.business.role;
 
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
+import edu.neu.wasteManagement.ui.segregator.WasteSegregatorWorkArea;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +21,7 @@ public class WasteSegregator extends Role{
     
     @Override
     public JPanel createWorkArea(Ecosystem business) {
-        return new PrincipalUserWorkArea(business);
+        return new WasteSegregatorWorkArea(business);
     }
     
 }

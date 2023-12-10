@@ -72,6 +72,9 @@ public class ConfigureASystem {
         marketplaceOrg.listProduct("Product 1", 20.0, 5, "sfwcl3");
         marketplaceOrg.listProduct("Product 2", 18, 4, "sfwcl3");
         marketplaceOrg.listProduct("Product 3", 10.0, 3, "sfwcl3");
+        marketplaceOrg.listProduct("Product 4", 20.0, 5, "sfws");
+        marketplaceOrg.listProduct("Product 5", 18, 4, "sfws");
+        marketplaceOrg.listProduct("Product 6", 10.0, 3, "sfws");
 
        
        // Create principal User

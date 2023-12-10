@@ -13,6 +13,10 @@ import javax.swing.JPanel;
  * @author ingale.r
  */
 public class Admin extends Role{
+    
+    public Admin(){
+        super(RoleType.ADMIN);
+    }
 
     @Override
     public JPanel createWorkArea(Ecosystem business) {

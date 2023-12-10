@@ -16,6 +16,10 @@ import javax.swing.JPanel;
  */
 public class MarketplaceIntegrator extends Role{
     
+    public MarketplaceIntegrator(){
+        super(RoleType.MARKETPLACE_INTEGRATOR);
+    }
+    
     @Override
     public JPanel createWorkArea(Ecosystem business) {
         return new MarketplaceIntegratorWorkArea(business);

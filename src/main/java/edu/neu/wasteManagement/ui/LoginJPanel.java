@@ -6,6 +6,7 @@ package edu.neu.wasteManagement.ui;
 
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.ui.common.SelectOrganizationJPanel;
 import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
 import edu.neu.wasteManagement.utility.Utility;
 import java.awt.Color;
@@ -119,8 +120,11 @@ public class LoginJPanel extends BaseJPanel {
         UserAccount loggedIn = system.getUserAccountDir().validateLogins(txtUsername.getText(), txtPassword.getText());
             
             if(loggedIn != null){
-                system.setLoggedInUser(loggedIn);
-                showHomePage(loggedIn);
+               system.setLoggedInUser(loggedIn);
+                if( system.hasUserAssociatedWithOrganization(loggedIn))
+                    showHomePage(loggedIn);
+                else
+                    showOrganizationAssociationPage(loggedIn);
          }else 
              JOptionPane.showMessageDialog(this, "User not found!");
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -152,4 +156,8 @@ public class LoginJPanel extends BaseJPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void showOrganizationAssociationPage(UserAccount loggedIn) {
+        Utility.switchPanel(new SelectOrganizationJPanel(system), system.getWorkArea());
+    }
 }

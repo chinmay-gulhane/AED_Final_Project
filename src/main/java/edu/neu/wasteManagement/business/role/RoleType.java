@@ -14,4 +14,5 @@ public enum RoleType {
     ADMIN,
     WASTE_SEGREGATOR,
     WASTE_COLLECTOR,
+    MARKETPLACE_INTEGRATOR,
 }

@@ -18,9 +18,6 @@ public abstract class Role {
         this.roleType = type;
     }
     
-    public Role(){
-    }
-
     public RoleType getRoleType() {
         return roleType;
     }

@@ -229,6 +229,17 @@ public class Ecosystem extends Organization{
                 amount += ((WasteProcessingRequest)req).getWasteAmount();
         return amount;
     }
+
+    public boolean hasUserAssociatedWithOrganization(UserAccount loggedIn) {
+        RoleType roleType = loggedIn.getRole().getRoleType();
+        if(roleType.equals(RoleType.ADMIN) || roleType.equals(RoleType.PRINCIPAL_USER)) return true;
+        
+        for(Enterprise ent : enterpriseDir.getEnterpriseList())
+            for(Organization org : ent.getOrganizationDir().getOrganizationList())
+                if(org.getUserAccountDir().userAccountExists(loggedIn))
+                    return true;
+        return false;
+    }
     
     public static class OrganizationEnterprise{
         public Organization org;

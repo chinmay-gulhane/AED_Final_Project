@@ -163,9 +163,16 @@ public class ConfigureASystem {
         org.getUserAccountDir().associateUser(wasteCollector);
         
         UserAccount wasteCollector2 = system.getUserAccountDir().addUserAccount("sfwcl2", "Abcd1ef", new WasteCollector(), true);
-        org.getUserAccountDir().associateUser(wasteCollector2);
-
+        org.getUserAccountDir().associateUser(wasteCollector2);   
        
+        
+        // Unassigned User
+        
+               
+       // Create Territory heirarchy
+        system.getUserAccountDir().addUserAccount("jpwcd", "Abcd1ef", new WasteCordinator(), true);
    }
+   
+   
     
 }

@@ -11,6 +11,7 @@ import edu.neu.wasteManagement.ui.common.GarbageCollectRequestJPanel;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import edu.neu.wasteManagement.ui.marketPlace.MarketPlaceHomeJPanel;
 import edu.neu.wasteManagement.utility.Utility;
 import static edu.neu.wasteManagement.utility.Utility.imageResize;
 import java.awt.CardLayout;
@@ -164,7 +165,7 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
 
     private void lblCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCoursesMouseClicked
         //Mouse Click
-//       Utility.switchPanel(new RegisterCourseJPanel(business), business.getWorkArea());     
+       Utility.switchPanel(new MarketPlaceHomeJPanel(system), system.getWorkArea());    
     }//GEN-LAST:event_lblCoursesMouseClicked
 
     private void lblViewCertificatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewCertificatesMouseClicked

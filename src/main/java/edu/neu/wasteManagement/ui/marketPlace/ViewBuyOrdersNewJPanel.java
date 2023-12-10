@@ -5,7 +5,17 @@
 package edu.neu.wasteManagement.ui.marketPlace;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
+import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.products.Order;
+import edu.neu.wasteManagement.business.products.Product;
+import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -13,12 +23,52 @@ import edu.neu.wasteManagement.ui.BaseJPanel;
  */
 public class ViewBuyOrdersNewJPanel extends BaseJPanel {
 
+    private MarketplaceOrg marketplace;
+
     /**
      * Creates new form ViewBuyOrdersNewJPanel
      */
     public ViewBuyOrdersNewJPanel(Ecosystem system) {
         super(system);
         initComponents();
+        String marketplaceOrgName = "Marketplace Organization";
+        Organization marketplaceOrg = system.findOrganizationByName(marketplaceOrgName);
+
+        if (marketplaceOrg instanceof MarketplaceOrg) {
+            marketplace = (MarketplaceOrg) marketplaceOrg;
+            populateUserOrdersTable();
+        } else {
+            System.out.println("The organization is not of type MarketplaceOrg");
+        }
+    }
+
+    public List<Product> getAllProducts() {
+        List<Product> allProducts = new ArrayList<>();
+
+        if (marketplace != null) {
+            ProductCatalog catalog = marketplace.getCatalog();
+            allProducts = catalog.getProducts();
+        }
+
+        return allProducts;
+    }
+
+    public void populateUserOrdersTable() {
+        DefaultTableModel model = (DefaultTableModel) UserOrdersTable.getModel();
+        JTableHeader header = UserOrdersTable.getTableHeader();
+        header.setFont(new Font("Dialog", Font.BOLD, 14));
+        model.setRowCount(0);
+        ProductCatalog catalog = marketplace.getCatalog();
+        List<Order> userOrders = catalog.getOrdersByUsername(system.getLoggedInUser().getUsername());
+        for (Order order : userOrders) {
+            Object[] row = new Object[5];
+            row[0] = order.getProduct();
+            row[1] = order.getProduct().getPrice();
+            row[2] = order.getQuantity();
+            row[3] = order.getFinalPrice();
+            row[4] = order.getSeller();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -31,56 +81,40 @@ public class ViewBuyOrdersNewJPanel extends BaseJPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        BrowseProductsTable = new javax.swing.JTable();
+        UserOrdersTable = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        btnAdd1 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        spinQuantity = new javax.swing.JSpinner();
 
-        BrowseProductsTable.setModel(new javax.swing.table.DefaultTableModel(
+        UserOrdersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Price"
+                "Product Name", "Price", "Quanity", "Total Price", "Seller"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        BrowseProductsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        UserOrdersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BrowseProductsTableMouseEntered(evt);
+                UserOrdersTableMouseEntered(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BrowseProductsTableMousePressed(evt);
+                UserOrdersTableMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(BrowseProductsTable);
+        jScrollPane1.setViewportView(UserOrdersTable);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Products");
-
-        btnAdd1.setBackground(new java.awt.Color(0, 0, 0));
-        btnAdd1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        btnAdd1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd1.setText("Add to Cart");
-        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdd1AddProductItemActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel17.setText("Quantity:");
+        jLabel12.setText("My Orders");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,16 +122,9 @@ public class ViewBuyOrdersNewJPanel extends BaseJPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spinQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
@@ -107,69 +134,28 @@ public class ViewBuyOrdersNewJPanel extends BaseJPanel {
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd1)
-                    .addComponent(spinQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BrowseProductsTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrowseProductsTableMouseEntered
+    private void UserOrdersTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserOrdersTableMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_BrowseProductsTableMouseEntered
+    }//GEN-LAST:event_UserOrdersTableMouseEntered
 
-    private void BrowseProductsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrowseProductsTableMousePressed
+    private void UserOrdersTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserOrdersTableMousePressed
         // TODO add your handling code here:
-        int suppliertablesize = BrowseProductsTable.getRowCount();
-        int selectedrow = BrowseProductsTable.getSelectionModel().getLeadSelectionIndex();
+        int suppliertablesize = UserOrdersTable.getRowCount();
+        int selectedrow = UserOrdersTable.getSelectionModel().getLeadSelectionIndex();
 
         if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
             return;
         }
-    }//GEN-LAST:event_BrowseProductsTableMousePressed
-
-    private void btnAdd1AddProductItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1AddProductItemActionPerformed
-        // TODO add your handling code here:
-
-        //        int suppliertablesize = SupplierCatalogTable.getRowCount();
-        //        int selectedrow = SupplierCatalogTable.getSelectionModel().getLeadSelectionIndex();
-        //
-        //        if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
-            //            return;
-            //        }
-        //        selectedproduct = (Product) SupplierCatalogTable.getValueAt(selectedrow, 0);
-        //        if (selectedproduct == null) {
-            //            return;
-            //        }
-        //        int salesPrice = 0;
-        //        int quant = 0;
-        //        try {
-            //            salesPrice = Integer.parseInt(txtSalesPrice.getText());
-            //            quant = (Integer) spinQuantity.getValue();
-            //        } catch (Exception e) {
-            //            JOptionPane.showMessageDialog(this, "Please select the price and quantity fields");
-            //            return;
-            //        }
-        //        OrderItem item = currentOrder.newOrderItem(selectedproduct, salesPrice, quant);
-        //        Object[] row = new Object[5];
-        //
-        //        row[0] = String.valueOf(item.getSelectedProduct());
-        //        row[1] = String.valueOf(item.getActualPrice());
-        //        row[2] = String.valueOf(item.getQuantity());
-        //        row[3] = String.valueOf(item.getOrderItemTotal());
-        //
-        //        ((DefaultTableModel) OrderItemsTable.getModel()).addRow(row);
-    }//GEN-LAST:event_btnAdd1AddProductItemActionPerformed
+    }//GEN-LAST:event_UserOrdersTableMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BrowseProductsTable;
-    private javax.swing.JButton btnAdd1;
+    private javax.swing.JTable UserOrdersTable;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner spinQuantity;
     // End of variables declaration//GEN-END:variables
 }

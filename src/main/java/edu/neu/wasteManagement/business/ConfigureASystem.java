@@ -8,6 +8,7 @@ import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.enterprise.MunicipalEnterprise;
 import edu.neu.wasteManagement.business.enterprise.WasteManagementCorpEnterprise;
+import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
 import edu.neu.wasteManagement.business.organization.MunicipalWasteProcessingOrg;
 import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.organization.RegionalWasteManagementOrg;
@@ -62,6 +63,16 @@ public class ConfigureASystem {
        
        // Create Marketplace Org
        Organization marketplace = greenLiving.getOrganizationDir().createOrganization("Marketplace Organization",Type.MARKETPLACE_ORG);
+
+       
+        // setting up market place       
+        MarketplaceOrg marketplaceOrg = (MarketplaceOrg) marketplace;
+
+        // List a product
+        marketplaceOrg.listProduct("Product 1", 20.0, 5, "sfwcl3");
+        marketplaceOrg.listProduct("Product 2", 18, 4, "sfwcl3");
+        marketplaceOrg.listProduct("Product 3", 10.0, 3, "sfwcl3");
+
        
        // Create principal User
        UserAccount andy = system.getUserAccountDir().addUserAccount("andy", "Abcd1ef", new PrincipalUser(), true);

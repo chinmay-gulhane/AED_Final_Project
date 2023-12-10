@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package edu.neu.wasteManagement.ui.retail;
+package edu.neu.wasteManagement.ui.integrator;
 
 import edu.neu.wasteManagement.ui.principal.*;
 import edu.neu.wasteManagement.ui.common.UserTrashJPanel;
@@ -51,6 +51,7 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
         jLabel3 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
+        lblCourses1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,6 +90,15 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
         lblEmail.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
         lblEmail.setText("jLabel4");
 
+        lblCourses1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblCourses1.setForeground(new java.awt.Color(0, 153, 255));
+        lblCourses1.setText("Waste Conversion>");
+        lblCourses1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCourses1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,15 +119,18 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(lblGreetings))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(142, 142, 142)
-                                .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(180, 180, 180)
+                                .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(lblGreetings)))
+                        .addGap(180, 180, 180)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCourses)
                                 .addGap(244, 244, 244)
-                                .addComponent(lblViewCertificates)))
+                                .addComponent(lblViewCertificates))
+                            .addComponent(lblCourses1))
                         .addGap(0, 46, Short.MAX_VALUE)))
                 .addContainerGap(12941, Short.MAX_VALUE))
         );
@@ -129,7 +142,9 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
                         .addGap(98, 98, 98)
                         .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(lblGreetings))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGreetings)
+                            .addComponent(lblCourses1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(249, 249, 249)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -156,12 +171,18 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
         // TODO add your handling code here:
         Utility.switchPanel(new UserProfileJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_lblViewCertificatesMouseClicked
+
+    private void lblCourses1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCourses1MouseClicked
+        // TODO add your handling code here:
+        Utility.switchPanel(new WasteConvertJPanel(system), system.getWorkArea());
+    }//GEN-LAST:event_lblCourses1MouseClicked
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblCourses;
+    private javax.swing.JLabel lblCourses1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGreetings;
     private javax.swing.JLabel lblName;

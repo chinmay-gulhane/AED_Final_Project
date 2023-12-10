@@ -5,8 +5,6 @@
 package edu.neu.wasteManagement.ui.common;
 
 import edu.neu.wasteManagement.business.Ecosystem;
-import edu.neu.wasteManagement.business.enterprise.Enterprise;
-import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
@@ -14,13 +12,11 @@ import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
 import edu.neu.wasteManagement.utility.Utility;
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 
 

@@ -254,6 +254,10 @@ public class Ecosystem extends Organization{
             temp.add(new Waste(type,0.0));
         return temp;
     }
+
+    public List<Waste> getListOfRecyclableWasteForUser(UserAccount loggedInUser) {
+        return null;
+    }
     
     public static class OrganizationEnterprise{
         public Organization org;

@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author ingale.r
+ * @author prart
  */
 public class RetailUserWorkArea extends BaseJPanel {
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author ingale.r
+ * @author prart
  */
 public class RetailWasteCollectionRequest extends WorkRequest{
 

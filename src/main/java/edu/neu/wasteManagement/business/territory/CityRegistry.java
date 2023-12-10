@@ -48,5 +48,43 @@ public class CityRegistry {
                 return c.getCountyByName(name);      
         return null;
     }
+    
+    public City findCityByName(String cityName) {
+        for (City city : cities) {
+            if (city.getName().equals(cityName)) {
+                return city;
+            }
+        }
+        return null;
+    }
+    
+    public List<County> getAllCounties() {
+        List<County> allCounties = new ArrayList<>();
+        for (City city : cities) {
+            allCounties.addAll(city.getCounties());
+        }
+        return allCounties;
+    }
+    
+    public List<Neighbourhood> getAllNeighbourhoods() {
+        List<Neighbourhood> allNeighbourhoods = new ArrayList<>();
+        for (City city : cities) {
+            for (County county : city.getCounties()) {
+                allNeighbourhoods.addAll(county.getNeighbourhoods());
+            }
+        }
+        return allNeighbourhoods;
+    }
+    
+    public County findCountyByName(String countyName) {
+        for (City city : cities) {
+            for (County county : city.getCounties()) {
+                if (county.getName().equals(countyName)) {
+                    return county;
+                }
+            }
+        }
+        return null;
+    }
    
 }

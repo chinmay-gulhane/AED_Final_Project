@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author ingale.r
+ * @author chinmaygulhane
  */
 public class County {
     
@@ -68,4 +68,10 @@ public class County {
     public boolean containsNeighbourhood(Neighbourhood hood) {
         return this.neighbourhoods.contains(hood);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+    
 }

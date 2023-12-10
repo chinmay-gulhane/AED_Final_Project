@@ -249,7 +249,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnComplete">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mark as Completed"/>
+        <Property name="text" type="java.lang.String" value="Process "/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCompleteMouseClicked"/>

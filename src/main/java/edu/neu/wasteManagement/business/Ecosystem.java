@@ -18,11 +18,13 @@ import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.Waste.WasteType;
 import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JPanel;
@@ -239,6 +241,10 @@ public class Ecosystem extends Organization{
                 if(org.getUserAccountDir().userAccountExists(loggedIn))
                     return true;
         return false;
+    }
+
+    public List<WasteType> getWasteType() {
+      return new ArrayList<>(EnumSet.allOf(WasteType.class));  
     }
     
     public static class OrganizationEnterprise{

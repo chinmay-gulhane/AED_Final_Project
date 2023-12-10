@@ -5,9 +5,20 @@
 package edu.neu.wasteManagement.ui.common;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.enterprise.Enterprise;
+import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.Waste;
+import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import edu.neu.wasteManagement.utility.Utility;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 
 
@@ -22,10 +33,13 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
      */
 
     private WorkRequestType type;
+    private List<Waste> wastes;
     public GarbageCollectRequestJPanel(Ecosystem system, WorkRequestType type) {
         super(system);
         this.type = type;
+        this.wastes = new ArrayList<>();
         initComponents();
+        initSetup();
     }
 
     /**
@@ -40,6 +54,15 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         jLabel1 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        cmbWasteType = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblWaste = new javax.swing.JTable();
+        btnAdd = new javax.swing.JButton();
+        btnRemove = new javax.swing.JButton();
+        txtAmt = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -60,52 +83,181 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("<html> <head> <h1>Garbage Collection Request Disclaimer</h1> </head> <body>    \n    <br><br><p>Dear Principal User,</p>\n    \n    <p>This form allows you to submit a Garbage Collection Request. Please note the following:</p>\n    \n    <ul>\n        <li>Ensure that the information provided is accurate and complete.</li>\n        <li>Attach any necessary supporting documents or details to expedite the process.</li>\n        <li>By submitting this request, you acknowledge that the information will be processed by the waste management system.</li>\n        <li>Any false or misleading information may result in delays or rejections of the request.</li>\n    </ul>\n    \n    <p>Thank you for your cooperation.</p>\n    \n    <p>Sincerely,<br>Waste Management System</p>  </body> </html> ");
 
+        jLabel3.setText("Waste Type");
+
+        jLabel4.setText("Amount in Kg : ");
+
+        jLabel5.setText("Request Summary");
+
+        tblWaste.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Type", "Amount (KG)"
+            }
+        ));
+        jScrollPane1.setViewportView(tblWaste);
+
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+
+        txtAmt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(431, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(165, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
+                        .addGap(400, 400, 400)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216)))
-                .addGap(203, 203, 203))
+                        .addGap(27, 27, 27)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jLabel5)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmbWasteType, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(60, 60, 60)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnAdd)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnRemove)))
+                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(jLabel1)
-                .addGap(96, 96, 96)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(592, Short.MAX_VALUE))
+                .addGap(192, 192, 192)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbWasteType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(txtAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdd)
+                            .addComponent(btnRemove))
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(575, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        system.createWorkRequest(type, system.getLoggedInUser());
+        WorkRequest req = system.createWorkRequest(type, system.getLoggedInUser());
+        ((UserWasteCollectionRequest)req).addWasteToRequest(wastes);
         JOptionPane.showMessageDialog(this, "Request raised!!");
+        Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system), system.getWorkArea());
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        wastes.add(new Waste((Waste.WasteType) cmbWasteType.getSelectedItem(),Double.parseDouble(txtAmt.getText())));
+        txtAmt.setText("");
+        populateTable();
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtAmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmtActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = tblWaste.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please Select a Row to Remove.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblWaste.getModel();
+        Waste waste = (Waste) model.getValueAt(selectedRowIndex, 0);
+        wastes.remove(waste);
+         populateTable();
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox<String> cmbWasteType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblWaste;
+    private javax.swing.JTextField txtAmt;
     // End of variables declaration//GEN-END:variables
 
  
     public boolean checkValidate(){
         return true;
     }
+
+    private void initSetup() {
+        
+        Utility.addToComboBox(cmbWasteType, system.getWasteType());
+    }
+    
+    private void populateTable(){
+        
+        DefaultTableModel model = (DefaultTableModel) tblWaste.getModel(); //Convert to TableModel to defaultTableModel
+        model.setRowCount(0);
+        
+        for (Waste waste : wastes) {
+
+            //to create lines or row (row is small array of object with 3 members)
+            Object[] row = new Object[2];
+             row[0] = waste;
+             row[1] = waste.getAmount();
+
+            model.addRow(row);
+        }
+    }   
 
 }
 

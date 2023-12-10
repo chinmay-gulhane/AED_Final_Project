@@ -5,24 +5,22 @@
 package edu.neu.wasteManagement.business.role;
 
 import edu.neu.wasteManagement.business.Ecosystem;
-import edu.neu.wasteManagement.ui.cordinator.WasteCordinatorWorkArea;
 import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
-import edu.neu.wasteManagement.ui.integrator.MarketplaceIntegratorWorkArea;
+import edu.neu.wasteManagement.ui.retail.ReatilUserWorkArea;
 import javax.swing.JPanel;
 
 /**
  *
- * @author ingale.r
+ * @author chinmaygulhane
  */
-public class MarketplaceIntegrator extends Role{
-    
-    public MarketplaceIntegrator(){
-        super(RoleType.MARKETPLACE_INTEGRATOR);
+public class RetailUser extends Role{
+
+    public RetailUser() {
+        super(RoleType.RETAIL_USER);
     }
-    
+
     @Override
     public JPanel createWorkArea(Ecosystem business) {
-        return new MarketplaceIntegratorWorkArea(business);
+        return new ReatilUserWorkArea(business);
     }
-    
 }

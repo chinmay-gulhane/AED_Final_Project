@@ -5,18 +5,27 @@
 package edu.neu.wasteManagement.ui.marketPlace;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
 import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.products.Order;
 import edu.neu.wasteManagement.business.products.Product;
 import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author chinmaygulhane
  */
 public class BuyProductsJPanel extends BaseJPanel {
+
+    private MarketplaceOrg marketplace;
 
     /**
      * Creates new form BuyProductsJPanel
@@ -26,21 +35,51 @@ public class BuyProductsJPanel extends BaseJPanel {
         initComponents();
         String marketplaceOrgName = "Marketplace Organization";
         Organization marketplaceOrg = system.findOrganizationByName(marketplaceOrgName);
+
         if (marketplaceOrg instanceof MarketplaceOrg) {
-            MarketplaceOrg marketplace = (MarketplaceOrg) marketplaceOrg;
-            ProductCatalog catalog = marketplace.getCatalog();
-            // Retrieve all products from the catalog
-            List<Product> allProducts = catalog.getProducts();
-                System.out.println("Products in the Marketplace Catalog:");
-    for (Product product : allProducts) {
-        System.out.println("Product Name: " + product.getName());
-        System.out.println("Price: " + product.getPrice());
-        System.out.println("Seller: " + product.getSeller());
-        System.out.println("------");
-    }
+            marketplace = (MarketplaceOrg) marketplaceOrg;
+            populateBrowseProductsTable();
         } else {
             System.out.println("The organization is not of type MarketplaceOrg");
         }
+    }
+
+    public List<Product> getAllProducts() {
+        List<Product> allProducts = new ArrayList<>();
+
+        if (marketplace != null) {
+            ProductCatalog catalog = marketplace.getCatalog();
+            allProducts = catalog.getProducts();
+        }
+
+        return allProducts;
+    }
+
+    public void populateBrowseProductsTable() {
+        // Get the logged-in user
+        String loggedInUsername = system.getLoggedInUser().getUsername();
+        DefaultTableModel model = (DefaultTableModel) BrowseProductsTable.getModel();
+        JTableHeader header = BrowseProductsTable.getTableHeader();
+        header.setFont(new Font("Dialog", Font.BOLD, 14));
+        model.setRowCount(0);
+        for (Product product : getAllProducts()) {
+//            if (!product.getSeller().equals(loggedInUsername)) {
+                Object[] row = new Object[4];
+                row[0] = product;
+                row[1] = product.getPrice();
+                row[2] = product.getQuantity();
+                row[3] = product.getSeller();
+                model.addRow(row);
+//            }
+        }
+    }
+
+    private double calculateFinalPrice(Product product, int quantity) {
+        // Assuming you have a getPrice() method in the Product class
+        double productPrice = product.getPrice();
+
+        // Calculate the final price based on the product price and quantity
+        return productPrice * quantity;
     }
 
     /**
@@ -61,17 +100,17 @@ public class BuyProductsJPanel extends BaseJPanel {
 
         BrowseProductsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Price"
+                "Name", "Price", "Stock Quantity", "Seller"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,7 +133,7 @@ public class BuyProductsJPanel extends BaseJPanel {
         btnAdd1.setBackground(new java.awt.Color(0, 0, 0));
         btnAdd1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnAdd1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd1.setText("Add to Cart");
+        btnAdd1.setText("Buy");
         btnAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdd1AddProductItemActionPerformed(evt);
@@ -155,34 +194,57 @@ public class BuyProductsJPanel extends BaseJPanel {
     private void btnAdd1AddProductItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1AddProductItemActionPerformed
         // TODO add your handling code here:
 
-//        int suppliertablesize = SupplierCatalogTable.getRowCount();
-//        int selectedrow = SupplierCatalogTable.getSelectionModel().getLeadSelectionIndex();
-//
-//        if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
-//            return;
-//        }
-//        selectedproduct = (Product) SupplierCatalogTable.getValueAt(selectedrow, 0);
-//        if (selectedproduct == null) {
-//            return;
-//        }
-//        int salesPrice = 0;
-//        int quant = 0;
-//        try {
-//            salesPrice = Integer.parseInt(txtSalesPrice.getText());
-//            quant = (Integer) spinQuantity.getValue();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "Please select the price and quantity fields");
-//            return;
-//        }
-//        OrderItem item = currentOrder.newOrderItem(selectedproduct, salesPrice, quant);
-//        Object[] row = new Object[5];
-//
-//        row[0] = String.valueOf(item.getSelectedProduct());
-//        row[1] = String.valueOf(item.getActualPrice());
-//        row[2] = String.valueOf(item.getQuantity());
-//        row[3] = String.valueOf(item.getOrderItemTotal());
-//
-//        ((DefaultTableModel) OrderItemsTable.getModel()).addRow(row);
+        int selectedRow = BrowseProductsTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a product to buy");
+            return;
+        }
+
+        Product selectedProduct = (Product) BrowseProductsTable.getValueAt(selectedRow, 0);
+        int quantity;
+
+        try {
+            quantity = Integer.parseInt(spinQuantity.getValue().toString());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid quantity");
+            return;
+        }
+
+        if (quantity <= 0) {
+            JOptionPane.showMessageDialog(this, "Quantity must be greater than 0");
+            return;
+        }
+
+        // Check if the entered quantity is more than the available quantity
+        int availableQuantity = marketplace.getCatalog().getProductQuantity(selectedProduct);
+        if (quantity > availableQuantity) {
+            JOptionPane.showMessageDialog(this, "Not enough quantity available");
+            return;
+        }
+
+        // Get the seller information based on the selected product
+        String seller = selectedProduct.getSeller();
+        System.out.println("selectedProduct: " + selectedProduct);
+        System.out.println("selectedProduct: " + selectedProduct.getSeller());
+
+        // Create an Order with buyer, seller, and final price
+        Order order = new Order(selectedProduct, system.getLoggedInUser().getUsername(), seller, quantity, calculateFinalPrice(selectedProduct, quantity));
+
+        // Add the order to the product catalog
+        marketplace.getCatalog().addOrder(order);
+
+        // Update the product catalog
+        marketplace.getCatalog().updateProductQuantityAfterOrder(selectedProduct, quantity);
+
+        // Update the user's order list
+        List<Order> userOrders = marketplace.getCatalog().getOrdersByUsername(system.getLoggedInUser().getUsername());
+        userOrders.add(order);
+
+        JOptionPane.showMessageDialog(this, "Order Placed Successfully");
+
+        spinQuantity.setValue(0);
+        populateBrowseProductsTable();
     }//GEN-LAST:event_btnAdd1AddProductItemActionPerformed
 
 

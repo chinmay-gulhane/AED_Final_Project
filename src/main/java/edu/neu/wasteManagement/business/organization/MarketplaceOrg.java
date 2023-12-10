@@ -17,7 +17,7 @@ import java.util.List;
  * @author ingale.r
  */
 public class MarketplaceOrg extends Organization {
-    
+
     PrincipalUser user;
     //Add other users who will have access to the market
     ProductCatalog catalog;
@@ -25,7 +25,7 @@ public class MarketplaceOrg extends Organization {
 
     public MarketplaceOrg(String name, Type type) {
         super(name, type);
-        this.catalog =  new ProductCatalog();
+        this.catalog = new ProductCatalog();
         this.user = new PrincipalUser();
         this.orders = new ArrayList<>();
     }
@@ -50,34 +50,13 @@ public class MarketplaceOrg extends Organization {
     public void setCatalog(ProductCatalog catalog) {
         this.catalog = catalog;
     }
-    
+
     public void listProduct(String productName, double price, int quantity, String username) {
         // Assuming the logged-in user is the seller
         String seller = username;
         Product product = new Product(productName, price, seller, quantity);
         catalog.addProduct(product);
         System.out.println("Product listed successfully.");
-    }
-
-    public void buyProduct(String username, Product product, int quantity) {
-        // Assuming some logic for handling the purchase
-        // For example, deducting money from the buyer's account
-
-        // Check if the quantity to buy is available in the catalog
-        if (getProductQuantity(product) < quantity) {
-            System.out.println("Insufficient quantity available for purchase.");
-            return;
-        }
-
-        // Update the quantity in the catalog
-        updateProductQuantity(product, quantity);
-
-        // Create an order and store it
-        Order order = new Order(product, username, quantity);
-        orders.add(order);
-
-        System.out.println("Product purchased: " + product.getName() + " from " + product.getSeller()
-                + " - Quantity: " + quantity);
     }
 
     public List<Order> getUserOrders(String username) {

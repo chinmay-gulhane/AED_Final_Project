@@ -12,7 +12,7 @@ public class Product {
     private String name;
     private double price;
     private String seller;
-    private int quantity; // New attribute
+    private int quantity;
  
     public Product(String name, double price, String seller, int quantity) {
         this.name = name;
@@ -40,4 +40,9 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return  name;
+    } 
 }

@@ -49,8 +49,18 @@ public class MarketPlaceHomeJPanel extends BaseJPanel {
         });
 
         jButton3.setText("Sell Products");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jToggleButton1.setText("View Buy Orders");
+        jToggleButton1.setText("Order History");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("View Sell Orders");
 
@@ -94,6 +104,16 @@ public class MarketPlaceHomeJPanel extends BaseJPanel {
         // TODO add your handling code here:
      Utility.switchPanel(new BuyProductsJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        Utility.switchPanel(new ViewBuyOrdersNewJPanel(system), system.getWorkArea());
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Utility.switchPanel(new SellProductsJPanel(system), system.getWorkArea());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

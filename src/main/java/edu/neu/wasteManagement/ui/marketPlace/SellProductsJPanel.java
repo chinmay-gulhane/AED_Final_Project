@@ -5,7 +5,12 @@
 package edu.neu.wasteManagement.ui.marketPlace;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
+import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.products.Product;
+import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,12 +18,21 @@ import edu.neu.wasteManagement.ui.BaseJPanel;
  */
 public class SellProductsJPanel extends BaseJPanel {
 
+    private MarketplaceOrg marketplace;
+
     /**
      * Creates new form SellProductsJPanel
      */
     public SellProductsJPanel(Ecosystem system) {
         super(system);
         initComponents();
+        String marketplaceOrgName = "Marketplace Organization";
+        Organization marketplaceOrg = system.findOrganizationByName(marketplaceOrgName);
+        if (marketplaceOrg instanceof MarketplaceOrg) {
+            marketplace = (MarketplaceOrg) marketplaceOrg;
+        } else {
+            System.out.println("The organization is not of type MarketplaceOrg");
+        }
     }
 
     /**
@@ -30,146 +44,132 @@ public class SellProductsJPanel extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        BrowseProductsTable = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        btnAdd1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         spinQuantity = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        txtProductName = new javax.swing.JTextField();
+        txtProductPrice = new javax.swing.JTextField();
 
-        BrowseProductsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Name", "Price"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+        setBackground(new java.awt.Color(255, 255, 255));
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        BrowseProductsTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BrowseProductsTableMouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                BrowseProductsTableMousePressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(BrowseProductsTable);
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Add Product Listing");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Products");
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel2.setText("Product Name");
 
-        btnAdd1.setBackground(new java.awt.Color(0, 0, 0));
-        btnAdd1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        btnAdd1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd1.setText("Add to Cart");
-        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdd1AddProductItemActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel17.setText("Quantity:");
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel3.setText("Price:");
+
+        jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spinQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12)))
-                .addGap(43, 43, 43))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1)
+                    .addComponent(spinQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProductName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(txtProductPrice))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel17, jLabel2, jLabel3});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(spinQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(417, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel17, jLabel3});
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BrowseProductsTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrowseProductsTableMouseEntered
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BrowseProductsTableMouseEntered
+        String productName = txtProductName.getText().trim();
+        String productPriceStr = txtProductPrice.getText().trim();
+        int quantity = (int) spinQuantity.getValue();
 
-    private void BrowseProductsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrowseProductsTableMousePressed
-        // TODO add your handling code here:
-        int suppliertablesize = BrowseProductsTable.getRowCount();
-        int selectedrow = BrowseProductsTable.getSelectionModel().getLeadSelectionIndex();
-
-        if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
+        // Validate input
+        if (productName.isEmpty() || productPriceStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter product name and price");
             return;
         }
-    }//GEN-LAST:event_BrowseProductsTableMousePressed
 
-    private void btnAdd1AddProductItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1AddProductItemActionPerformed
-        // TODO add your handling code here:
+        try {
+            double productPrice = Double.parseDouble(productPriceStr);
 
-        //        int suppliertablesize = SupplierCatalogTable.getRowCount();
-        //        int selectedrow = SupplierCatalogTable.getSelectionModel().getLeadSelectionIndex();
-        //
-        //        if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
-            //            return;
-            //        }
-        //        selectedproduct = (Product) SupplierCatalogTable.getValueAt(selectedrow, 0);
-        //        if (selectedproduct == null) {
-            //            return;
-            //        }
-        //        int salesPrice = 0;
-        //        int quant = 0;
-        //        try {
-            //            salesPrice = Integer.parseInt(txtSalesPrice.getText());
-            //            quant = (Integer) spinQuantity.getValue();
-            //        } catch (Exception e) {
-            //            JOptionPane.showMessageDialog(this, "Please select the price and quantity fields");
-            //            return;
-            //        }
-        //        OrderItem item = currentOrder.newOrderItem(selectedproduct, salesPrice, quant);
-        //        Object[] row = new Object[5];
-        //
-        //        row[0] = String.valueOf(item.getSelectedProduct());
-        //        row[1] = String.valueOf(item.getActualPrice());
-        //        row[2] = String.valueOf(item.getQuantity());
-        //        row[3] = String.valueOf(item.getOrderItemTotal());
-        //
-        //        ((DefaultTableModel) OrderItemsTable.getModel()).addRow(row);
-    }//GEN-LAST:event_btnAdd1AddProductItemActionPerformed
+            // Create a new product
+            Product newProduct = new Product(productName, productPrice, system.getLoggedInUser().getUsername(), quantity);
+
+            // Add the product to the product catalog
+            marketplace.getCatalog().addProduct(newProduct);
+
+            // Clear input fields
+            txtProductName.setText("");
+            txtProductPrice.setText("");
+            spinQuantity.setValue(0);
+
+            JOptionPane.showMessageDialog(this, "Product listing saved successfully");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid price");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BrowseProductsTable;
-    private javax.swing.JButton btnAdd1;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSpinner spinQuantity;
+    private javax.swing.JTextField txtProductName;
+    private javax.swing.JTextField txtProductPrice;
     // End of variables declaration//GEN-END:variables
 }

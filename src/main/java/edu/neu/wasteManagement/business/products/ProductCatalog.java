@@ -35,7 +35,7 @@ public class ProductCatalog {
                 return p.getQuantity();
             }
         }
-        return 0; // Product not found in the catalog
+        return 0;
     }
 
     public void updateProductQuantity(Product product, int quantity) {

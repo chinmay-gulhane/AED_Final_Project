@@ -11,12 +11,16 @@ package edu.neu.wasteManagement.business.products;
 public class Order {
     private Product product;
     private String buyer;
-    private int quantity; // New attribute
+    private String seller;
+    private int quantity;
+    private double finalPrice;
 
-    public Order(Product product, String buyer, int quantity) {
+    public Order(Product product, String buyer, String seller, int quantity,double finalPrice) {
         this.product = product;
         this.buyer = buyer;
+        this.seller = seller;
         this.quantity = quantity;
+        this.finalPrice = finalPrice;
     }
 
     public Product getProduct() {
@@ -30,5 +34,31 @@ public class Order {
     public int getQuantity() {
         return quantity;
     }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(double finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setBuyer(String buyer) {
+        this.buyer = buyer;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    public String getSeller() {
+        return seller;
+    }
+
+    
 }
 

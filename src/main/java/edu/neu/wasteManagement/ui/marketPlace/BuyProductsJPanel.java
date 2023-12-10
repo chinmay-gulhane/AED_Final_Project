@@ -56,17 +56,21 @@ public class BuyProductsJPanel extends BaseJPanel {
     }
 
     public void populateBrowseProductsTable() {
+        // Get the logged-in user
+        String loggedInUsername = system.getLoggedInUser().getUsername();
         DefaultTableModel model = (DefaultTableModel) BrowseProductsTable.getModel();
         JTableHeader header = BrowseProductsTable.getTableHeader();
         header.setFont(new Font("Dialog", Font.BOLD, 14));
         model.setRowCount(0);
         for (Product product : getAllProducts()) {
-            Object[] row = new Object[4];
-            row[0] = product;
-            row[1] = product.getPrice();
-            row[2] = product.getQuantity();
-            row[3] = product.getSeller();
-            model.addRow(row);
+//            if (!product.getSeller().equals(loggedInUsername)) {
+                Object[] row = new Object[4];
+                row[0] = product;
+                row[1] = product.getPrice();
+                row[2] = product.getQuantity();
+                row[3] = product.getSeller();
+                model.addRow(row);
+//            }
         }
     }
 
@@ -223,8 +227,6 @@ public class BuyProductsJPanel extends BaseJPanel {
         String seller = selectedProduct.getSeller();
         System.out.println("selectedProduct: " + selectedProduct);
         System.out.println("selectedProduct: " + selectedProduct.getSeller());
-        
-
 
         // Create an Order with buyer, seller, and final price
         Order order = new Order(selectedProduct, system.getLoggedInUser().getUsername(), seller, quantity, calculateFinalPrice(selectedProduct, quantity));

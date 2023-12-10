@@ -42,8 +42,6 @@ public class ManageOrganizationJPanel extends BaseJPanel {
         header.setFont(new Font("Dialog", Font.BOLD, 14));
         model.setRowCount(0);
         for (OrganizationEnterprise obj : system.fetchOrganizationForTable()) {
-            System.out.println("org name"+ obj.org.getName());
-            System.out.println("ent name"+obj.ent.getName());
             Object[] row = new Object[4];
             row[0] = obj.org;
             row[1] = convertOrganizationToDisplayName(obj.org.getType());

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author ingale.r
+ * @author chinmaygulhane
  */
 public class City {
     private String name;
@@ -76,5 +76,10 @@ public class City {
             if(c.getName().equals(name))
                 return c;
         return null;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
     }
 }

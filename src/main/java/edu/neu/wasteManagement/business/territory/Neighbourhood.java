@@ -6,11 +6,13 @@ package edu.neu.wasteManagement.business.territory;
 
 /**
  *
- * @author ingale.r
+ * @author chinmaygulhane
  */
 public class Neighbourhood {
     private String name;
     private County county;
+    private City city;
+    
     
     public Neighbourhood(String name){
         this.name = name;
@@ -30,5 +32,18 @@ public class Neighbourhood {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
     }
 }

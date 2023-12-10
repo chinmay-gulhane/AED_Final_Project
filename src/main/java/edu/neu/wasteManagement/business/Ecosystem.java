@@ -299,7 +299,6 @@ public class Ecosystem extends Organization{
     public List<OrganizationEnterprise> fetchOrganizationForTable() {
         return organizationEnterpriseList;
     }
-<<<<<<< HEAD
     
     public Organization getOrganizationByUserAccount(UserAccount user){
         //Step 1 : Iterate over all organization
@@ -313,7 +312,6 @@ public class Ecosystem extends Organization{
         }
         return null;
     }
-=======
 
     public Enterprise findEnterpriseByName(String enterpriseName) {
         for (Enterprise enterprise : enterpriseDir.getEnterpriseList()) {
@@ -334,5 +332,4 @@ public class Ecosystem extends Organization{
         }
         return null; // Not found
     }
->>>>>>> 4aec4a5bc1dfa36604c0748a6625538f91397524
 }

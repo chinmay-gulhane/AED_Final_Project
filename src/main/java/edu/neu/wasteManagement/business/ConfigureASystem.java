@@ -51,7 +51,10 @@ public class ConfigureASystem {
        // Create Territory heirarchy
        City boston = system.getCityReg().addCity("Boston");
        County suffolk = boston.addCounty("Suffolk");
+       suffolk.setCity(boston);
        Neighbourhood backbay = suffolk.addNeighbourhood("Backbay");
+       backbay.setCity(boston);
+       backbay.setCounty(suffolk);
        
        // Create GreenLiving Solution
        Enterprise greenLiving = system.getEnterpriseDir().createAndAddEnterprise("Green Living Solution Enterprise", EnterpriseType.GREEN_LIVING_SOLUTIONS);

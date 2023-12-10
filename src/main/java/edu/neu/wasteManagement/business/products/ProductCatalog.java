@@ -28,6 +28,10 @@ public class ProductCatalog {
     public List<Product> getProducts() {
         return products;
     }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
     
     public int getProductQuantity(Product product) {
         for (Product p : products) {
@@ -92,5 +96,9 @@ public class ProductCatalog {
             }
         }
         return userOrders;
+    }
+
+    public void deleteProduct(Product selectedProduct) {
+        this.products.remove(selectedProduct);
     }
 }

@@ -9,6 +9,7 @@ import edu.neu.wasteManagement.business.enterprise.EnterpriseDirectory;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.organization.Type;
+import edu.neu.wasteManagement.business.products.Product;
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.role.RoleType;
 import edu.neu.wasteManagement.business.territory.CityRegistry;
@@ -337,6 +338,19 @@ public class Ecosystem extends Organization{
             if(isWasteRecyclable(waste))
                 return true;
         return false;
+    }
+
+    public Organization getOrganizationByType(Type type) {
+        for(Enterprise ent: this.getAllEnterprises())
+            for(Organization org: ent.getOrganizationDir().getOrganizationList())
+                if(org.getType().equals(type))
+                    return org;
+        return null;
+    }
+
+    public Iterable<Product> getProductsToSell(UserAccount loggedInUser) {
+        Organization org = this.getOrganizationByUserAccount(loggedInUser);
+        return org.getProductCatalog().getProducts();
     }
     
     public static class OrganizationEnterprise{

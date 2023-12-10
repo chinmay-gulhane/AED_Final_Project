@@ -18,6 +18,18 @@ public class Product {
     private double price;
     private String seller;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
     public ProductType getType() {
         return type;
     }

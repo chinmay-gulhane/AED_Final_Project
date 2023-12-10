@@ -6,7 +6,9 @@ package edu.neu.wasteManagement.ui.integrator;
 
 import edu.neu.wasteManagement.ui.common.*;
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
 import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.business.products.Product;
 import edu.neu.wasteManagement.business.products.Product.ProductType;
 import edu.neu.wasteManagement.business.products.ProductCatalog;
@@ -182,9 +184,16 @@ public class WasteConvertJPanel extends BaseJPanel {
         
         UserAccount user = system.getLoggedInUser();
         Organization org = system.getOrganizationByUserAccount(user);
+        
+        // Find marketPlace
+        MarketplaceOrg marketplace = (MarketplaceOrg) system.getOrganizationByType(Type.MARKETPLACE_ORG);
+        
         ProductCatalog catalog = org.getProductCatalog();
+        ProductCatalog marketplaceCatalog = marketplace.getProductCatalog();
+        
         for(Product p : products){
             catalog.addProduct(p);
+            marketplaceCatalog.addProduct(p);
         }
         for(WorkRequest req : requests)
             req.setStatus("Processed");

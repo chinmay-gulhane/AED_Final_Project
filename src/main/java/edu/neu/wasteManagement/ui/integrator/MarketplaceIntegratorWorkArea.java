@@ -72,10 +72,15 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
 
         lblViewCertificates.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblViewCertificates.setForeground(new java.awt.Color(0, 153, 255));
-        lblViewCertificates.setText("My Profile >");
+        lblViewCertificates.setText("Manage Products >");
         lblViewCertificates.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblViewCertificatesMouseClicked(evt);
+            }
+        });
+        lblViewCertificates.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblViewCertificatesKeyPressed(evt);
             }
         });
 
@@ -132,8 +137,8 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
                                 .addGap(244, 244, 244)
                                 .addComponent(lblViewCertificates))
                             .addComponent(lblCourses1))
-                        .addGap(0, 46, Short.MAX_VALUE)))
-                .addContainerGap(12941, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(12891, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,13 +175,17 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
 
     private void lblViewCertificatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewCertificatesMouseClicked
         // TODO add your handling code here:
-        Utility.switchPanel(new UserProfileJPanel(system), system.getWorkArea());
+        Utility.switchPanel(new ManageProductJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_lblViewCertificatesMouseClicked
 
     private void lblCourses1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCourses1MouseClicked
         // TODO add your handling code here:
         Utility.switchPanel(new WasteConvertJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_lblCourses1MouseClicked
+
+    private void lblViewCertificatesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblViewCertificatesKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblViewCertificatesKeyPressed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,9 +202,5 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
 
     private void initialSetup() {
         // Adjust icon resolution
-        
-//      imageResize(lblProfilePic, "./src/edusera/assets/edusera-user-stock-profile-pic.png");
-   
-
     }    
 }

@@ -26,6 +26,7 @@ import javax.swing.table.JTableHeader;
 public class BuyProductsJPanel extends BaseJPanel {
 
     private MarketplaceOrg marketplace;
+
     /**
      * Creates new form BuyProductsJPanel
      */
@@ -64,8 +65,17 @@ public class BuyProductsJPanel extends BaseJPanel {
             row[0] = product;
             row[1] = product.getPrice();
             row[2] = product.getQuantity();
+            row[3] = product.getSeller();
             model.addRow(row);
         }
+    }
+
+    private double calculateFinalPrice(Product product, int quantity) {
+        // Assuming you have a getPrice() method in the Product class
+        double productPrice = product.getPrice();
+
+        // Calculate the final price based on the product price and quantity
+        return productPrice * quantity;
     }
 
     /**
@@ -86,17 +96,17 @@ public class BuyProductsJPanel extends BaseJPanel {
 
         BrowseProductsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Price", "Stock Quantity"
+                "Name", "Price", "Stock Quantity", "Seller"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -209,8 +219,15 @@ public class BuyProductsJPanel extends BaseJPanel {
             return;
         }
 
-        // Create an Order
-        Order order = new Order(selectedProduct, system.getLoggedInUser().getUsername(), quantity);
+        // Get the seller information based on the selected product
+        String seller = selectedProduct.getSeller();
+        System.out.println("selectedProduct: " + selectedProduct);
+        System.out.println("selectedProduct: " + selectedProduct.getSeller());
+        
+
+
+        // Create an Order with buyer, seller, and final price
+        Order order = new Order(selectedProduct, system.getLoggedInUser().getUsername(), seller, quantity, calculateFinalPrice(selectedProduct, quantity));
 
         // Add the order to the product catalog
         marketplace.getCatalog().addOrder(order);

@@ -76,9 +76,6 @@ public class ConfigureASystem {
         marketplaceOrg.listProduct("Product 1", 20.0, 5, "sfwcl3");
         marketplaceOrg.listProduct("Product 2", 18, 4, "sfwcl3");
         marketplaceOrg.listProduct("Product 3", 10.0, 3, "sfwcl3");
-        marketplaceOrg.listProduct("Product 4", 20.0, 5, "sfws");
-        marketplaceOrg.listProduct("Product 5", 18, 4, "sfws");
-        marketplaceOrg.listProduct("Product 6", 10.0, 3, "sfws");
 
        
        // Create principal User
@@ -97,7 +94,7 @@ public class ConfigureASystem {
        ((WasteManagementCorpEnterprise)suffolkWasteManagementEnt).setCounty(suffolk);
               
        //Create Municiap Waste Processing org
-        Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization("Suffolk Municipal Waste Organization",Type.MUNICIPAL_WASTE_PROCESSING_ORG);
+        Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization("Backbay Municipal Waste Organization",Type.MUNICIPAL_WASTE_PROCESSING_ORG);
        ((MunicipalWasteProcessingOrg)municipalWasteOrg).setCounty(suffolk);
        
         // Create Regional Waste Management org
@@ -136,10 +133,10 @@ public class ConfigureASystem {
      
        
        // Waste Cordinator create new Waste Processing request
-//       WorkRequest processingRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, wasteCordinator);
+       WorkRequest processingRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, wasteCordinator);
        
        // Assign Waste Processing Request to Waste Segregator
-//       processingRequest.setReceiver(wasteSegregator);
+       processingRequest.setReceiver(wasteSegregator);
         
        // Waste Collector - Mark Status as completed
 //       processingRequest.setStatus("Completed");
@@ -185,7 +182,7 @@ public class ConfigureASystem {
         org.getUserAccountDir().associateUser(wasteCollector2);   
        
         
-        UserAccount MarketplaceIntegrator = system.getUserAccountDir().addUserAccount("sfwcl3", "Abcd1ef", new MarketplaceIntegrator(), true);
+        UserAccount MarketplaceIntegrator = system.getUserAccountDir().addUserAccount("sfmi3", "Abcd1ef", new MarketplaceIntegrator(), true);
         org.getUserAccountDir().associateUser(wasteCollector2);
         // Unassigned User
         

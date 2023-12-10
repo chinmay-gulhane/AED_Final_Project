@@ -120,7 +120,7 @@ public class WasteProcessedJPanel extends BaseJPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        request.setStatus("Completed");
+       request.setStatus("Completed");
        JOptionPane.showMessageDialog(this, "Request completed!!");
        Utility.switchPanel(new ManageWasteRequestsJPanel(system), system.getWorkArea());
     }//GEN-LAST:event_btnSubmitActionPerformed

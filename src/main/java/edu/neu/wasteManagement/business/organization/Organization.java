@@ -4,6 +4,7 @@
  */
 package edu.neu.wasteManagement.business.organization;
 
+import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.WorkQueue;
@@ -20,6 +21,7 @@ public abstract class Organization {
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDir;
     private UserAccountDirectory userAccountDir;
+    private ProductCatalog catalog;
 
     public UserAccountDirectory getUserAccountDir() {
         return userAccountDir;
@@ -79,6 +81,7 @@ public abstract class Organization {
         this.workQueue = new WorkQueue();
         this.employeeDir = new EmployeeDirectory();
         this.userAccountDir = new UserAccountDirectory();
+        this.catalog = new ProductCatalog();
     }
 
     public Organization(String name) {
@@ -86,11 +89,17 @@ public abstract class Organization {
         this.workQueue = new WorkQueue();
         this.employeeDir = new EmployeeDirectory();
         this.userAccountDir = new UserAccountDirectory();
+        this.catalog = new ProductCatalog();
+
     }    
     
     
     public String toString(){
         return this.getName();
+    }
+
+    public ProductCatalog getProductCatalog() {
+        return catalog;
     }
   
 }

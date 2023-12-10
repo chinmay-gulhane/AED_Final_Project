@@ -22,6 +22,7 @@ import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.Waste.WasteType;
 import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
+import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import java.util.ArrayList;
@@ -266,8 +267,76 @@ public class Ecosystem extends Organization{
         return temp;
     }
 
-    public List<Waste> getListOfRecyclableWasteForUser(UserAccount loggedInUser) {
-        return null;
+    public List<Waste> getListOfRecyclableWasteForUser(UserAccount user) {
+        
+        // Dummy list
+        List<Waste> dummy = new ArrayList<>();
+        
+        // Get Logged In users Organization
+        Organization org = this.getOrganizationByUserAccount(user);
+        
+        // Get WorkQueue
+        WorkQueue queue = org.getWorkQueue();
+        
+        // Iterate over queue and select recyclable waste from processing request
+        for(WorkRequest request: queue.getWorkRequestList()){
+            System.out.println("Status: "+ request.getStatus() + "  Instance Of WasteProcessingRequest: " + (request instanceof WasteProcessingRequest));
+            if(request.getStatus().equals("Completed") && request instanceof WasteProcessingRequest)
+                for(Waste toBeRecycled: filterRecyclableWaste(((WasteProcessingRequest)request).getWasteToCollect())){
+                    System.out.println("Waste Added as Recylable");
+                    dummy.add(toBeRecycled);
+                }
+        }
+        return dummy;
+    }
+    
+    private List<Waste> filterRecyclableWaste(List<Waste> allWaste){
+        List<Waste> recyclableWaste = new ArrayList<>();
+        
+        for(Waste waste: allWaste){
+            System.out.println("Waste Type: "+ waste.getType() + "  Is it Recyclable " + (isWasteRecyclable(waste)));
+            if(isWasteRecyclable(waste) && waste.getAmount() > 0){
+                System.out.println("Waste Added as Recylable");
+                recyclableWaste.add(waste);
+            }
+        }
+        
+        return recyclableWaste;
+    }
+    
+    private boolean isWasteRecyclable(Waste waste){
+        return waste.getType().equals(WasteType.RECYCLABLE_GLASS) 
+                || waste.getType().equals(WasteType.RECYCLABLE_METAL)
+                || waste.getType().equals(WasteType.RECYCLABLE_PAPER);
+    }
+
+    public List<WorkRequest> getListOfRecyclableRequestsForUser(UserAccount user) {
+        // Dummy list
+        List<WorkRequest> dummy = new ArrayList<>();
+        
+        // Get Logged In users Organization
+        Organization org = this.getOrganizationByUserAccount(user);
+        
+        // Get WorkQueue
+        WorkQueue queue = org.getWorkQueue();
+        
+        // Iterate over queue and select recyclable waste from processing request
+        for(WorkRequest request: queue.getWorkRequestList()){
+            System.out.println("Is request completed: " + request.getStatus() + "Does request contain recylclable " + processRequestContainsRecyclable(request));
+            if(request.getStatus().equals("Completed") && request instanceof WasteProcessingRequest && processRequestContainsRecyclable(request)){
+                System.out.println("Request Added as Recylable");
+                dummy.add(request);
+            }
+        }
+        
+        return dummy;    
+    }
+
+    private boolean processRequestContainsRecyclable(WorkRequest request) {
+        for(Waste waste: ((WasteProcessingRequest)request).getWasteToCollect())
+            if(isWasteRecyclable(waste))
+                return true;
+        return false;
     }
     
     public static class OrganizationEnterprise{

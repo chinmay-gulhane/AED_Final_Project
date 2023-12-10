@@ -12,6 +12,7 @@ import edu.neu.wasteManagement.business.organization.MunicipalWasteProcessingOrg
 import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.organization.RegionalWasteManagementOrg;
 import edu.neu.wasteManagement.business.organization.Type;
+import edu.neu.wasteManagement.business.role.MarketplaceIntegrator;
 import edu.neu.wasteManagement.business.role.PrincipalUser;
 import edu.neu.wasteManagement.business.role.WasteCollector;
 import edu.neu.wasteManagement.business.role.WasteCordinator;
@@ -166,6 +167,8 @@ public class ConfigureASystem {
         org.getUserAccountDir().associateUser(wasteCollector2);   
        
         
+        UserAccount MarketplaceIntegrator = system.getUserAccountDir().addUserAccount("sfwcl3", "Abcd1ef", new MarketplaceIntegrator(), true);
+        org.getUserAccountDir().associateUser(wasteCollector2);
         // Unassigned User
         
                

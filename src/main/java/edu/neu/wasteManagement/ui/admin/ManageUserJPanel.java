@@ -5,6 +5,12 @@
 package edu.neu.wasteManagement.ui.admin;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.role.MarketplaceIntegrator;
+import edu.neu.wasteManagement.business.role.PrincipalUser;
+import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.business.role.WasteCollector;
+import edu.neu.wasteManagement.business.role.WasteCordinator;
+import edu.neu.wasteManagement.business.role.WasteSegregator;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.utility.Validations;
 import java.io.BufferedReader;
@@ -20,6 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -97,7 +105,7 @@ public class ManageUserJPanel extends BaseJPanel {
         tblUser.setAutoscrolls(false);
         jScrollPane2.setViewportView(tblUser);
 
-        btnSearch.setText("Search by nuId");
+        btnSearch.setText("Search by user name");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -215,7 +223,7 @@ public class ManageUserJPanel extends BaseJPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -259,13 +267,13 @@ public class ManageUserJPanel extends BaseJPanel {
                                 .addComponent(btnUpdate)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCancel)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel1))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(564, Short.MAX_VALUE)
+                    .addContainerGap(559, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(565, Short.MAX_VALUE)))
+                    .addContainerGap(560, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,9 +466,67 @@ public class ManageUserJPanel extends BaseJPanel {
     private void btnSaveEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveEntActionPerformed
         // TODO add your handling code here:
         // Validation if any field is left empty
-        String role = (String) userRoleComboBox.getSelectedItem();
-        
+        RoleType role = mapDisplayNameToRoleType((String) userRoleComboBox.getSelectedItem());
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+
+        switch (role) {
+            case PRINCIPAL_USER:
+            {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password,  new PrincipalUser(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case WASTE_CORDINATOR:
+            {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password,  new WasteCordinator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case WASTE_SEGREGATOR:
+            {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password,  new WasteSegregator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case WASTE_COLLECTOR:
+            {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password,  new WasteCollector(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case MARKETPLACE_INTEGRATOR:
+            {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password,  new MarketplaceIntegrator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            // Add cases for other RoleTypes
+            default:
+                throw new IllegalArgumentException("Unsupported RoleType: " + role);
+        }
+
         JOptionPane.showMessageDialog(this, "User Information Saved");
+        populateTable();
+        
     }//GEN-LAST:event_btnSaveEntActionPerformed
 
 
@@ -493,16 +559,51 @@ public class ManageUserJPanel extends BaseJPanel {
         populateTable();
     }
 
-    private void populateRoleDropdown() {
-//    PRINCIPAL_USER,
-//    WASTE_CORDINATOR,
-//    ADMIN,
-//    WASTE_SEGREGATOR,
-        userRoleComboBox.addItem("Principal User");
-        userRoleComboBox.addItem("Waste Cordinator");
-        userRoleComboBox.addItem("Waste Segregator");
+    private void populateRoleDropdown() {    
+       for (RoleType roleType : RoleType.values()) {
+            userRoleComboBox.addItem(mapRoleTypeToDisplayName(roleType));
+        }
     }
-
+    
+    
+    public static String mapRoleTypeToDisplayName(RoleType roleType) {
+        switch (roleType) {
+            case PRINCIPAL_USER:
+                return "Principal User";
+            case WASTE_CORDINATOR:
+                return "Waste Coordinator";
+            case ADMIN:
+                return "Admin";
+            case WASTE_SEGREGATOR:
+                return "Waste Segregator";
+            case WASTE_COLLECTOR:
+                return "Waste Collector";
+            case MARKETPLACE_INTEGRATOR:
+                return "Marketplace Integrator";
+            default:
+                return "Unknown Role";
+        }
+    }
+    
+    public static RoleType mapDisplayNameToRoleType(String displayName) {
+        switch (displayName) {
+            case "Principal User":
+                return RoleType.PRINCIPAL_USER;
+            case "Waste Coordinator":
+                return RoleType.WASTE_CORDINATOR;
+            case "Admin":
+                return RoleType.ADMIN;
+            case "Waste Segregator":
+                return RoleType.WASTE_SEGREGATOR;
+            case "Waste Collector":
+                return RoleType.WASTE_COLLECTOR;
+            case "Marketplace Integrator":
+                return RoleType.MARKETPLACE_INTEGRATOR;
+            default:
+                return null; // or throw an exception for unknown display names
+        }
+    }
+   
     private void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
@@ -518,7 +619,7 @@ public class ManageUserJPanel extends BaseJPanel {
             Object[] row = new Object[6];
             row[0] = user;
             row[1] = user.getPassword();
-            row[2] = user.getRole().getRoleType();
+            row[2] = mapRoleTypeToDisplayName(user.getRole().getRoleType());
             row[3] = user.isActive();
 
             //model will add row
@@ -540,8 +641,8 @@ public class ManageUserJPanel extends BaseJPanel {
             //to create lines or row (row is small array of object with 3 members)
             Object[] row = new Object[6];
             row[0] = user;
-            row[1] = user.getUsername();
-            row[2] = user.getPassword();
+            row[1] = user.getPassword();
+            row[2] = mapRoleTypeToDisplayName(user.getRole().getRoleType());
             row[3] = user.isActive();
 
             //model will add row

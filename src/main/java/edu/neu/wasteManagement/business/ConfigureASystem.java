@@ -86,7 +86,7 @@ public class ConfigureASystem {
        retail.setNeighbourhood(backbay);
        
        // Create Municipal Waste Enterprise
-       Enterprise municipalWasteEnt = system.getEnterpriseDir().createAndAddEnterprise("Backbay Waste Processing Enterprise", EnterpriseType.MUNICIPAL_WASTE_SERVICES);
+        Enterprise municipalWasteEnt = system.getEnterpriseDir().createAndAddEnterprise("Backbay Waste Processing Enterprise", EnterpriseType.MUNICIPAL_WASTE_SERVICES);
        ((MunicipalEnterprise)municipalWasteEnt).setHood(backbay);
                
        // Create Waste Management Enterprise

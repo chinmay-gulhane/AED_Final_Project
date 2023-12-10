@@ -6,6 +6,8 @@ package edu.neu.wasteManagement.business.userAccount;
 
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.business.territory.City;
+import edu.neu.wasteManagement.business.territory.County;
 import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import java.util.ArrayList;
@@ -34,6 +36,9 @@ public class UserAccount {
         this.setPassword(password);
         this.Active = Active;
         this.role = role;
+        County county = new County("");
+        City city = new City("");
+        this.person = new Person(username, "", neighbourhood, county, city,"");
     }
 
     public UserAccount() {

@@ -7,7 +7,7 @@ package edu.neu.wasteManagement.business.role;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.ui.cordinator.WasteCordinatorWorkArea;
 import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
-import edu.neu.wasteManagement.ui.retail.MarketplaceIntegratorWorkArea;
+import edu.neu.wasteManagement.ui.integrator.MarketplaceIntegratorWorkArea;
 import javax.swing.JPanel;
 
 /**

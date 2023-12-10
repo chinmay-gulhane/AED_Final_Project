@@ -28,4 +28,5 @@ public class GreenLivingSolution extends Enterprise{
         return null;
     }
     
+    
 }

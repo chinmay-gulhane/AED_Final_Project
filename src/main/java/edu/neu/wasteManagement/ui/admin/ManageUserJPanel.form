@@ -28,7 +28,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
@@ -86,14 +86,14 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="564" max="32767" attributes="0"/>
+                  <EmptySpace pref="559" max="32767" attributes="0"/>
                   <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="565" max="32767" attributes="0"/>
+                  <EmptySpace pref="560" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -226,7 +226,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnSearch">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Search by nuId"/>
+        <Property name="text" type="java.lang.String" value="Search by user name"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>

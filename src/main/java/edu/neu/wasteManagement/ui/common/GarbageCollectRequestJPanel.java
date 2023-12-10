@@ -7,6 +7,7 @@ package edu.neu.wasteManagement.ui.common;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.workQueue.RetailWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
@@ -126,12 +127,11 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(165, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(96, 96, 96)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
                         .addComponent(jLabel1)
                         .addGap(27, 27, 27)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -152,12 +152,12 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnRemove)))
                     .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(192, 192, 192)
+                .addGap(107, 107, 107)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -180,13 +180,13 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(575, Short.MAX_VALUE))
+                .addContainerGap(660, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         WorkRequest req = system.createWorkRequest(type, system.getLoggedInUser());
-        ((UserWasteCollectionRequest)req).addWasteToRequest(wastes);
+        addWasteToReq(req);
         JOptionPane.showMessageDialog(this, "Request raised!!");
         Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system), system.getWorkArea());
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -258,6 +258,13 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
             model.addRow(row);
         }
     }   
+
+    private void addWasteToReq(WorkRequest req) {
+        if(req instanceof UserWasteCollectionRequest)
+            ((UserWasteCollectionRequest)req).addWasteToRequest(wastes);
+        else if(req instanceof RetailWasteCollectionRequest)
+            ((RetailWasteCollectionRequest)req).addWasteToRequest(wastes);
+    }
 
 }
 

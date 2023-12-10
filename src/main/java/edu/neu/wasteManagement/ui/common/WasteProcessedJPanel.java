@@ -5,6 +5,7 @@
 package edu.neu.wasteManagement.ui.common;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.workQueue.RetailWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
@@ -165,12 +166,12 @@ public class WasteProcessedJPanel extends BaseJPanel {
         DefaultTableModel model = (DefaultTableModel) tblWaste.getModel(); //Convert to TableModel to defaultTableModel
         model.setRowCount(0);
         
-        List<Waste> wastes = null;
+        List<Waste> wastes =  populateWastesList();
         
-        if(request instanceof UserWasteCollectionRequest)
-            wastes = ((UserWasteCollectionRequest)request).getWasteToCollect();
-        else if( request instanceof WasteProcessingRequest)
-            wastes = ((WasteProcessingRequest)request).getWasteToCollect();
+        if(wastes == null || wastes.size() == 0){
+            JOptionPane.showMessageDialog(this, "No waste associate with request!");
+            return;
+        }
         
         for (Waste waste : wastes) {
 
@@ -182,6 +183,17 @@ public class WasteProcessedJPanel extends BaseJPanel {
             model.addRow(row);
         }
     }   
+
+    private List<Waste> populateWastesList() {
+        List<Waste> wastes = null;
+        if(request instanceof UserWasteCollectionRequest)
+            wastes = ((UserWasteCollectionRequest)request).getWasteToCollect();
+        else if( request instanceof WasteProcessingRequest)
+            wastes = ((WasteProcessingRequest)request).getWasteToCollect();
+        else if( request instanceof RetailWasteCollectionRequest)
+            wastes = ((RetailWasteCollectionRequest)request).getWasteToCollect();
+        return wastes;
+    }
 
 }
 

@@ -17,6 +17,7 @@ import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.RetailWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.Waste.WasteType;
@@ -28,6 +29,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -153,6 +155,17 @@ public class Ecosystem extends Organization{
                 
                 ((MunicipalWasteCollectionRequest)request).setCounty(county); 
                 break;
+                
+            case RETAIL_WASTE_COLLECTION_REQUEST:
+              // Create request
+                request = new RetailWasteCollectionRequest();
+                
+                // Find org
+                org = findOrgByHood(hood,EnterpriseType.RETAIL_WASTE_ENTERPRISE, Type.RETAIL_WASTE_PROCESSING_ORG);
+                org.getWorkQueue().addWorkRequest(request);
+                
+                ((RetailWasteCollectionRequest)request).setHood(hood); 
+                break;
         }
         
         // Add request details
@@ -168,20 +181,18 @@ public class Ecosystem extends Organization{
         }
     
     
-    private UserAccount findUserByNeighbourhood(Neighbourhood hood,EnterpriseType entType,Type orgType, RoleType roleType){
-        return this.getEnterpriseDir()
-                    .findEnterpriseByTypeAndNeighbourhood(hood, entType)
-                        .getOrganizationDir().findOrganizationByType(orgType)
-                            .getUserAccountDir().findUserAccountByRole(roleType);
-    }
 
-    private Organization findOrgByHood(Neighbourhood hood,EnterpriseType enterpriseType, Type type) {
-        Enterprise entFound = this.getEnterpriseDir()
-                    .findEnterpriseByTypeAndNeighbourhood(hood, enterpriseType);
-        return entFound.getOrganizationDir().findOrganizationByType(type);
-                       
+    private Organization findOrgByHood(Neighbourhood hood, EnterpriseType enterpriseType, Type type) {
+        Enterprise entFound = this.getEnterpriseDir().findEnterpriseByTypeAndNeighbourhood(hood, enterpriseType);
+
+        if (entFound != null) {
+            return entFound.getOrganizationDir().findOrganizationByType(type);
+
+        }
+        return null;
     }
     
+
     public List<Enterprise> getAllEnterprises() {
         List<Enterprise> allEnterprises = new ArrayList<>();
         for (Enterprise enterprise : getEnterpriseDir().getEnterpriseList()) {

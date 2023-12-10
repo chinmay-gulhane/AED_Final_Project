@@ -73,5 +73,13 @@ public class County {
     public String toString() {
         return name;
     }
+
+    public boolean neighbourHoodExists(String name) {
+        
+        for(Neighbourhood hood: this.neighbourhoods)
+            if(hood.getName().equals(name))
+                return true;
+        return false; 
+    }
     
 }

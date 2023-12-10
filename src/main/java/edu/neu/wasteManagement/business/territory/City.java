@@ -82,4 +82,18 @@ public class City {
     public String toString() {
         return name;
     }
+
+    public boolean neighbourHoodExists(String name) {
+          for(County c : counties)
+            if(c.neighbourHoodExists(name))
+                return true;
+        return false;
+    }
+
+    public Neighbourhood getNeighbourhoodByName(String name) {
+        for(County c : counties)
+            if(c.neighbourHoodExists(name))
+                return c.get(name);
+        return null;    
+    }
 }

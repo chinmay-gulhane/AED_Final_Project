@@ -7,14 +7,17 @@ package edu.neu.wasteManagement.business;
 import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.enterprise.EnterpriseType;
 import edu.neu.wasteManagement.business.enterprise.MunicipalEnterprise;
+import edu.neu.wasteManagement.business.enterprise.RetailWasteEnterprise;
 import edu.neu.wasteManagement.business.enterprise.WasteManagementCorpEnterprise;
 import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
 import edu.neu.wasteManagement.business.organization.MunicipalWasteProcessingOrg;
 import edu.neu.wasteManagement.business.organization.Organization;
 import edu.neu.wasteManagement.business.organization.RegionalWasteManagementOrg;
+import edu.neu.wasteManagement.business.organization.RetailWasteProcessingOrg;
 import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.business.role.MarketplaceIntegrator;
 import edu.neu.wasteManagement.business.role.PrincipalUser;
+import edu.neu.wasteManagement.business.role.RetailUser;
 import edu.neu.wasteManagement.business.role.WasteCollector;
 import edu.neu.wasteManagement.business.role.WasteCordinator;
 import edu.neu.wasteManagement.business.role.WasteSegregator;
@@ -41,6 +44,7 @@ public class ConfigureASystem {
            Ecosystem system = Ecosystem.getInstance();
            createData(system);
            createDataForWasteManageCorp(system);
+           createDataForRetailEnterprise(system);
            return system;
        } catch (Exception ex) {
            Logger.getLogger(ConfigureASystem.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,16 +82,19 @@ public class ConfigureASystem {
        UserAccount andy = system.getUserAccountDir().addUserAccount("andy", "Abcd1ef", new PrincipalUser(), true);
        andy.setNeighbourhood(backbay);
        
+       UserAccount retail = system.getUserAccountDir().addUserAccount("retail", "Abcd1ef", new RetailUser(), true);
+       retail.setNeighbourhood(backbay);
+       
        // Create Municipal Waste Enterprise
        Enterprise municipalWasteEnt = system.getEnterpriseDir().createAndAddEnterprise("Backbay Waste Processing Enterprise", EnterpriseType.MUNICIPAL_WASTE_SERVICES);
        ((MunicipalEnterprise)municipalWasteEnt).setHood(backbay);
-        
+               
        // Create Waste Management Enterprise
        Enterprise suffolkWasteManagementEnt = system.getEnterpriseDir().createAndAddEnterprise("Suffolk Waste Management Enterprise", EnterpriseType.WASTE_MANAGEMENT_CORP);
        ((WasteManagementCorpEnterprise)suffolkWasteManagementEnt).setCounty(suffolk);
-       
-       // Create Municipal Waste Processing org
-       Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization("Suffolk Municipal Waste Organization",Type.MUNICIPAL_WASTE_PROCESSING_ORG);
+              
+       //Create Municiap Waste Processing org
+        Organization municipalWasteOrg = municipalWasteEnt.getOrganizationDir().createOrganization("Suffolk Municipal Waste Organization",Type.MUNICIPAL_WASTE_PROCESSING_ORG);
        ((MunicipalWasteProcessingOrg)municipalWasteOrg).setCounty(suffolk);
        
         // Create Regional Waste Management org
@@ -109,35 +116,40 @@ public class ConfigureASystem {
 
      
        //  -------- Create Waste Collection Request ----------
-       WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
-
-
+//       WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
+        // Assign Waste collection Request to Waste Collector
+//       garbageCollectRequest.setReceiver(wasteCollector);
        
-       // Assign Waste collection Request to Waste Collector
-       garbageCollectRequest.setReceiver(wasteCollector);
-       
+         // Waste Collector - Mark Status as completed
+//       garbageCollectRequest.setStatus("Completed");
+
+       // ----------- Create Retail Waste Collection Request ----------
+//       WorkRequest retailCollectRequest = system.createWorkRequest(WorkRequestType.RETAIL_WASTE_COLLECTION_REQUEST, retail);
+//        retailCollectRequest.setReceiver(wasteCollector);
+
        // Waste Collector - Mark Status as completed
-       garbageCollectRequest.setStatus("Completed");
-
+       
+//       retailCollectRequest.setStatus("Completed");
+     
        
        // Waste Cordinator create new Waste Processing request
-       WorkRequest processingRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, wasteCordinator);
+//       WorkRequest processingRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, wasteCordinator);
        
        // Assign Waste Processing Request to Waste Segregator
-       processingRequest.setReceiver(wasteSegregator);
+//       processingRequest.setReceiver(wasteSegregator);
         
        // Waste Collector - Mark Status as completed
-       processingRequest.setStatus("Completed");
+//       processingRequest.setStatus("Completed");
        
        
        // -------- Municipal to Waste Management -------
        
        // Step 1 - Create MUNICIPAL_WASTE_COLLECTION_REQUEST
-       WorkRequest municipalWasteColReq = system.createWorkRequest(WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST, wasteCordinator);
-       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.RECYCLABLE_GLASS, 15);
-       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.E_WASTE, 1);
-       System.out.println(regionalWasteManagementOrg.getWorkQueue());
-        
+//       WorkRequest municipalWasteColReq = system.createWorkRequest(WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST, wasteCordinator);
+//       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.RECYCLABLE_GLASS, 15);
+//       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.E_WASTE, 1);
+//       System.out.println(regionalWasteManagementOrg.getWorkQueue());
+//        
        
        // --------- Display the User's statistic -------
        system.addOrganizationEnterprise(marketplace, greenLiving);
@@ -145,7 +157,7 @@ public class ConfigureASystem {
        
        
        // Raise WCR
-     system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST, andy);
+//     system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST, andy);
              
    }
    
@@ -179,6 +191,27 @@ public class ConfigureASystem {
         system.getUserAccountDir().addUserAccount("jpwcd", "Abcd1ef", new WasteCordinator(), true);
    }
    
+   private static void createDataForRetailEnterprise(Ecosystem system) throws Exception{
+       
+        Neighbourhood hood = system.getCityReg().getNeighbourhoodByName("Backbay");
+        Enterprise ent = system.getEnterpriseDir().createAndAddEnterprise("Retail Waste Processing Enterprise", EnterpriseType.RETAIL_WASTE_ENTERPRISE);
+       ((RetailWasteEnterprise)ent).setHood(hood);
+       
+        Organization retailWasteOrg = ent.getOrganizationDir().createOrganization("Backbay Retail Waste Organization",Type.RETAIL_WASTE_PROCESSING_ORG);
+       ((RetailWasteProcessingOrg)retailWasteOrg).setHood(hood);
+       
+        //Waste segregator:
+        UserAccount wasteSegregator = system.getUserAccountDir().addUserAccount("bbrws", "Abcd1ef", new WasteSegregator(), true);
+        retailWasteOrg.getUserAccountDir().associateUser(wasteSegregator);
+        
+        //Waste Collector:
+        UserAccount wasteCollector = system.getUserAccountDir().addUserAccount("bbrwcl", "Abcd1ef", new WasteCollector(), true);
+        retailWasteOrg.getUserAccountDir().associateUser(wasteCollector);
+        
+        UserAccount wasteCordinator = system.getUserAccountDir().addUserAccount("bbrwcd", "Abcd1ef", new WasteCordinator(), true);
+        retailWasteOrg.getUserAccountDir().associateUser(wasteCordinator); 
+       
+   }
    
     
 }

@@ -12,7 +12,7 @@ public class Product {
     private String name;
     private double price;
     private String seller;
-    private int quantity; // New attribute
+    private int quantity;
  
     public Product(String name, double price, String seller, int quantity) {
         this.name = name;

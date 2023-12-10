@@ -343,4 +343,13 @@ public class Ecosystem extends Organization{
         }
         return null; // Not found
     }
+
+    public List<OrganizationEnterprise> getOrganizationEnterpriseList() {
+        return organizationEnterpriseList;
+    }
+
+    public void setOrganizationEnterpriseList(List<OrganizationEnterprise> organizationEnterpriseList) {
+        this.organizationEnterpriseList = organizationEnterpriseList;
+    }
+    
 }

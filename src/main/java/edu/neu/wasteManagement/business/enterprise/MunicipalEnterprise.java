@@ -38,4 +38,5 @@ public class MunicipalEnterprise extends Enterprise {
     public List<Role> getSupportedRole() {
         return null;
     }
+    
 }

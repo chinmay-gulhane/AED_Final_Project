@@ -29,6 +29,22 @@ public class MarketplaceOrg extends Organization {
     public List<Role> getSupportedRole() {
         return null;
     }
+
+    public PrincipalUser getUser() {
+        return user;
+    }
+
+    public void setUser(PrincipalUser user) {
+        this.user = user;
+    }
+
+    public ProductCatalog getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(ProductCatalog catalog) {
+        this.catalog = catalog;
+    }
     
     
 }

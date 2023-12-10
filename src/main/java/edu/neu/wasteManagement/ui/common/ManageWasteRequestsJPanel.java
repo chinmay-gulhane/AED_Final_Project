@@ -141,7 +141,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
             }
         });
 
-        btnComplete.setText("Mark as Completed");
+        btnComplete.setText("Process ");
         btnComplete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCompleteMouseClicked(evt);
@@ -363,9 +363,8 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-       selectedRequest.setStatus("Completed");
-       JOptionPane.showMessageDialog(this, "Request completed!!");
-       initSetup();
+       Utility.switchPanel(new WasteProcessedJPanel(system,selectedRequest), system.getWorkArea());
+       
     }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked

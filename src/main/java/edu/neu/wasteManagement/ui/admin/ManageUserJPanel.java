@@ -7,6 +7,7 @@ package edu.neu.wasteManagement.ui.admin;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.role.MarketplaceIntegrator;
 import edu.neu.wasteManagement.business.role.PrincipalUser;
+import edu.neu.wasteManagement.business.role.RetailUser;
 import edu.neu.wasteManagement.business.role.RoleType;
 import edu.neu.wasteManagement.business.role.WasteCollector;
 import edu.neu.wasteManagement.business.role.WasteCordinator;
@@ -518,6 +519,16 @@ public class ManageUserJPanel extends BaseJPanel {
                     Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            
+            case RETAIL_USER:
+            {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password,  new RetailUser(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
             // Add cases for other RoleTypes
             default:
@@ -580,6 +591,8 @@ public class ManageUserJPanel extends BaseJPanel {
                 return "Waste Collector";
             case MARKETPLACE_INTEGRATOR:
                 return "Marketplace Integrator";
+            case RETAIL_USER:
+                return "Retail User";
             default:
                 return "Unknown Role";
         }
@@ -599,6 +612,8 @@ public class ManageUserJPanel extends BaseJPanel {
                 return RoleType.WASTE_COLLECTOR;
             case "Marketplace Integrator":
                 return RoleType.MARKETPLACE_INTEGRATOR;
+            case "Retail User":
+                return RoleType.RETAIL_USER;
             default:
                 return null; // or throw an exception for unknown display names
         }

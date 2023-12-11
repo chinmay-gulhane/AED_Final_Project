@@ -12,6 +12,8 @@ import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -28,8 +30,18 @@ public class UserAccount {
     private String salt = BCrypt.gensalt();
     private Neighbourhood neighbourhood;
     private WorkQueue queue;
+    private double TotalTrash;
+
+    public double getTotalTrash() {
+        return TotalTrash;
+    }
+
+    public void setTotalTrash(double TotalTrash) {
+        this.TotalTrash = TotalTrash;
+    }
     
-    public UserAccount(String username, String password, Role role, boolean Active) throws Exception {
+    
+    public UserAccount(String username, String password, Role role, boolean Active) {
         this.usedPasswords = new ArrayList<>();
         this.queue = new WorkQueue();
         this.username = username;
@@ -40,7 +52,6 @@ public class UserAccount {
     }
 
     public UserAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public WorkQueue getQueue() {
@@ -80,9 +91,13 @@ public class UserAccount {
         return password;
     }
 
-    public void setPassword(String password) throws Exception {
+    public void setPassword(String password){
         if(!isValidPassword(password))
-            throw new Exception("Invalid Password!");
+            try {
+                throw new Exception("Invalid Password!");
+        } catch (Exception ex) {
+            Logger.getLogger(UserAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
         String hashedPassword = BCrypt.hashpw(password, salt); // Hash the password with the generated salt
         this.password = hashedPassword;
@@ -134,4 +149,10 @@ public class UserAccount {
     public Neighbourhood getNeighbourhood() {
         return neighbourhood;
     }
+
+    public void setTotalTrashGenerated(double trashGenerated) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+
 }

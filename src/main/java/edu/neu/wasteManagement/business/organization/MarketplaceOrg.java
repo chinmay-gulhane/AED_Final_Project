@@ -18,6 +18,9 @@ import java.util.List;
  */
 public class MarketplaceOrg extends Organization {
 
+    
+        public MarketplaceOrg(){}
+
     PrincipalUser user;
     //Add other users who will have access to the market
     ProductCatalog catalog;

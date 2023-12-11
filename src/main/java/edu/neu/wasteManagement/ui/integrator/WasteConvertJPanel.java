@@ -6,7 +6,13 @@ package edu.neu.wasteManagement.ui.integrator;
 
 import edu.neu.wasteManagement.ui.common.*;
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.organization.MarketplaceOrg;
+import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.organization.Type;
 import edu.neu.wasteManagement.business.products.Product;
+import edu.neu.wasteManagement.business.products.Product.ProductType;
+import edu.neu.wasteManagement.business.products.ProductCatalog;
+import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
@@ -33,10 +39,12 @@ public class WasteConvertJPanel extends BaseJPanel {
      */
 
     private List<Waste> wastes;
+    private List<WorkRequest> requests;
     private List<Product> products;
     public WasteConvertJPanel(Ecosystem system) {
         super(system);
         this.wastes = new ArrayList<>();
+        this.requests = new ArrayList<>();
         this.products = new ArrayList<>();
         initComponents();
         initSetup();
@@ -51,34 +59,20 @@ public class WasteConvertJPanel extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        removeButton = new javax.swing.JButton();
         btnAddProduct = new javax.swing.JButton();
         btnBack3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWaste = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
-        jLabel1.setText("Waste Conversion");
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("Waste Conversion");
-
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("Waste");
-
-        removeButton.setText("<");
-        removeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeButtonActionPerformed(evt);
-            }
-        });
+        add(jLabel9);
 
         btnAddProduct.setText(">");
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +80,7 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnAddProductActionPerformed(evt);
             }
         });
+        add(btnAddProduct);
 
         btnBack3.setBackground(new java.awt.Color(0, 0, 0));
         btnBack3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
@@ -96,200 +91,152 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnBack3ActionPerformed(evt);
             }
         });
+        add(btnBack3);
 
         tblWaste.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+                {null, null}
             },
             new String [] {
-                "Waste Type"
+                "Waste Type", "Amount"
             }
         ));
         jScrollPane2.setViewportView(tblWaste);
 
+        add(jScrollPane2);
+
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+                {null, null}
             },
             new String [] {
-                "Products"
+                "Products", "Quantity"
             }
         ));
         jScrollPane3.setViewportView(tblProduct);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(570, 570, 570)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(btnBack3)))
-                .addContainerGap(153, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(btnAddProduct)
-                        .addGap(17, 17, 17)
-                        .addComponent(removeButton)))
-                .addGap(61, 61, 61)
-                .addComponent(btnBack3)
-                .addContainerGap(613, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+        add(jScrollPane3);
 
-    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        // TODO add your handling code here:
-//        Product str2 = addedProducts.getSelectedValue();
-//        if(addedProducts.getSelectedIndex()==-1){
-//            JOptionPane.showMessageDialog(this, "No Data selected");
-//        } else{
-//            int value = addedProducts.getSelectedIndex();
-//
-//            listProductsModel.addElement(str2);
-//            listProducts.setModel(listProductsModel);
-//
-//            if(addedProductsModel.getSize() != 0){
-//                addedProductsModel.removeElementAt(value);
-//            }
-//        }
-//        updatePrice(-str2.getTargetPrice(), -str2.getCeilingPrice(), -str2.getFloorPrice());
-    }//GEN-LAST:event_removeButtonActionPerformed
+        jLabel10.setText("Product");
+        add(jLabel10);
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         // TODO add your handling code here:
-        
-        Product p = null;
-//
-//        Product selectedValue = listProducts.getSelectedValue();
-//
-//        if (selectedValue != null) {
-//
-//            int countProducts = addedProductsModel.getSize();
-//            if(countProducts > 1){
-//                JOptionPane.showMessageDialog(this, "Only 2 Products can be added!");
-//                return;
-//            }
-//
-//            // Add the selected item to the addedProductsModel list
-//            addedProductsModel.addElement(selectedValue);
-//
-//            // Remove the selected item from the listProductsModel list
-//            listProductsModel.removeElement(selectedValue);
-//
-//            // Set models for both lists
-//            listProducts.setModel(listProductsModel);
-//            addedProducts.setModel(addedProductsModel);
-//
-//            updatePrice(selectedValue.getTargetPrice(),selectedValue.getFloorPrice(),selectedValue.getCeilingPrice());
-
-//        } else {
-//            JOptionPane.showMessageDialog(this, "No data selected", "Oops..", HEIGHT);
-//        }
-
+        List<Product> convertedProducts = convertWastesToProducts(wastes);
+        products.addAll(convertedProducts);
+        wastes = new ArrayList<>();
+        populateWasteTable();
+        populateProductTable();
+        JOptionPane.showMessageDialog(this, "Waste converted successfully!");
+        JOptionPane.showMessageDialog(this, "To lock conversion click on Convert button");
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed
         // TODO add your handling code here:
+        //Step 1: Fetch loggedin user
+        //Step 2: Fetch loggedIn user's organization
+        //Step 3 :  Fetch Product catalog form org
+        //Step 4: Add the product and mark all request as Processed
+        
+        UserAccount user = system.getLoggedInUser();
+        Organization org = system.getOrganizationByUserAccount(user);
+        
+        // Find marketPlace
+        MarketplaceOrg marketplace = (MarketplaceOrg) system.getOrganizationByType(Type.MARKETPLACE_ORG);
+        
+        ProductCatalog catalog = org.getProductCatalog();
+        ProductCatalog marketplaceCatalog = marketplace.getProductCatalog();
+        
+        for(Product p : products){
+            catalog.addProduct(p);
+            marketplaceCatalog.addProduct(p);
+        }
+        for(WorkRequest req : requests)
+            req.setStatus("Processed");
+        
+        JOptionPane.showMessageDialog(this, "Products added to catalog successfully!!");
+        Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system), system.getWorkArea());
+        
     }//GEN-LAST:event_btnBack3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
     private javax.swing.JButton btnBack3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton removeButton;
     private javax.swing.JTable tblProduct;
     private javax.swing.JTable tblWaste;
     // End of variables declaration//GEN-END:variables
 
- 
-   
     private void initSetup() {
+       loadWaste();
+       loadRequestForWasteToBeProcessed();
        populateWasteTable();
        populateProductTable();
     }
     
-    private void populateTable(){
-        
-//        DefaultTableModel model = (DefaultTableModel) tblWaste.getModel(); //Convert to TableModel to defaultTableModel
-//        model.setRowCount(0);
-//        
-//        List<Waste> wastes = null;
-//        
-//        if(request instanceof UserWasteCollectionRequest)
-//            wastes = ((UserWasteCollectionRequest)request).getWasteToCollect();
-//        else if( request instanceof WasteProcessingRequest)
-//            wastes = ((WasteProcessingRequest)request).getWasteToCollect();
-//        
-//        for (Waste waste : wastes) {
-//
-//            //to create lines or row (row is small array of object with 3 members)
-//            Object[] row = new Object[2];
-//             row[0] = waste;
-//             row[1] = waste.getAmount();
-//
-//            model.addRow(row);
-//        }
-    }   
-
     private void populateWasteTable() {
-        
-        DefaultTableModel model = (DefaultTableModel) tblWaste.getModel(); //Convert to TableModel to defaultTableModel
+        DefaultTableModel model = (DefaultTableModel) tblWaste.getModel();
         model.setRowCount(0);   
            
            for(Waste waste : wastes){
-            Object[] row = new Object[1];
+            Object[] row = new Object[2];
             row[0] = waste;
+            row[1] = waste.getAmount();
 
             model.addRow(row);
-           }
+        }
     }
 
     private void populateProductTable() {
         DefaultTableModel model = (DefaultTableModel) tblProduct.getModel(); 
-           model.setRowCount(0);
+        model.setRowCount(0);
+        
+        for(Product product : products){
+            Object[] row = new Object[2];
+            row[0] = product;
+            row[1] = product.getQuantity();
+
+            model.addRow(row);
+        }
     }
 
     private void loadWaste() {
         List<Waste> recyclableWaste = system.getListOfRecyclableWasteForUser(system.getLoggedInUser());
         wastes.addAll(recyclableWaste);
     }
+
+    private void loadRequestForWasteToBeProcessed() {
+        List<WorkRequest> recyclableRequest = system.getListOfRecyclableRequestsForUser(system.getLoggedInUser());
+        requests.addAll(recyclableRequest);
+    }
+
+    private List<Product> convertWastesToProducts(List<Waste> ws) {
+        List<Product> genProducts = new ArrayList<>();
+        
+        for(Waste w: ws){
+            Product convertedProduct = convertWasteToProduct(w);
+            genProducts.add(convertedProduct);
+        }
+        
+        return genProducts;   
+    }
+
+    private Product convertWasteToProduct(Waste w) {
+        switch(w.getType()){
+            case RECYCLABLE_PAPER:
+                return new Product("W2P_" + ProductType.RECYCLED_PAPER.toString(), ProductType.RECYCLED_PAPER,(int)w.getAmount());
+            case RECYCLABLE_GLASS:
+                return new Product("W2P_" + ProductType.RECYCLED_GLASS.toString(), ProductType.RECYCLED_GLASS,(int)w.getAmount()); 
+            case RECYCLABLE_METAL:
+                return new Product("W2P_" + ProductType.RECYCLED_METAL.toString(), ProductType.RECYCLED_METAL,(int)w.getAmount()); 
+        }
+        return null;
+    }
+
 
 }
 

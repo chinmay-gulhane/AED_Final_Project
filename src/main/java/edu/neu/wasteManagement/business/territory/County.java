@@ -26,6 +26,8 @@ public class County {
         return name;
     }
 
+        public County(){}
+
     public List<Neighbourhood> getNeighbourhoods() {
         return neighbourhoods;
     }
@@ -72,6 +74,14 @@ public class County {
     @Override
     public String toString() {
         return name;
+    }
+
+    public boolean neighbourHoodExists(String name) {
+        
+        for(Neighbourhood hood: this.neighbourhoods)
+            if(hood.getName().equals(name))
+                return true;
+        return false; 
     }
     
 }

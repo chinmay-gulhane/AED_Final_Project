@@ -138,6 +138,8 @@ public class ManageTerritoryJPanel extends BaseJPanel {
         jLabel73.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel73.setText("Manage Territory");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel2.setText("Add CIty");
 
         txtCity.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +148,9 @@ public class ManageTerritoryJPanel extends BaseJPanel {
             }
         });
 
+        btnAddCity.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddCity.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnAddCity.setForeground(new java.awt.Color(255, 255, 255));
         btnAddCity.setText("Add City");
         btnAddCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +158,9 @@ public class ManageTerritoryJPanel extends BaseJPanel {
             }
         });
 
+        btnCounty.setBackground(new java.awt.Color(0, 0, 0));
+        btnCounty.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnCounty.setForeground(new java.awt.Color(255, 255, 255));
         btnCounty.setText("Add County");
         btnCounty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,8 +174,12 @@ public class ManageTerritoryJPanel extends BaseJPanel {
             }
         });
 
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Add County");
 
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel4.setText("Add Neighborhood");
 
         txtNeighborhood.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +188,9 @@ public class ManageTerritoryJPanel extends BaseJPanel {
             }
         });
 
+        btnAddNeigh.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddNeigh.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnAddNeigh.setForeground(new java.awt.Color(255, 255, 255));
         btnAddNeigh.setText("Add Neighborhood");
         btnAddNeigh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +211,8 @@ public class ManageTerritoryJPanel extends BaseJPanel {
         ));
         jScrollPane7.setViewportView(CityTbl);
 
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel5.setText("City");
 
         CountyTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -224,18 +241,32 @@ public class ManageTerritoryJPanel extends BaseJPanel {
         ));
         jScrollPane9.setViewportView(NeighborhoodTbl);
 
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel6.setText("County");
 
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel7.setText("Neighborhood");
 
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel8.setText("Name");
 
+        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("City");
 
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel10.setText("Name:");
 
+        jLabel11.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel11.setText("County");
 
+        jLabel12.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel12.setText("Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

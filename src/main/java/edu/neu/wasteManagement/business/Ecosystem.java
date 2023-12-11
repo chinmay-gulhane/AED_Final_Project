@@ -390,6 +390,8 @@ public class Ecosystem extends Organization implements Serializable{
     }
 
     private boolean processRequestContainsRecyclable(WorkRequest request) {
+        if(!(request instanceof WasteProcessingRequest)) 
+            return false;
         for(Waste waste: ((WasteProcessingRequest)request).getWasteToCollect())
             if(isWasteRecyclable(waste))
                 return true;

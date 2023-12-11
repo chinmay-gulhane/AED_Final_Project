@@ -6,7 +6,8 @@ package edu.neu.wasteManagement.business.role;
 
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.ui.principal.PrincipalUserWorkArea;
-import edu.neu.wasteManagement.ui.retail.ReatilUserWorkArea;
+
+import edu.neu.wasteManagement.ui.retail.RetailUserWorkArea;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +22,6 @@ public class RetailUser extends Role{
 
     @Override
     public JPanel createWorkArea(Ecosystem business) {
-        return new ReatilUserWorkArea(business);
+        return new RetailUserWorkArea(business);
     }
 }

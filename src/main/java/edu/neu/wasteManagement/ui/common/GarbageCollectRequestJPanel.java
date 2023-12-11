@@ -71,8 +71,8 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         jLabel1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         jLabel1.setText("Raise Request");
 
-        btnSubmit.setBackground(new java.awt.Color(105, 155, 247));
-        btnSubmit.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        btnSubmit.setBackground(new java.awt.Color(0, 0, 0));
+        btnSubmit.setFont(new java.awt.Font("STHeiti", 1, 14)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Raise Request");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -82,13 +82,15 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("STHeiti", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("<html> <head> <h1>Garbage Collection Request Disclaimer</h1> </head> <body>    \n    <br><br><p>Dear Principal User,</p>\n    \n    <p>This form allows you to submit a Garbage Collection Request. Please note the following:</p>\n    \n    <ul>\n        <li>Ensure that the information provided is accurate and complete.</li>\n        <li>Attach any necessary supporting documents or details to expedite the process.</li>\n        <li>By submitting this request, you acknowledge that the information will be processed by the waste management system.</li>\n        <li>Any false or misleading information may result in delays or rejections of the request.</li>\n    </ul>\n    \n    <p>Thank you for your cooperation.</p>\n    \n    <p>Sincerely,<br>Waste Management System</p>  </body> </html> ");
 
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Waste Type");
 
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel4.setText("Amount in Kg : ");
 
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel5.setText("Request Summary");
 
         tblWaste.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,6 +106,9 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         ));
         jScrollPane1.setViewportView(tblWaste);
 
+        btnAdd.setBackground(new java.awt.Color(0, 0, 0));
+        btnAdd.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +116,9 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
             }
         });
 
+        btnRemove.setBackground(new java.awt.Color(0, 0, 0));
+        btnRemove.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        btnRemove.setForeground(new java.awt.Color(255, 255, 255));
         btnRemove.setText("Remove");
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,8 +136,8 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(170, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -144,16 +152,16 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(cmbWasteType, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(60, 60, 60)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(46, 46, 46)
+                            .addComponent(jLabel4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(btnAdd)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(30, 30, 30)
                             .addComponent(btnRemove)))
                     .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,15 +179,15 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(txtAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAdd)
                             .addComponent(btnRemove))
-                        .addGap(55, 55, 55)
+                        .addGap(43, 43, 43)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(30, 30, 30)
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(660, Short.MAX_VALUE))
         );

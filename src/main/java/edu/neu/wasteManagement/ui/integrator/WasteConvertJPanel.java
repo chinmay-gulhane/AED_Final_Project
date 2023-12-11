@@ -59,7 +59,6 @@ public class WasteConvertJPanel extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         btnAddProduct = new javax.swing.JButton();
         btnBack3 = new javax.swing.JButton();
@@ -71,14 +70,9 @@ public class WasteConvertJPanel extends BaseJPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
-        jLabel1.setText("Waste Conversion");
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("Waste Conversion");
-
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("Waste");
+        add(jLabel9);
 
         btnAddProduct.setText(">");
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +80,7 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnAddProductActionPerformed(evt);
             }
         });
+        add(btnAddProduct);
 
         btnBack3.setBackground(new java.awt.Color(0, 0, 0));
         btnBack3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
@@ -96,6 +91,7 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnBack3ActionPerformed(evt);
             }
         });
+        add(btnBack3);
 
         tblWaste.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +103,8 @@ public class WasteConvertJPanel extends BaseJPanel {
         ));
         jScrollPane2.setViewportView(tblWaste);
 
+        add(jScrollPane2);
+
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
@@ -117,50 +115,10 @@ public class WasteConvertJPanel extends BaseJPanel {
         ));
         jScrollPane3.setViewportView(tblProduct);
 
-        jLabel10.setText("Product");
+        add(jScrollPane3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(178, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(btnBack3)))
-                .addContainerGap(153, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(btnAddProduct)))
-                .addGap(61, 61, 61)
-                .addComponent(btnBack3)
-                .addContainerGap(613, Short.MAX_VALUE))
-        );
+        jLabel10.setText("Product");
+        add(jLabel10);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
@@ -205,7 +163,6 @@ public class WasteConvertJPanel extends BaseJPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
     private javax.swing.JButton btnBack3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;

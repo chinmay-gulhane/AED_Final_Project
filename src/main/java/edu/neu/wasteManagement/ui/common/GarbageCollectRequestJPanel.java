@@ -205,7 +205,6 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         wastes.add(new Waste((Waste.WasteType) cmbWasteType.getSelectedItem(),Double.parseDouble(txtAmt.getText())));
         txtAmt.setText("");
         populateTable();
-        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtAmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmtActionPerformed
@@ -269,12 +268,14 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
     }   
 
     private void addWasteToReq(WorkRequest req) {
+        
         if(req instanceof UserWasteCollectionRequest)
             ((UserWasteCollectionRequest)req).addWasteToRequest(wastes);
         else if(req instanceof RetailWasteCollectionRequest)
             ((RetailWasteCollectionRequest)req).addWasteToRequest(wastes);
-        else if(req instanceof MunicipalWasteCollectionRequest)
+        else if(req instanceof MunicipalWasteCollectionRequest){
             ((MunicipalWasteCollectionRequest)req).addWasteToRequest(wastes);
+        }
     }
 
 }

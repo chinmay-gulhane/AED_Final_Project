@@ -13,6 +13,8 @@ import java.util.List;
  * @author ingale.r
  */
 public class GreenLivingSolution extends Enterprise{
+    
+    public GreenLivingSolution(){}
 
     @Override
     public List<Type> getSupportedOrganizations() {

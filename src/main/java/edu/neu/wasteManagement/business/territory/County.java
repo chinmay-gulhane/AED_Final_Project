@@ -26,6 +26,8 @@ public class County {
         return name;
     }
 
+        public County(){}
+
     public List<Neighbourhood> getNeighbourhoods() {
         return neighbourhoods;
     }

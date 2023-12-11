@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author ingale.r
  */
 public class OrganizationDirectory {
+    
     private ArrayList<Organization> organizationList;
 
     public OrganizationDirectory() {

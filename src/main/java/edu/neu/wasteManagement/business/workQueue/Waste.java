@@ -25,6 +25,9 @@ public class Waste {
         this.type = type;
         this.amount = amount;
     }
+    
+        public Waste(){}
+
 
     // Getters and setters for type and amount
     public WasteType getType() {

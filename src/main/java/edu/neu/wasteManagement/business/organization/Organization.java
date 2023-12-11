@@ -8,13 +8,14 @@ import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.WorkQueue;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author ingale.r
  */
-public abstract class Organization {
+public abstract class Organization implements Serializable{
     
     private Type type;
     private String name;
@@ -31,6 +32,7 @@ public abstract class Organization {
     public void setTrashGenerated(double TrashGenerated) {
         this.TrashGenerated = TrashGenerated;
     }
+
 
     public UserAccountDirectory getUserAccountDir() {
         return userAccountDir;
@@ -102,6 +104,9 @@ public abstract class Organization {
 
     }    
     
+    
+    public Organization(){
+    }
     
     public String toString(){
         return this.getName();

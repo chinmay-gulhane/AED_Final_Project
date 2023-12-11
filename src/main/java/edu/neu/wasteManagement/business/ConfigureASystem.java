@@ -41,7 +41,7 @@ public class ConfigureASystem {
     
    public static Ecosystem configure(){   
        try {
-           Ecosystem system = Ecosystem.getInstance();
+           Ecosystem system = new Ecosystem();
            createData(system);
            createDataForWasteManageCorp(system);
            createDataForRetailEnterprise(system);

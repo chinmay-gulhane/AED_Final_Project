@@ -5,6 +5,7 @@
 package edu.neu.wasteManagement.ui.common;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.RetailWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
@@ -191,6 +192,8 @@ public class WasteProcessedJPanel extends BaseJPanel {
             wastes = ((WasteProcessingRequest)request).getWasteToCollect();
         else if( request instanceof RetailWasteCollectionRequest)
             wastes = ((RetailWasteCollectionRequest)request).getWasteToCollect();
+        else if( request instanceof MunicipalWasteCollectionRequest)
+            wastes = ((MunicipalWasteCollectionRequest)request).getWasteToCollect();
         return wastes;
     }
 

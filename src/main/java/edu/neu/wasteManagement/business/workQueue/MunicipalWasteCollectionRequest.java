@@ -28,12 +28,18 @@ public class MunicipalWasteCollectionRequest extends WorkRequest{
     public County getCounty() {
         return county;
     }
+    
+
+    public List<Waste> getWasteToCollect() {
+        return wasteToCollect;
+    }
 
     public void setCounty(County county) {
         this.county = county;
     }
 
     public void addWasteToRequest(List<Waste> wastes){
+        System.out.println("Adding wastes to request!");
         this.wasteToCollect.addAll(wastes);
     }
     

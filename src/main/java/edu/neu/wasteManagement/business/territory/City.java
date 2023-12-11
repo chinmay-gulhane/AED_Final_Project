@@ -96,4 +96,6 @@ public class City {
                 return c.get(name);
         return null;    
     }
+    
+    public City(){}
 }

@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class RetailWasteProcessingOrg extends Organization {
 
+            public RetailWasteProcessingOrg(){}
+
     private County county;
     private Neighbourhood hood;
 

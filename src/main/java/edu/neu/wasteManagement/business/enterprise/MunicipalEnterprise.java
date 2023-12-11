@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class MunicipalEnterprise extends Enterprise {
     
+        public MunicipalEnterprise(){}
+
+    
     private Neighbourhood hood;
 
     public Neighbourhood getHood() {

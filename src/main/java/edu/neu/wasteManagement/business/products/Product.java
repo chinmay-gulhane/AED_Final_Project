@@ -14,6 +14,9 @@ public class Product {
         RECYCLED_PAPER, RECYCLED_GLASS, RECYCLED_METAL, OTHER
     }
     
+    
+        public Product(){}
+
     private String name;
     private double price;
     private String seller;

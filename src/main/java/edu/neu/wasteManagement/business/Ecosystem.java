@@ -26,6 +26,7 @@ import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkQueue;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,8 +41,8 @@ import javax.swing.JPanel;
  *
  * @author ingale.r
  */
-public class Ecosystem extends Organization{
-    
+public class Ecosystem extends Organization implements Serializable{
+        
     private UserAccountDirectory userAccountDir;
     private EnterpriseDirectory enterpriseDir;
     private List<OrganizationEnterprise> organizationEnterpriseList;
@@ -58,17 +59,10 @@ public class Ecosystem extends Organization{
     private JPanel header;
     private JPanel mainWorkArea;
     private JPanel workArea;
-    private static Ecosystem instance = null;
     
-    //Singleton design pattern
-    public static Ecosystem getInstance(){
-        if(instance == null)
-            instance = new Ecosystem();
-        return instance;
-    }
     
-    private Ecosystem(){
-        super("Ecosystem");
+    public Ecosystem(){
+        super();
         this.userAccountDir = new UserAccountDirectory();
         this.enterpriseDir = new EnterpriseDirectory();
         this.cityReg = new CityRegistry();

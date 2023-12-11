@@ -20,6 +20,9 @@ import java.util.List;
 public class MunicipalWasteProcessingOrg extends Organization {
 
     private County county;
+    
+            public MunicipalWasteProcessingOrg(){}
+
 
     public County getCounty() {
         return county;

@@ -12,6 +12,8 @@ import java.util.List;
 * @author prart
 */
 public class ProductCatalog {
+    
+    
 
     private List<Product> products;
     private List<Order> orders; 

@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class EnterpriseDirectory {
    
+
     private List<Enterprise> enterpriseList;
     
      public EnterpriseDirectory(){

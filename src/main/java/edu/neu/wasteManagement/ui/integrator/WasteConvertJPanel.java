@@ -64,12 +64,13 @@ public class WasteConvertJPanel extends BaseJPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
         jLabel1.setText("Waste Conversion");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("Waste Conversion");
 
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("Waste");
 
         removeButton.setText("<");
@@ -86,6 +87,9 @@ public class WasteConvertJPanel extends BaseJPanel {
             }
         });
 
+        btnBack3.setBackground(new java.awt.Color(0, 0, 0));
+        btnBack3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnBack3.setForeground(new java.awt.Color(255, 255, 255));
         btnBack3.setText("Convert ?");
         btnBack3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,16 +141,16 @@ public class WasteConvertJPanel extends BaseJPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(456, 456, 456)
                         .addComponent(btnBack3)))
-                .addGap(153, 153, 153))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(2, 2, 2)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -161,7 +165,7 @@ public class WasteConvertJPanel extends BaseJPanel {
                         .addComponent(removeButton)))
                 .addGap(61, 61, 61)
                 .addComponent(btnBack3)
-                .addContainerGap(529, Short.MAX_VALUE))
+                .addContainerGap(613, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

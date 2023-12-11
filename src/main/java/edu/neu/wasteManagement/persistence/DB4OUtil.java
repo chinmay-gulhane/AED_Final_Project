@@ -51,6 +51,7 @@ private ObjectContainer createConnection() {
         // Register your top most Class here
         config.common().objectClass(Ecosystem.class).cascadeOnUpdate(true); // Change to the object you want to save
 
+        config.common().exceptionsOnNotStorable(false);
         ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
         return db;
     } catch (Exception ex) {

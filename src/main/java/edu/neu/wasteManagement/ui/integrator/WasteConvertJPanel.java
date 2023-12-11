@@ -59,16 +59,28 @@ public class WasteConvertJPanel extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblWaste = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         btnAddProduct = new javax.swing.JButton();
         btnBack3 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblWaste = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        tblWaste.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Waste Type", "Amount"
+            }
+        ));
+        jScrollPane2.setViewportView(tblWaste);
+
+        add(jScrollPane2);
 
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("Waste");
@@ -93,17 +105,8 @@ public class WasteConvertJPanel extends BaseJPanel {
         });
         add(btnBack3);
 
-        tblWaste.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null}
-            },
-            new String [] {
-                "Waste Type", "Amount"
-            }
-        ));
-        jScrollPane2.setViewportView(tblWaste);
-
-        add(jScrollPane2);
+        jLabel10.setText("Product");
+        add(jLabel10);
 
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,9 +119,6 @@ public class WasteConvertJPanel extends BaseJPanel {
         jScrollPane3.setViewportView(tblProduct);
 
         add(jScrollPane3);
-
-        jLabel10.setText("Product");
-        add(jLabel10);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed

@@ -98,6 +98,8 @@ public class BuyProductsJPanel extends BaseJPanel {
         jLabel17 = new javax.swing.JLabel();
         spinQuantity = new javax.swing.JSpinner();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         BrowseProductsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

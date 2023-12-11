@@ -46,25 +46,15 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblProfilePic = new javax.swing.JLabel();
-        lblGreetings = new javax.swing.JLabel();
         lblCourses = new javax.swing.JLabel();
         lblReviewProfessor = new javax.swing.JLabel();
         lblViewCertificates = new javax.swing.JLabel();
         lblMyGrades = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
         lblReviewProfessor1 = new javax.swing.JLabel();
         lblMyGrades1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        lblProfilePic.setPreferredSize(new java.awt.Dimension(255, 255));
-
-        lblGreetings.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblGreetings.setText("Hello !");
 
         lblCourses.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblCourses.setForeground(new java.awt.Color(0, 153, 255));
@@ -102,18 +92,6 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        jLabel1.setText("Name : ");
-
-        jLabel3.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        jLabel3.setText("Email id: ");
-
-        lblName.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        lblName.setText("jLabel4");
-
-        lblEmail.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        lblEmail.setText("jLabel4");
-
         lblReviewProfessor1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblReviewProfessor1.setForeground(new java.awt.Color(0, 153, 255));
         lblReviewProfessor1.setText("Raise Waste Segregation Request >");
@@ -137,16 +115,19 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Work Cordinator Work Area");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(351, 351, 351)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMyGrades)
                             .addComponent(lblCourses)
@@ -155,57 +136,27 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMyGrades1)
                             .addComponent(lblReviewProfessor)
-                            .addComponent(lblViewCertificates)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lblGreetings))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(12632, Short.MAX_VALUE))
+                            .addComponent(lblViewCertificates))))
+                .addContainerGap(12858, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(lblGreetings))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCourses)
-                            .addComponent(lblReviewProfessor))
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblViewCertificates)
-                            .addComponent(lblMyGrades))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lblName))
-                        .addGap(7, 7, 7)
-                        .addComponent(lblReviewProfessor1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblMyGrades1)
-                        .addGap(26, 26, 26)))
+                .addGap(100, 100, 100)
+                .addComponent(jLabel1)
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblEmail))
-                .addContainerGap(927, Short.MAX_VALUE))
+                    .addComponent(lblCourses)
+                    .addComponent(lblReviewProfessor))
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblViewCertificates)
+                    .addComponent(lblMyGrades))
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblReviewProfessor1)
+                    .addComponent(lblMyGrades1))
+                .addContainerGap(964, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -255,14 +206,9 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblCourses;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblGreetings;
     private javax.swing.JLabel lblMyGrades;
     private javax.swing.JLabel lblMyGrades1;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblProfilePic;
     private javax.swing.JLabel lblReviewProfessor;
     private javax.swing.JLabel lblReviewProfessor1;
     private javax.swing.JLabel lblViewCertificates;

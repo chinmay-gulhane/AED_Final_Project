@@ -44,23 +44,13 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblProfilePic = new javax.swing.JLabel();
-        lblGreetings = new javax.swing.JLabel();
         lblCourses = new javax.swing.JLabel();
         lblViewCertificates = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
         lblCourses1 = new javax.swing.JLabel();
         lblMyProfile = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        lblProfilePic.setPreferredSize(new java.awt.Dimension(255, 255));
-
-        lblGreetings.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblGreetings.setText("Hello !");
 
         lblCourses.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblCourses.setForeground(new java.awt.Color(0, 153, 255));
@@ -85,18 +75,6 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        jLabel1.setText("Name : ");
-
-        jLabel3.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        jLabel3.setText("Email id: ");
-
-        lblName.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        lblName.setText("jLabel4");
-
-        lblEmail.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        lblEmail.setText("jLabel4");
-
         lblCourses1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblCourses1.setForeground(new java.awt.Color(0, 153, 255));
         lblCourses1.setText("Waste Conversion>");
@@ -115,66 +93,45 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Marketplace Integrator Work Area");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lblGreetings)))
-                .addGap(180, 180, 180)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCourses)
-                    .addComponent(lblCourses1))
-                .addGap(244, 244, 244)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMyProfile)
-                    .addComponent(lblViewCertificates))
-                .addContainerGap(12891, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCourses)
+                            .addComponent(lblCourses1))
+                        .addGap(244, 244, 244)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMyProfile)
+                            .addComponent(lblViewCertificates))))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jLabel2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addGap(271, 271, 271)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGreetings)
                             .addComponent(lblCourses1)
                             .addComponent(lblMyProfile)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(255, 255, 255)
+                        .addGap(100, 100, 100)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCourses)
                             .addComponent(lblViewCertificates))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblName))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblEmail))
-                .addContainerGap(889, Short.MAX_VALUE))
+                .addContainerGap(948, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,15 +161,10 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblCourses;
     private javax.swing.JLabel lblCourses1;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblGreetings;
     private javax.swing.JLabel lblMyProfile;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblProfilePic;
     private javax.swing.JLabel lblViewCertificates;
     // End of variables declaration//GEN-END:variables
 

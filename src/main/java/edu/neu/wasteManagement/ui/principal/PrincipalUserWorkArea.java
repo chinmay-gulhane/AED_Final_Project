@@ -112,19 +112,19 @@ public class PrincipalUserWorkArea extends BaseJPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel1)
-                .addGap(142, 142, 142)
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCourses)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(lblReviewProfessor)))
-                .addGap(129, 129, 129)
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMyGrades)
                     .addComponent(lblMyProfile))
-                .addContainerGap(832, Short.MAX_VALUE))
+                .addContainerGap(855, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

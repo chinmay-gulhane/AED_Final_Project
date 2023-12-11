@@ -16,6 +16,9 @@ import java.util.List;
 public class RetailWasteEnterprise extends Enterprise {
     
     private Neighbourhood hood;
+    
+            public RetailWasteEnterprise(){}
+
 
     public Neighbourhood getHood() {
         return hood;

@@ -86,5 +86,12 @@ public class CityRegistry {
         }
         return null;
     }
+
+    public Neighbourhood getNeighbourhoodByName(String name) {
+        for(City c : cities)
+            if(c.neighbourHoodExists(name))
+                return c.getNeighbourhoodByName(name);
+        return null;
+    }
    
 }

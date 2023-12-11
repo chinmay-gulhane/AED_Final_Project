@@ -4,22 +4,35 @@
  */
 package edu.neu.wasteManagement.business.organization;
 
+import edu.neu.wasteManagement.business.products.ProductCatalog;
 import edu.neu.wasteManagement.business.role.Role;
 import edu.neu.wasteManagement.business.userAccount.UserAccountDirectory;
 import edu.neu.wasteManagement.business.workQueue.WorkQueue;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author ingale.r
  */
-public abstract class Organization {
+public abstract class Organization implements Serializable{
     
     private Type type;
     private String name;
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDir;
     private UserAccountDirectory userAccountDir;
+    private ProductCatalog catalog;
+    private double TrashGenerated;
+
+    public double getTrashGenerated() {
+        return TrashGenerated;
+    }
+
+    public void setTrashGenerated(double TrashGenerated) {
+        this.TrashGenerated = TrashGenerated;
+    }
+
 
     public UserAccountDirectory getUserAccountDir() {
         return userAccountDir;
@@ -79,6 +92,7 @@ public abstract class Organization {
         this.workQueue = new WorkQueue();
         this.employeeDir = new EmployeeDirectory();
         this.userAccountDir = new UserAccountDirectory();
+        this.catalog = new ProductCatalog();
     }
 
     public Organization(String name) {
@@ -86,11 +100,20 @@ public abstract class Organization {
         this.workQueue = new WorkQueue();
         this.employeeDir = new EmployeeDirectory();
         this.userAccountDir = new UserAccountDirectory();
+        this.catalog = new ProductCatalog();
+
     }    
     
     
+    public Organization(){
+    }
+    
     public String toString(){
         return this.getName();
+    }
+
+    public ProductCatalog getProductCatalog() {
+        return catalog;
     }
   
 }

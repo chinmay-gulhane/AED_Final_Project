@@ -8,6 +8,7 @@ package edu.neu.wasteManagement.business.organization;
  *
  * @author ingale.r
  */
-class EmployeeDirectory {
+public class EmployeeDirectory {
     
+    public EmployeeDirectory(){}
 }

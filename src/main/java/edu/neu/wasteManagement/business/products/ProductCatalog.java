@@ -12,6 +12,8 @@ import java.util.List;
 * @author prart
 */
 public class ProductCatalog {
+    
+    
 
     private List<Product> products;
     private List<Order> orders; 
@@ -27,6 +29,10 @@ public class ProductCatalog {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
     
     public int getProductQuantity(Product product) {
@@ -92,5 +98,9 @@ public class ProductCatalog {
             }
         }
         return userOrders;
+    }
+
+    public void deleteProduct(Product selectedProduct) {
+        this.products.remove(selectedProduct);
     }
 }

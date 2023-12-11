@@ -7,6 +7,8 @@ package edu.neu.wasteManagement.ui.common;
 import edu.neu.wasteManagement.business.Ecosystem;
 import edu.neu.wasteManagement.business.enterprise.Enterprise;
 import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.workQueue.MunicipalWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.RetailWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
 import edu.neu.wasteManagement.business.workQueue.Waste;
 import edu.neu.wasteManagement.business.workQueue.WorkRequest;
@@ -164,7 +166,7 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(192, 192, 192)
+                .addGap(107, 107, 107)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -187,13 +189,13 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(575, Short.MAX_VALUE))
+                .addContainerGap(660, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         WorkRequest req = system.createWorkRequest(type, system.getLoggedInUser());
-        ((UserWasteCollectionRequest)req).addWasteToRequest(wastes);
+        addWasteToReq(req);
         JOptionPane.showMessageDialog(this, "Request raised!!");
         Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system), system.getWorkArea());
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -203,7 +205,6 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
         wastes.add(new Waste((Waste.WasteType) cmbWasteType.getSelectedItem(),Double.parseDouble(txtAmt.getText())));
         txtAmt.setText("");
         populateTable();
-        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtAmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmtActionPerformed
@@ -265,6 +266,17 @@ public class GarbageCollectRequestJPanel extends BaseJPanel {
             model.addRow(row);
         }
     }   
+
+    private void addWasteToReq(WorkRequest req) {
+        
+        if(req instanceof UserWasteCollectionRequest)
+            ((UserWasteCollectionRequest)req).addWasteToRequest(wastes);
+        else if(req instanceof RetailWasteCollectionRequest)
+            ((RetailWasteCollectionRequest)req).addWasteToRequest(wastes);
+        else if(req instanceof MunicipalWasteCollectionRequest){
+            ((MunicipalWasteCollectionRequest)req).addWasteToRequest(wastes);
+        }
+    }
 
 }
 

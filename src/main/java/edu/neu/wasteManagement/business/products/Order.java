@@ -22,6 +22,9 @@ public class Order {
         this.quantity = quantity;
         this.finalPrice = finalPrice;
     }
+    
+    public Order(){}
+
 
     public Product getProduct() {
         return product;

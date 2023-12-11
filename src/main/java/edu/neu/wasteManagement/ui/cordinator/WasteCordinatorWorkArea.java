@@ -57,6 +57,7 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
         lblName = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblReviewProfessor1 = new javax.swing.JLabel();
+        lblMyGrades1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,6 +123,20 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
             }
         });
 
+        lblMyGrades1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblMyGrades1.setForeground(new java.awt.Color(0, 153, 255));
+        lblMyGrades1.setText("Performance Indices >");
+        lblMyGrades1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMyGrades1MouseClicked(evt);
+            }
+        });
+        lblMyGrades1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblMyGrades1KeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,15 +148,14 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
                         .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblMyGrades)
-                                    .addComponent(lblCourses))
-                                .addGap(160, 160, 160)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblReviewProfessor)
-                                    .addComponent(lblViewCertificates)))
-                            .addComponent(lblReviewProfessor1)))
+                            .addComponent(lblMyGrades)
+                            .addComponent(lblCourses)
+                            .addComponent(lblReviewProfessor1))
+                        .addGap(74, 74, 74)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMyGrades1)
+                            .addComponent(lblReviewProfessor)
+                            .addComponent(lblViewCertificates)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(lblGreetings))
@@ -177,12 +191,17 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
                             .addComponent(lblViewCertificates)
                             .addComponent(lblMyGrades))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblName))
-                .addGap(7, 7, 7)
-                .addComponent(lblReviewProfessor1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblName))
+                        .addGap(7, 7, 7)
+                        .addComponent(lblReviewProfessor1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblMyGrades1)
+                        .addGap(26, 26, 26)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblEmail))
@@ -221,6 +240,17 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
             JOptionPane.showMessageDialog(this, "Request Raised!!");
         }
     }//GEN-LAST:event_lblReviewProfessor1MouseClicked
+
+    private void lblMyGrades1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMyGrades1MouseClicked
+        // TODO add your handling code here:
+       Utility.switchPanel(new PerformancesIndices(system), system.getWorkArea());
+
+    }//GEN-LAST:event_lblMyGrades1MouseClicked
+
+    private void lblMyGrades1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblMyGrades1KeyPressed
+        // TODO add your handling code here:
+               
+    }//GEN-LAST:event_lblMyGrades1KeyPressed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -230,6 +260,7 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGreetings;
     private javax.swing.JLabel lblMyGrades;
+    private javax.swing.JLabel lblMyGrades1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblProfilePic;
     private javax.swing.JLabel lblReviewProfessor;

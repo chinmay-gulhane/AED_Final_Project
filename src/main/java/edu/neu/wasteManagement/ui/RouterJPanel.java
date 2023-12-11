@@ -4,6 +4,7 @@
  */
 package edu.neu.wasteManagement.ui;
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.persistence.DB4OUtil;
 import edu.neu.wasteManagement.utility.Utility;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,9 +21,11 @@ import javax.swing.JPanel;
  */
 public class RouterJPanel extends BaseJPanel {
 
-    public RouterJPanel(Ecosystem system) {
+    private DB4OUtil db4o;
+    public RouterJPanel(Ecosystem system, DB4OUtil db4o) {
         super(system);
         initComponents();
+        this.db4o = db4o;
         system.setHeader(header);
         system.setWorkArea(workArea);
     }
@@ -41,6 +44,7 @@ public class RouterJPanel extends BaseJPanel {
         lblLogo = new javax.swing.JLabel();
         btnSignUp = new javax.swing.JLabel();
         btnLogin = new javax.swing.JLabel();
+        btnClose = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -92,6 +96,21 @@ public class RouterJPanel extends BaseJPanel {
             }
         });
 
+        btnClose.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        btnClose.setForeground(new java.awt.Color(255, 255, 255));
+        btnClose.setText("Close");
+        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCloseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCloseMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
@@ -99,11 +118,13 @@ public class RouterJPanel extends BaseJPanel {
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(lblLogo)
-                .addGap(1038, 1038, 1038)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 920, Short.MAX_VALUE)
                 .addComponent(btnSignUp)
                 .addGap(26, 26, 26)
                 .addComponent(btnLogin)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnClose)
+                .addGap(300, 300, 300))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +133,8 @@ public class RouterJPanel extends BaseJPanel {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogin))
+                    .addComponent(btnLogin)
+                    .addComponent(btnClose))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -196,8 +218,23 @@ public class RouterJPanel extends BaseJPanel {
         Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system),workArea);           
     }//GEN-LAST:event_lblLogoMouseClicked
 
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
+        // TODO add your handling code here:
+        db4o.storeSystem(system);
+        System.exit(0);
+    }//GEN-LAST:event_btnCloseMouseClicked
+
+    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCloseMouseEntered
+
+    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCloseMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnLogin;
     private javax.swing.JLabel btnSignUp;
     private javax.swing.JPanel header;

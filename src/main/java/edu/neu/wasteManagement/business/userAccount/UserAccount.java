@@ -41,7 +41,7 @@ public class UserAccount {
     }
     
     
-    public UserAccount(String username, String password, Role role, boolean Active) {
+    public UserAccount(String username, String password, Role role, boolean Active) throws Exception {
         this.usedPasswords = new ArrayList<>();
         this.queue = new WorkQueue();
         this.username = username;
@@ -91,14 +91,9 @@ public class UserAccount {
         return password;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) throws Exception{
         if(!isValidPassword(password))
-            try {
-                throw new Exception("Invalid Password!");
-        } catch (Exception ex) {
-            Logger.getLogger(UserAccount.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+        throw new Exception("Invalid Password!");
         String hashedPassword = BCrypt.hashpw(password, salt); // Hash the password with the generated salt
         this.password = hashedPassword;
         usedPasswords.add(hashedPassword);    

@@ -53,6 +53,7 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
         lblName = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblCourses1 = new javax.swing.JLabel();
+        lblMyProfile = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,39 +106,47 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
             }
         });
 
+        lblMyProfile.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblMyProfile.setForeground(new java.awt.Color(0, 153, 255));
+        lblMyProfile.setText("My Profile >");
+        lblMyProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMyProfileMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(142, 142, 142)
+                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(142, 142, 142)
-                                .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(lblGreetings)))
-                        .addGap(180, 180, 180)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCourses)
-                                .addGap(244, 244, 244)
-                                .addComponent(lblViewCertificates))
-                            .addComponent(lblCourses1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(138, 138, 138)
+                        .addComponent(lblGreetings)))
+                .addGap(180, 180, 180)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCourses)
+                    .addComponent(lblCourses1))
+                .addGap(244, 244, 244)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMyProfile)
+                    .addComponent(lblViewCertificates))
                 .addContainerGap(12891, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,9 +159,10 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblGreetings)
-                            .addComponent(lblCourses1)))
+                            .addComponent(lblCourses1)
+                            .addComponent(lblMyProfile)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
+                        .addGap(255, 255, 255)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCourses)
                             .addComponent(lblViewCertificates))))
@@ -186,6 +196,11 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
     private void lblViewCertificatesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblViewCertificatesKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_lblViewCertificatesKeyPressed
+
+    private void lblMyProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMyProfileMouseClicked
+        // TODO add your handling code here:
+        Utility.switchPanel(new UserProfileJPanel(system), system.getWorkArea());
+    }//GEN-LAST:event_lblMyProfileMouseClicked
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -195,6 +210,7 @@ public class MarketplaceIntegratorWorkArea extends BaseJPanel {
     private javax.swing.JLabel lblCourses1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGreetings;
+    private javax.swing.JLabel lblMyProfile;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblProfilePic;
     private javax.swing.JLabel lblViewCertificates;

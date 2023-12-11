@@ -266,7 +266,7 @@ public class UserProfileJPanel extends BaseJPanel {
             try {
                 User.setPassword(pass);
             } catch (Exception ex) {
-                Logger.getLogger(UserProfileJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Please enter a valid password");
             }
         }
         

@@ -253,7 +253,24 @@ public class SelectOrganizationJPanel extends BaseJPanel {
 
         Organization org = (Organization) cmbOrganization.getSelectedItem();
         org.getUserAccountDir().associateUser(system.getLoggedInUser());
+        
+        String City = (String) cityComboBox.getSelectedItem();
+        String Neighbourhood = (String) neighComboBox.getSelectedItem();
+        String County = (String) countyComboBox.getSelectedItem();
+        Neighbourhood neighbourhood = new Neighbourhood(Neighbourhood);
+        system.getLoggedInUser().setNeighbourhood(neighbourhood);
+
+        City city = new City(City);
+        system.getLoggedInUser().getPerson().setCity(city);
+        
+        County county = new County(County);
+        system.getLoggedInUser().getPerson().setCounty(county);
+        
+        system.getLoggedInUser().getPerson().setNeighbourhood(neighbourhood);
+
+            
         JOptionPane.showMessageDialog(this, "Organization is now associated!!");
+        
         Utility.switchPanel(system.getLoggedInUser().getRole().createWorkArea(system), system.getWorkArea());
         loginLogoutChange();
     }//GEN-LAST:event_btnSubmitActionPerformed

@@ -36,9 +36,7 @@ public class UserAccount {
         this.setPassword(password);
         this.Active = Active;
         this.role = role;
-        County county = new County("");
-        City city = new City("");
-        this.person = new Person(username, "", neighbourhood, county, city,"");
+        this.person = new Person(username, "", "");
     }
 
     public UserAccount() {

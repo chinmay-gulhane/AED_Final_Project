@@ -30,19 +30,16 @@ import edu.neu.wasteManagement.ui.BaseJPanel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author chinmaygulhane
  */
-
 public class ManageUserJPanel extends BaseJPanel {
 
     UserAccount selectedUser;
-  
+
     public ManageUserJPanel(Ecosystem system) {
         super(system);
-                        System.out.println("In manage User");
         initComponents();
         initSetup();
     }
@@ -293,9 +290,9 @@ public class ManageUserJPanel extends BaseJPanel {
                 .addComponent(jLabel1))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(559, Short.MAX_VALUE)
+                    .addContainerGap(551, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(560, Short.MAX_VALUE)))
+                    .addContainerGap(551, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,18 +350,18 @@ public class ManageUserJPanel extends BaseJPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-          if (chkSearchMode.isSelected()) {
+        if (chkSearchMode.isSelected()) {
             populateTableSearch(txtSearchbox.getText());
             JOptionPane.showMessageDialog(this, "User found!");
         } else {
             JOptionPane.showMessageDialog(this, "Search-checkbox is disabled");
-        } 
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void chkSearchModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSearchModeActionPerformed
         // TODO add your handling code here:
-        if(chkSearchMode.isSelected())
-        btnView.setEnabled(false);
+        if (chkSearchMode.isSelected())
+            btnView.setEnabled(false);
         else
             btnView.setEnabled(true);
     }//GEN-LAST:event_chkSearchModeActionPerformed
@@ -380,7 +377,7 @@ public class ManageUserJPanel extends BaseJPanel {
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
 
-        
+
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewMouseClicked
@@ -400,7 +397,7 @@ public class ManageUserJPanel extends BaseJPanel {
         txtPassword.setText(selectedUser.getPassword());
         chkActive.setSelected(selectedUser.isActive());
 
-      
+
     }//GEN-LAST:event_btnViewMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
@@ -419,7 +416,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -441,6 +438,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
             String userName = txtUsername.getText();
             String password = txtPassword.getText();
+            RoleType role = mapDisplayNameToRoleType((String) userRoleComboBox.getSelectedItem());
 
             if (!checkValidate()) {
                 JOptionPane.showMessageDialog(this, "Please enter valid details");
@@ -455,6 +453,63 @@ public class ManageUserJPanel extends BaseJPanel {
                 }
                 selectedUser.setUsername(userName);
                 selectedUser.setActive(chkActive.isSelected());
+                switch (role) {
+                    case PRINCIPAL_USER: {
+                        try {
+                            selectedUser.setRole(new PrincipalUser());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    case WASTE_CORDINATOR: {
+                        try {
+                            selectedUser.setRole(new WasteCordinator());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    case WASTE_SEGREGATOR: {
+                        try {
+                           selectedUser.setRole(new WasteSegregator());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    case WASTE_COLLECTOR: {
+                        try {
+                            selectedUser.setRole(new WasteCollector());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    case MARKETPLACE_INTEGRATOR: {
+                        try {
+                             selectedUser.setRole(new MarketplaceIntegrator());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    case RETAIL_USER: {
+                        try {
+                            selectedUser.setRole(new RetailUser());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    // Add cases for other RoleTypes
+                    default:
+                        throw new IllegalArgumentException("Unsupported RoleType: " + role);
+                }
 
                 JOptionPane.showMessageDialog(this, "Row updated successfully");
                 resetPage();
@@ -495,58 +550,52 @@ public class ManageUserJPanel extends BaseJPanel {
         String password = txtPassword.getText();
 
         switch (role) {
-            case PRINCIPAL_USER:
-            {
+            case PRINCIPAL_USER: {
                 try {
-                    system.getUserAccountDir().addUserAccount(userName, password,  new PrincipalUser(), true);
+                    system.getUserAccountDir().addUserAccount(userName, password, new PrincipalUser(), true);
                     break;
                 } catch (Exception ex) {
                     Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            case WASTE_CORDINATOR:
-            {
+            case WASTE_CORDINATOR: {
                 try {
-                    system.getUserAccountDir().addUserAccount(userName, password,  new WasteCordinator(), true);
-                    break;
-                } catch (Exception ex) {
-                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            case WASTE_SEGREGATOR:
-            {
-                try {
-                    system.getUserAccountDir().addUserAccount(userName, password,  new WasteSegregator(), true);
-                    break;
-                } catch (Exception ex) {
-                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            case WASTE_COLLECTOR:
-            {
-                try {
-                    system.getUserAccountDir().addUserAccount(userName, password,  new WasteCollector(), true);
+                    system.getUserAccountDir().addUserAccount(userName, password, new WasteCordinator(), true);
                     break;
                 } catch (Exception ex) {
                     Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
-            case MARKETPLACE_INTEGRATOR:
-            {
+            case WASTE_SEGREGATOR: {
                 try {
-                    system.getUserAccountDir().addUserAccount(userName, password,  new MarketplaceIntegrator(), true);
+                    system.getUserAccountDir().addUserAccount(userName, password, new WasteSegregator(), true);
                     break;
                 } catch (Exception ex) {
                     Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-            case RETAIL_USER:
-            {
+            case WASTE_COLLECTOR: {
                 try {
-                    system.getUserAccountDir().addUserAccount(userName, password,  new RetailUser(), true);
+                    system.getUserAccountDir().addUserAccount(userName, password, new WasteCollector(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case MARKETPLACE_INTEGRATOR: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new MarketplaceIntegrator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case RETAIL_USER: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new RetailUser(), true);
                     break;
                 } catch (Exception ex) {
                     Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -560,7 +609,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
         JOptionPane.showMessageDialog(this, "User Information Saved");
         populateTable();
-        
+
     }//GEN-LAST:event_btnSaveEntActionPerformed
 
 
@@ -593,13 +642,12 @@ public class ManageUserJPanel extends BaseJPanel {
         populateTable();
     }
 
-    private void populateRoleDropdown() {    
-       for (RoleType roleType : RoleType.values()) {
+    private void populateRoleDropdown() {
+        for (RoleType roleType : RoleType.values()) {
             userRoleComboBox.addItem(mapRoleTypeToDisplayName(roleType));
         }
     }
-    
-    
+
     public static String mapRoleTypeToDisplayName(RoleType roleType) {
         switch (roleType) {
             case PRINCIPAL_USER:
@@ -620,7 +668,7 @@ public class ManageUserJPanel extends BaseJPanel {
                 return "Unknown Role";
         }
     }
-    
+
     public static RoleType mapDisplayNameToRoleType(String displayName) {
         switch (displayName) {
             case "Principal User":
@@ -641,7 +689,7 @@ public class ManageUserJPanel extends BaseJPanel {
                 return null; // or throw an exception for unknown display names
         }
     }
-   
+
     private void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
@@ -649,7 +697,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
         for (UserAccount user : system.getUserAccountDir().getUserAccounts()) {
 
-            if (user.getUsername().equals("ADMIN")) {
+            if (user.getUsername().equals("admin")) {
                 continue;
             }
 
@@ -664,10 +712,9 @@ public class ManageUserJPanel extends BaseJPanel {
             model.addRow(row);
         }
     }
-  
 
-  private void populateTableSearch(String userName) {
-       DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
+    private void populateTableSearch(String userName) {
+        DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
         model.setRowCount(0);
 
         for (UserAccount user : system.getUserAccountDir().getUserAccounts()) {
@@ -686,12 +733,12 @@ public class ManageUserJPanel extends BaseJPanel {
             //model will add row
             model.addRow(row);
         }
-   
-}
 
-      public void clearFields(){
+    }
+
+    public void clearFields() {
         txtUsername.setText("");
-        txtPassword.setText("");    
+        txtPassword.setText("");
     }
 
     private void resetPage() {
@@ -701,27 +748,14 @@ public class ManageUserJPanel extends BaseJPanel {
     }
 
     private void initialButtonsState() {
-         btnDelete.setEnabled(false);
+        btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
     }
 
+    public boolean checkValidate() {
+        return Validations.isStringValid(txtUsername.getText())
+                && Validations.isStringValid(txtPassword.getText());
 
-   public boolean checkValidate(){
-        return Validations.isStringValid(txtUsername.getText()) &&
-        Validations.isStringValid(txtPassword.getText());
-    
     }
 
-
 }
-
-
-
-
-
-
-
-
-
-
-

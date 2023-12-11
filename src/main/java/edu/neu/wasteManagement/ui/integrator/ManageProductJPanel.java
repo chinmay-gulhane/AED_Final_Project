@@ -56,7 +56,6 @@ public class ManageProductJPanel extends BaseJPanel {
         btnCancel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setForeground(new java.awt.Color(0, 0, 0));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
@@ -68,7 +67,6 @@ public class ManageProductJPanel extends BaseJPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
 
         tblProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +81,9 @@ public class ManageProductJPanel extends BaseJPanel {
         ));
         jScrollPane2.setViewportView(tblProducts);
 
+        btnView.setBackground(new java.awt.Color(0, 0, 0));
+        btnView.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnView.setForeground(new java.awt.Color(255, 255, 255));
         btnView.setText("View");
         btnView.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -96,8 +97,13 @@ public class ManageProductJPanel extends BaseJPanel {
         });
 
         lblEmail3.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
+        lblEmail3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmail3.setText("Manage Products");
+        lblEmail3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btnPublish.setBackground(new java.awt.Color(0, 0, 0));
+        btnPublish.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnPublish.setForeground(new java.awt.Color(255, 255, 255));
         btnPublish.setText("Publish");
         btnPublish.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,6 +122,7 @@ public class ManageProductJPanel extends BaseJPanel {
             }
         });
 
+        lblName.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblName.setText("Product Name");
 
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
@@ -124,8 +131,10 @@ public class ManageProductJPanel extends BaseJPanel {
             }
         });
 
+        lblName1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblName1.setText("Quantity");
 
+        lblName2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblName2.setText("Price");
 
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +143,9 @@ public class ManageProductJPanel extends BaseJPanel {
             }
         });
 
+        btnUpdate.setBackground(new java.awt.Color(0, 0, 0));
+        btnUpdate.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,6 +158,9 @@ public class ManageProductJPanel extends BaseJPanel {
             }
         });
 
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
         btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,43 +178,39 @@ public class ManageProductJPanel extends BaseJPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnView)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPublish))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(399, 399, 399)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnUpdate)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnCancel))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblName2)
-                                    .addGap(31, 31, 31)
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblName1)
-                                    .addGap(31, 31, 31)
-                                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblName)
-                                    .addGap(31, 31, 31)
-                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnView)
+                            .addGap(750, 750, 750)
+                            .addComponent(btnPublish))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(444, 444, 444)
-                            .addComponent(lblEmail3))))
-                .addComponent(jLabel1)
-                .addGap(0, 14122, Short.MAX_VALUE))
+                            .addComponent(btnUpdate)
+                            .addGap(30, 30, 30)
+                            .addComponent(btnCancel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblName2)
+                            .addGap(31, 31, 31)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblName1)
+                            .addGap(31, 31, 31)
+                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblName)
+                            .addGap(31, 31, 31)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblEmail3, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jLabel1))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(7704, Short.MAX_VALUE)
+                    .addContainerGap(486, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(7705, Short.MAX_VALUE)))
+                    .addContainerGap(487, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,15 +220,15 @@ public class ManageProductJPanel extends BaseJPanel {
                         .addGap(721, 721, 721)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+                        .addGap(49, 49, 49)
                         .addComponent(lblEmail3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnView)
                             .addComponent(btnPublish))
-                        .addGap(14, 14, 14)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblName))
@@ -233,12 +244,12 @@ public class ManageProductJPanel extends BaseJPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnUpdate)
                             .addComponent(btnCancel))))
-                .addContainerGap(598, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(683, Short.MAX_VALUE)
+                    .addContainerGap(387, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(683, Short.MAX_VALUE)))
+                    .addContainerGap(387, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

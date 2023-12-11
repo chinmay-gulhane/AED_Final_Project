@@ -40,23 +40,24 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="lblGreetings" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                               <Component id="lblProfilePic" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="lblCourses" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
-                              <Component id="lblViewCertificates" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblViewCertificates" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCourses" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="504" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="12941" max="32767" attributes="0"/>
+              <EmptySpace pref="12632" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,24 +72,22 @@
                       <Component id="lblGreetings" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCourses" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblViewCertificates" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                      <Component id="lblCourses" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblViewCertificates" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="889" max="32767" attributes="0"/>
+              <EmptySpace pref="936" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,7 +116,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Visit Marketplace &gt;"/>
+        <Property name="text" type="java.lang.String" value="Manage Waste Requests &gt; "/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCoursesMouseClicked"/>

@@ -14,7 +14,10 @@ import javax.swing.JPanel;
  */
 public class PrincipalUser extends Role{
     
-
+    public PrincipalUser(){
+        super(RoleType.PRINCIPAL_USER);
+    }
+    
     @Override
     public JPanel createWorkArea(Ecosystem business) {
         return new PrincipalUserWorkArea(business);

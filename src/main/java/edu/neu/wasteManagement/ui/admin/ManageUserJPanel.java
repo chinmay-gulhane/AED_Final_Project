@@ -5,6 +5,13 @@
 package edu.neu.wasteManagement.ui.admin;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.role.MarketplaceIntegrator;
+import edu.neu.wasteManagement.business.role.PrincipalUser;
+import edu.neu.wasteManagement.business.role.RetailUser;
+import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.business.role.WasteCollector;
+import edu.neu.wasteManagement.business.role.WasteCordinator;
+import edu.neu.wasteManagement.business.role.WasteSegregator;
 import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import edu.neu.wasteManagement.utility.Validations;
 import java.io.BufferedReader;
@@ -20,20 +27,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import edu.neu.wasteManagement.ui.BaseJPanel;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author chinmaygulhane
  */
-
 public class ManageUserJPanel extends BaseJPanel {
 
     UserAccount selectedUser;
-  
+
     public ManageUserJPanel(Ecosystem system) {
         super(system);
-                        System.out.println("In manage User");
         initComponents();
         initSetup();
     }
@@ -97,13 +103,19 @@ public class ManageUserJPanel extends BaseJPanel {
         tblUser.setAutoscrolls(false);
         jScrollPane2.setViewportView(tblUser);
 
-        btnSearch.setText("Search by nuId");
+        btnSearch.setBackground(new java.awt.Color(0, 0, 0));
+        btnSearch.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnSearch.setForeground(java.awt.Color.white);
+        btnSearch.setText("Search by user name");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        btnView.setBackground(new java.awt.Color(0, 0, 0));
+        btnView.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnView.setForeground(java.awt.Color.white);
         btnView.setText("View");
         btnView.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -131,6 +143,9 @@ public class ManageUserJPanel extends BaseJPanel {
         lblEmail3.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
         lblEmail3.setText("Manage Users");
 
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnDelete.setForeground(java.awt.Color.white);
         btnDelete.setText("Delete");
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -149,11 +164,16 @@ public class ManageUserJPanel extends BaseJPanel {
             }
         });
 
+        lblName.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblName.setText("Username : ");
 
+        lblName1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblName1.setText("Password :");
 
+        btnUpdate.setBackground(new java.awt.Color(0, 0, 0));
+        btnUpdate.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnUpdate.setForeground(java.awt.Color.white);
         btnUpdate.setText("Update");
         btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -166,6 +186,9 @@ public class ManageUserJPanel extends BaseJPanel {
             }
         });
 
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnCancel.setForeground(java.awt.Color.white);
         btnCancel.setText("Cancel");
         btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -184,6 +207,7 @@ public class ManageUserJPanel extends BaseJPanel {
             }
         });
 
+        lblActive.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblActive.setText("IsActive ? ");
 
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -197,12 +221,13 @@ public class ManageUserJPanel extends BaseJPanel {
             }
         });
 
+        lblName3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblName3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblName3.setText("Role : ");
 
         btnSaveEnt.setBackground(new java.awt.Color(0, 0, 0));
-        btnSaveEnt.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btnSaveEnt.setForeground(new java.awt.Color(255, 255, 255));
+        btnSaveEnt.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnSaveEnt.setForeground(java.awt.Color.white);
         btnSaveEnt.setText("Save");
         btnSaveEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,24 +240,26 @@ public class ManageUserJPanel extends BaseJPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnView)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnDelete)
-                            .addGap(623, 623, 623)
-                            .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnSearch))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(358, 358, 358)
-                                .addComponent(lblEmail3))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnView)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(358, 358, 358)
+                                    .addComponent(lblEmail3))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -259,13 +286,13 @@ public class ManageUserJPanel extends BaseJPanel {
                                 .addComponent(btnUpdate)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCancel)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(564, Short.MAX_VALUE)
+                    .addContainerGap(551, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(565, Short.MAX_VALUE)))
+                    .addContainerGap(551, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,36 +307,38 @@ public class ManageUserJPanel extends BaseJPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSearch))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSearch)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblName)
+                            .addComponent(lblName1)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblName3)
+                                            .addComponent(userRoleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(21, 21, 21))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblActive)
+                                        .addGap(25, 25, 25)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnSaveEnt)
+                                    .addComponent(btnUpdate)
+                                    .addComponent(btnCancel)))
+                            .addComponent(chkActive)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnView)
                         .addComponent(btnDelete)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblName)
-                    .addComponent(lblName1)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblName3)
-                                    .addComponent(userRoleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(21, 21, 21))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblActive)
-                                .addGap(25, 25, 25)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSaveEnt)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnCancel)))
-                    .addComponent(chkActive))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -321,18 +350,18 @@ public class ManageUserJPanel extends BaseJPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-          if (chkSearchMode.isSelected()) {
+        if (chkSearchMode.isSelected()) {
             populateTableSearch(txtSearchbox.getText());
             JOptionPane.showMessageDialog(this, "User found!");
         } else {
             JOptionPane.showMessageDialog(this, "Search-checkbox is disabled");
-        } 
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void chkSearchModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSearchModeActionPerformed
         // TODO add your handling code here:
-        if(chkSearchMode.isSelected())
-        btnView.setEnabled(false);
+        if (chkSearchMode.isSelected())
+            btnView.setEnabled(false);
         else
             btnView.setEnabled(true);
     }//GEN-LAST:event_chkSearchModeActionPerformed
@@ -348,7 +377,7 @@ public class ManageUserJPanel extends BaseJPanel {
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
 
-        
+
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewMouseClicked
@@ -368,7 +397,7 @@ public class ManageUserJPanel extends BaseJPanel {
         txtPassword.setText(selectedUser.getPassword());
         chkActive.setSelected(selectedUser.isActive());
 
-      
+
     }//GEN-LAST:event_btnViewMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
@@ -387,7 +416,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -409,6 +438,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
             String userName = txtUsername.getText();
             String password = txtPassword.getText();
+            RoleType role = mapDisplayNameToRoleType((String) userRoleComboBox.getSelectedItem());
 
             if (!checkValidate()) {
                 JOptionPane.showMessageDialog(this, "Please enter valid details");
@@ -423,6 +453,63 @@ public class ManageUserJPanel extends BaseJPanel {
                 }
                 selectedUser.setUsername(userName);
                 selectedUser.setActive(chkActive.isSelected());
+                switch (role) {
+                    case PRINCIPAL_USER: {
+                        try {
+                            selectedUser.setRole(new PrincipalUser());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    case WASTE_CORDINATOR: {
+                        try {
+                            selectedUser.setRole(new WasteCordinator());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    case WASTE_SEGREGATOR: {
+                        try {
+                           selectedUser.setRole(new WasteSegregator());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    case WASTE_COLLECTOR: {
+                        try {
+                            selectedUser.setRole(new WasteCollector());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    case MARKETPLACE_INTEGRATOR: {
+                        try {
+                             selectedUser.setRole(new MarketplaceIntegrator());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    case RETAIL_USER: {
+                        try {
+                            selectedUser.setRole(new RetailUser());
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    // Add cases for other RoleTypes
+                    default:
+                        throw new IllegalArgumentException("Unsupported RoleType: " + role);
+                }
 
                 JOptionPane.showMessageDialog(this, "Row updated successfully");
                 resetPage();
@@ -458,9 +545,71 @@ public class ManageUserJPanel extends BaseJPanel {
     private void btnSaveEntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveEntActionPerformed
         // TODO add your handling code here:
         // Validation if any field is left empty
-        String role = (String) userRoleComboBox.getSelectedItem();
-        
+        RoleType role = mapDisplayNameToRoleType((String) userRoleComboBox.getSelectedItem());
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+
+        switch (role) {
+            case PRINCIPAL_USER: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new PrincipalUser(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case WASTE_CORDINATOR: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new WasteCordinator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case WASTE_SEGREGATOR: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new WasteSegregator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case WASTE_COLLECTOR: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new WasteCollector(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case MARKETPLACE_INTEGRATOR: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new MarketplaceIntegrator(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            case RETAIL_USER: {
+                try {
+                    system.getUserAccountDir().addUserAccount(userName, password, new RetailUser(), true);
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(ManageUserJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            // Add cases for other RoleTypes
+            default:
+                throw new IllegalArgumentException("Unsupported RoleType: " + role);
+        }
+
         JOptionPane.showMessageDialog(this, "User Information Saved");
+        populateTable();
+
     }//GEN-LAST:event_btnSaveEntActionPerformed
 
 
@@ -494,13 +643,51 @@ public class ManageUserJPanel extends BaseJPanel {
     }
 
     private void populateRoleDropdown() {
-//    PRINCIPAL_USER,
-//    WASTE_CORDINATOR,
-//    ADMIN,
-//    WASTE_SEGREGATOR,
-        userRoleComboBox.addItem("Principal User");
-        userRoleComboBox.addItem("Waste Cordinator");
-        userRoleComboBox.addItem("Waste Segregator");
+        for (RoleType roleType : RoleType.values()) {
+            userRoleComboBox.addItem(mapRoleTypeToDisplayName(roleType));
+        }
+    }
+
+    public static String mapRoleTypeToDisplayName(RoleType roleType) {
+        switch (roleType) {
+            case PRINCIPAL_USER:
+                return "Principal User";
+            case WASTE_CORDINATOR:
+                return "Waste Coordinator";
+            case ADMIN:
+                return "Admin";
+            case WASTE_SEGREGATOR:
+                return "Waste Segregator";
+            case WASTE_COLLECTOR:
+                return "Waste Collector";
+            case MARKETPLACE_INTEGRATOR:
+                return "Marketplace Integrator";
+            case RETAIL_USER:
+                return "Retail User";
+            default:
+                return "Unknown Role";
+        }
+    }
+
+    public static RoleType mapDisplayNameToRoleType(String displayName) {
+        switch (displayName) {
+            case "Principal User":
+                return RoleType.PRINCIPAL_USER;
+            case "Waste Coordinator":
+                return RoleType.WASTE_CORDINATOR;
+            case "Admin":
+                return RoleType.ADMIN;
+            case "Waste Segregator":
+                return RoleType.WASTE_SEGREGATOR;
+            case "Waste Collector":
+                return RoleType.WASTE_COLLECTOR;
+            case "Marketplace Integrator":
+                return RoleType.MARKETPLACE_INTEGRATOR;
+            case "Retail User":
+                return RoleType.RETAIL_USER;
+            default:
+                return null; // or throw an exception for unknown display names
+        }
     }
 
     private void populateTable() {
@@ -510,7 +697,7 @@ public class ManageUserJPanel extends BaseJPanel {
 
         for (UserAccount user : system.getUserAccountDir().getUserAccounts()) {
 
-            if (user.getUsername().equals("ADMIN")) {
+            if (user.getUsername().equals("admin")) {
                 continue;
             }
 
@@ -518,17 +705,16 @@ public class ManageUserJPanel extends BaseJPanel {
             Object[] row = new Object[6];
             row[0] = user;
             row[1] = user.getPassword();
-            row[2] = user.getRole().getRoleType();
+            row[2] = mapRoleTypeToDisplayName(user.getRole().getRoleType());
             row[3] = user.isActive();
 
             //model will add row
             model.addRow(row);
         }
     }
-  
 
-  private void populateTableSearch(String userName) {
-       DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
+    private void populateTableSearch(String userName) {
+        DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
         model.setRowCount(0);
 
         for (UserAccount user : system.getUserAccountDir().getUserAccounts()) {
@@ -540,19 +726,19 @@ public class ManageUserJPanel extends BaseJPanel {
             //to create lines or row (row is small array of object with 3 members)
             Object[] row = new Object[6];
             row[0] = user;
-            row[1] = user.getUsername();
-            row[2] = user.getPassword();
+            row[1] = user.getPassword();
+            row[2] = mapRoleTypeToDisplayName(user.getRole().getRoleType());
             row[3] = user.isActive();
 
             //model will add row
             model.addRow(row);
         }
-   
-}
 
-      public void clearFields(){
+    }
+
+    public void clearFields() {
         txtUsername.setText("");
-        txtPassword.setText("");    
+        txtPassword.setText("");
     }
 
     private void resetPage() {
@@ -562,27 +748,14 @@ public class ManageUserJPanel extends BaseJPanel {
     }
 
     private void initialButtonsState() {
-         btnDelete.setEnabled(false);
+        btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
     }
 
+    public boolean checkValidate() {
+        return Validations.isStringValid(txtUsername.getText())
+                && Validations.isStringValid(txtPassword.getText());
 
-   public boolean checkValidate(){
-        return Validations.isStringValid(txtUsername.getText()) &&
-        Validations.isStringValid(txtPassword.getText());
-    
     }
 
-
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author ingale.r
+ * @author chinmaygulhane
  */
 public class City {
     private String name;
@@ -63,4 +63,39 @@ public class City {
     public void setCounties(List<County> counties) {
         this.counties = counties;
     }
+
+    public boolean countyExists(String name) {
+        for(County c : counties)
+            if(c.getName().equals(name))
+                return true;
+         return false;
+    }
+
+    public County getCountyByName(String name) {
+        for(County c : counties)
+            if(c.getName().equals(name))
+                return c;
+        return null;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public boolean neighbourHoodExists(String name) {
+          for(County c : counties)
+            if(c.neighbourHoodExists(name))
+                return true;
+        return false;
+    }
+
+    public Neighbourhood getNeighbourhoodByName(String name) {
+        for(County c : counties)
+            if(c.neighbourHoodExists(name))
+                return c.get(name);
+        return null;    
+    }
+    
+    public City(){}
 }

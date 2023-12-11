@@ -5,8 +5,17 @@
 package edu.neu.wasteManagement.ui.common;
 
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.organization.Organization;
+import edu.neu.wasteManagement.business.role.RoleType;
+import edu.neu.wasteManagement.business.userAccount.UserAccount;
+import edu.neu.wasteManagement.business.workQueue.UserWasteCollectionRequest;
+import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
+import edu.neu.wasteManagement.business.workQueue.WorkRequest;
+import edu.neu.wasteManagement.persistence.DB4OUtil;
 import edu.neu.wasteManagement.ui.BaseJPanel;
+import edu.neu.wasteManagement.utility.Utility;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,10 +28,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class ManageWasteRequestsJPanel extends BaseJPanel {
 
+   private WorkRequest selectedRequest;
+   private Organization org;
+   private DB4OUtil db4o;
   
     public ManageWasteRequestsJPanel(Ecosystem system) {
         super(system);
         initComponents();
+        this.db4o = DB4OUtil.getInstance();
         initSetup();
     }
 
@@ -38,21 +51,24 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblUser = new javax.swing.JTable();
+        tblRequests = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         chkSearchMode = new javax.swing.JCheckBox();
         txtSearchbox = new javax.swing.JTextField();
         lblEmail3 = new javax.swing.JLabel();
-        btnDelete = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
+        btnComplete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        chkSearchMode1 = new javax.swing.JCheckBox();
+        chkProcessingReq = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
+        cmbAssignee = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        chkCollectionReq = new javax.swing.JCheckBox();
+        btnAssign = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setForeground(new java.awt.Color(0, 0, 0));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
@@ -64,9 +80,8 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
 
-        tblUser.setModel(new javax.swing.table.DefaultTableModel(
+        tblRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,9 +92,12 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
                 "ID", "Sender", "Reciever", "Status"
             }
         ));
-        tblUser.setAutoscrolls(false);
-        jScrollPane2.setViewportView(tblUser);
+        tblRequests.setAutoscrolls(false);
+        jScrollPane2.setViewportView(tblRequests);
 
+        btnSearch.setBackground(new java.awt.Color(0, 0, 0));
+        btnSearch.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setText("Search by ID");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +105,9 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
             }
         });
 
+        btnView.setBackground(new java.awt.Color(0, 0, 0));
+        btnView.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnView.setForeground(new java.awt.Color(255, 255, 255));
         btnView.setText("View");
         btnView.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -112,32 +133,43 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         });
 
         lblEmail3.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
+        lblEmail3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmail3.setText("Manage Waste Requests");
+        lblEmail3.setToolTipText("");
 
-        btnDelete.setText("Delete");
-        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRefresh.setBackground(new java.awt.Color(0, 0, 0));
+        btnRefresh.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setText("Refresh");
+        btnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseClicked(evt);
+                btnRefreshMouseClicked(evt);
             }
         });
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnRefreshActionPerformed(evt);
             }
         });
 
-        btnUpdate.setText("Update");
-        btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnComplete.setBackground(new java.awt.Color(0, 0, 0));
+        btnComplete.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnComplete.setForeground(new java.awt.Color(255, 255, 255));
+        btnComplete.setText("Process ");
+        btnComplete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUpdateMouseClicked(evt);
+                btnCompleteMouseClicked(evt);
             }
         });
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnCompleteActionPerformed(evt);
             }
         });
 
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
         btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -150,102 +182,140 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel2.setText("Collection Request?");
 
-        chkSearchMode1.addActionListener(new java.awt.event.ActionListener() {
+        chkProcessingReq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkSearchMode1ActionPerformed(evt);
+                chkProcessingReqActionPerformed(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Processing Request?");
+
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel4.setText("Assignee:");
+
+        chkCollectionReq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCollectionReqActionPerformed(evt);
+            }
+        });
+
+        btnAssign.setBackground(new java.awt.Color(0, 0, 0));
+        btnAssign.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        btnAssign.setForeground(new java.awt.Color(255, 255, 255));
+        btnAssign.setText("Assign");
+        btnAssign.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAssignMouseClicked(evt);
+            }
+        });
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(172, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnView)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(chkSearchMode1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(257, 257, 257)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(515, 515, 515)
-                        .addComponent(btnUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel)))
-                .addGap(0, 14083, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(382, 382, 382)
-                .addComponent(lblEmail3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblEmail3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(chkProcessingReq, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(chkCollectionReq, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(2, 2, 2)
+                                    .addComponent(jLabel2))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnView)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(btnRefresh)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnAssign)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnComplete)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnCancel))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(cmbAssignee, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(194, 194, 194)
+                                                .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnSearch)))))))
+                        .addContainerGap(167, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(7753, Short.MAX_VALUE)
+                    .addContainerGap(696, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(7754, Short.MAX_VALUE)))
+                    .addContainerGap(697, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lblEmail3)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(721, 721, 721)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lblEmail3)
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnSearch)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnView)
-                                .addComponent(btnDelete))
-                            .addComponent(chkSearchMode1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnCancel))))
-                .addContainerGap(648, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(chkProcessingReq, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(chkCollectionReq, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearchbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch))
+                    .addComponent(chkSearchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbAssignee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(btnView)
+                        .addComponent(btnRefresh)))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnComplete)
+                    .addComponent(btnCancel)
+                    .addComponent(btnAssign))
+                .addGap(59, 59, 59)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(683, Short.MAX_VALUE)
+                    .addContainerGap(404, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(683, Short.MAX_VALUE)))
+                    .addContainerGap(404, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
           if (chkSearchMode.isSelected()) {
-            populateTableSearch(txtSearchbox.getText());
-            JOptionPane.showMessageDialog(this, "User found!");
+            populateTableSearch(Integer.parseInt(txtSearchbox.getText()));
+            JOptionPane.showMessageDialog(this, "Request found!");
         } else {
             JOptionPane.showMessageDialog(this, "Search-checkbox is disabled");
         } 
@@ -270,92 +340,51 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
 
+        int selectedRowIndex = tblRequests.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Select the request to View!");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        selectedRequest = (WorkRequest) model.getValueAt(selectedRowIndex, 0);
+        
+        if(canComplete()) btnComplete.setEnabled(true);
+        if(canAssign()) {
+            btnAssign.setEnabled(true);
+            cmbAssignee.setEnabled(true);
+        }
+        btnRefresh.setEnabled(true);
+        txtSearchbox.setEnabled(false);
+        populateAssignee();
+
         
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewMouseClicked
         // TODO add your handling code here:
-//        btnView.setEnabled(true);
-//        btnUpdate.setEnabled(true);
-//        btnDelete.setEnabled(true);
-//        txtnuId.setEnabled(false);
-//
-//        int selectedRowIndex = tblUser.getSelectedRow();
-//        if (selectedRowIndex < 0) {
-//            JOptionPane.showMessageDialog(this, "Select a person to View!");
-//        }
-//        DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
-//        selectedUser = (User) model.getValueAt(selectedRowIndex, 0);
-//
-//        txtUsername.setText(selectedUser.getUsername());
-//        txtPassword.setText(selectedUser.getPassword());
-//        txtnuId.setText(selectedUser.getNuId());
-//        chkActive.setSelected(selectedUser.isActive());
-
-      
+        
+    
     }//GEN-LAST:event_btnViewMouseClicked
 
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-//             int selectedRowIndex = tblUser.getSelectedRow();
-//           if (selectedRowIndex < 0) {
-//               JOptionPane.showMessageDialog(this, "Please select a row to delete!");
-//           }
-//           DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
-//           selectedUser = (User) model.getValueAt(selectedRowIndex, 0);
-//
-//           business.getUserDir().deleteUser(selectedUser);
-//           JOptionPane.showMessageDialog(this, "User Deleted!");
-//
-//           resetPage();
-    }//GEN-LAST:event_btnDeleteMouseClicked
+    private void btnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshMouseClicked
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-     
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }//GEN-LAST:event_btnRefreshMouseClicked
 
-    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-//        int selectedRowIndex = tblUser.getSelectedRow();
-//
-//        if (selectedRowIndex < 0) {
-//
-//            JOptionPane.showMessageDialog(this, "Please select a row to update");
-//
-//        } else {
-//
-//            DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
-//            selectedUser = (User) model.getValueAt(selectedRowIndex, 0);
-//
-//            String userName = txtUsername.getText();
-//            String password = txtPassword.getText();
-//            String nuId = txtnuId.getText();
-//
-//            if (!checkValidate()) {
-//                JOptionPane.showMessageDialog(this, "Please enter valid details");
-//            } else {
-//                
-//                try{
-//                    if(!txtPassword.getText().equals(selectedUser.getPassword()))
-//                        selectedUser.setPassword(password);
-//                }catch(Exception e){
-//                    JOptionPane.showMessageDialog(this, e.getMessage());
-//                    return;
-//                }
-//                selectedUser.setUsername(userName);
-//                selectedUser.setActive(chkActive.isSelected());
-//                
-//                JOptionPane.showMessageDialog(this, "Row updated successfully");
-//                resetPage();
-//
-//            }
-//
-//        } 
-    }//GEN-LAST:event_btnUpdateMouseClicked
+        populateTable(org.getWorkQueue().getWorkRequestList());
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnCompleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompleteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnCompleteMouseClicked
+
+    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
+        // TODO add your handling code here:
+       Utility.switchPanel(new WasteProcessedJPanel(system,selectedRequest), system.getWorkArea());
+       
+    }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
         // TODO add your handling code here:
@@ -366,107 +395,199 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         resetPage();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void chkSearchMode1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSearchMode1ActionPerformed
+    private void chkProcessingReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkProcessingReqActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_chkSearchMode1ActionPerformed
+    }//GEN-LAST:event_chkProcessingReqActionPerformed
+
+    private void chkCollectionReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCollectionReqActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkCollectionReqActionPerformed
+
+    private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAssignMouseClicked
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        UserAccount reciever = (UserAccount) cmbAssignee.getSelectedItem();
+        selectedRequest.setReceiver(reciever);
+        selectedRequest.setStatus("Assigned");
+        JOptionPane.showMessageDialog(this, "Request assigned!!");
+        initSetup();
+        
+      // db4o.storeSystem(system);
+        
+    }//GEN-LAST:event_btnAssignActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnComplete;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnView;
+    private javax.swing.JCheckBox chkCollectionReq;
+    private javax.swing.JCheckBox chkProcessingReq;
     private javax.swing.JCheckBox chkSearchMode;
-    private javax.swing.JCheckBox chkSearchMode1;
+    private javax.swing.JComboBox<String> cmbAssignee;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblEmail3;
-    private javax.swing.JTable tblUser;
+    private javax.swing.JTable tblRequests;
     private javax.swing.JTextField txtSearchbox;
     // End of variables declaration//GEN-END:variables
 
-    private void initSetup() {        
-          populateTable();
+    private void initSetup() {
+        changePageStateByUserRole();
+        cmbAssignee.setEnabled(false);
     }
     
        
-    private void populateTable() {
+    private void populateTable(List<WorkRequest> requests) {
     
-//   DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
-//        model.setRowCount(0);
-//
-//        for (User user : business.getUserDir().getUsers()) {
-//
-//            if (user.getRole().equals("ADMIN")) {
-//                continue;
-//            }
-//
-//            //to create lines or row (row is small array of object with 3 members)
-//            Object[] row = new Object[6];
-//            row[0] = user;
-//            row[1] = user.getUsername();
-//            row[2] = user.getPassword();
-//            row[3] = user.isActive();
-//
-//            //model will add row
-//            model.addRow(row);
-//        }
+   DefaultTableModel model = (DefaultTableModel) tblRequests.getModel(); //Convert to TableModel to defaultTableModel
+        model.setRowCount(0);
+        if(org == null){
+            JOptionPane.showMessageDialog(this, "Current user is not associated with organization! ");
+            return;
+        }
+        
+        for(WorkRequest req : requests ){
+            
+            if(req instanceof UserWasteCollectionRequest && !isViewCollectionRequest()){
+                continue;
+            }
+            
+            if(req instanceof WasteProcessingRequest && !isViewProcessingRequest()){
+                continue;
+            }
+
+            //to create lines or row (row is small array of object with 3 members)
+            Object[] row = new Object[6];
+            row[0] = req;
+            row[1] = req.getSender();
+            row[2] = req.getReceiver();
+            row[3] = req.getStatus();
+
+            //model will add row
+            model.addRow(row);
+        }
     }
   
 
-  private void populateTableSearch(String nuId) {
-//       DefaultTableModel model = (DefaultTableModel) tblUser.getModel(); //Convert to TableModel to defaultTableModel
-//        model.setRowCount(0);
-//
-//        for (User user : business.getUserDir().getUsers()) {
-//
-//            if (!user.getNuId().equals(nuId)) {
-//                continue;
-//            }
-//
-//            //to create lines or row (row is small array of object with 3 members)
-//            Object[] row = new Object[6];
-//            row[0] = user;
-//            row[1] = user.getUsername();
-//            row[2] = user.getPassword();
-//            row[3] = user.isActive();
-//
-//            //model will add row
-//            model.addRow(row);
-//        }
+  private void populateTableSearch(int id) {
+       DefaultTableModel model = (DefaultTableModel) tblRequests.getModel(); //Convert to TableModel to defaultTableModel
+        model.setRowCount(0);
+        
+        for(WorkRequest req : system.getOrganizationByUserAccount(system.getLoggedInUser()).getWorkQueue().getWorkRequestList()){
+
+            if (req.getId() != id ) {
+                continue;
+            }
+
+            //to create lines or row (row is small array of object with 3 members)
+            Object[] row = new Object[6];
+            row[0] = req;
+            row[1] = req.getSender();
+            row[2] = req.getReceiver();
+            row[3] = req.getStatus();
+
+            //model will add row
+            model.addRow(row);
+        }
    
 }
 
-//      public void clearFields(){
-//        txtUsername.setText("");
-//        txtPassword.setText("");
-//        txtnuId.setText("");     
-//    }
 
     private void resetPage() {
-        populateTable();
-     //   clearFields();
-        initialButtonsState();
+        initSetup();
     }
 
-    private void initialButtonsState() {
-         btnDelete.setEnabled(false);
-        btnUpdate.setEnabled(false);
+
+    private boolean isViewCollectionRequest(){
+        return chkCollectionReq.isSelected();
     }
-//
-//
-//   public boolean checkValidate(){
-//        return Validations.isStringValid(txtUsername.getText()) &&
-//        Validations.isStringValid(txtPassword.getText()) && 
-//        Validations.isStringValid(txtnuId.getText());
-//    
-//    }
+   
+    private boolean isViewProcessingRequest(){
+       return chkProcessingReq.isSelected();
+    }
+        
+    private void emptyAssignee(){
+        cmbAssignee.removeAllItems();
+    }
+     
+    private void populateAssignee(){
+       //Step 1: Empty assignee comboBox
+       emptyAssignee();
+       
+       //Step 2: Check if View collectionRequest is checked:
+       if(isViewCollectionRequest()){
+           
+           //fetch waste collectors from organizations
+           List<UserAccount> collectors = org.getUserAccountDir().findAllUserAccountByRole(RoleType.WASTE_COLLECTOR);
+           Utility.addToComboBox(cmbAssignee, collectors);
+       }
+       
+       if(isViewProcessingRequest()){
+            List<UserAccount> segregators = org.getUserAccountDir().findAllUserAccountByRole(RoleType.WASTE_SEGREGATOR);
+           Utility.addToComboBox(cmbAssignee, segregators);
+       }
+       
+       
+    }
 
-
+    private void changePageStateByUserRole() {
+        
+        RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
+        List<WorkRequest> requests = null;
+        org = system.getOrganizationByUserAccount(system.getLoggedInUser());
+        
+        switch(roleType){
+            case WASTE_CORDINATOR:
+                chkProcessingReq.setSelected(true);
+                chkCollectionReq.setSelected(true);
+                requests = org.getWorkQueue().getWorkRequestList();
+                break;
+                
+            case WASTE_COLLECTOR:
+                chkProcessingReq.setSelected(false);
+                chkCollectionReq.setSelected(true);
+                chkProcessingReq.setEnabled(false);
+                chkCollectionReq.setEnabled(false);
+                requests = org.getWorkQueue().getWorkRequestByReceiver(system.getLoggedInUser());
+                break;
+                
+             case WASTE_SEGREGATOR:
+                chkProcessingReq.setSelected(true);
+                chkCollectionReq.setSelected(false);
+                chkProcessingReq.setEnabled(false);
+                chkCollectionReq.setEnabled(false);
+                requests = org.getWorkQueue().getWorkRequestByReceiver(system.getLoggedInUser());
+                break;   
+         
+        }
+            
+        btnAssign.setEnabled(false);
+        btnComplete.setEnabled(false);
+        
+        //populate logic
+        populateTable(requests);
+    }
+    
+    private boolean canAssign(){
+        RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
+        return roleType.equals(RoleType.WASTE_CORDINATOR) && (selectedRequest.getReceiver() == null);   
+    }
+    
+    private boolean canComplete(){
+        RoleType roleType = system.getLoggedInUser().getRole().getRoleType();
+        return !roleType.equals(RoleType.WASTE_CORDINATOR) && !(selectedRequest.getStatus().equals("Completed"));  
+    }
 }
 
 

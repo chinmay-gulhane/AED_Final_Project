@@ -10,6 +10,8 @@ import edu.neu.wasteManagement.ui.common.ManageWasteRequestsJPanel;
 import edu.neu.wasteManagement.ui.common.GarbageCollectRequestJPanel;
 import edu.neu.wasteManagement.ui.principal.*;
 import edu.neu.wasteManagement.business.Ecosystem;
+import edu.neu.wasteManagement.business.workQueue.WasteProcessingRequest;
+import edu.neu.wasteManagement.business.workQueue.WorkRequest;
 import edu.neu.wasteManagement.business.workQueue.WorkRequestType;
 import edu.neu.wasteManagement.ui.BaseJPanel;
 import edu.neu.wasteManagement.utility.Utility;
@@ -44,23 +46,15 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblProfilePic = new javax.swing.JLabel();
-        lblGreetings = new javax.swing.JLabel();
         lblCourses = new javax.swing.JLabel();
         lblReviewProfessor = new javax.swing.JLabel();
         lblViewCertificates = new javax.swing.JLabel();
         lblMyGrades = new javax.swing.JLabel();
+        lblReviewProfessor1 = new javax.swing.JLabel();
+        lblMyGrades1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        lblProfilePic.setPreferredSize(new java.awt.Dimension(255, 255));
-
-        lblGreetings.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblGreetings.setText("Hello !");
 
         lblCourses.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
         lblCourses.setForeground(new java.awt.Color(0, 153, 255));
@@ -98,78 +92,71 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        jLabel1.setText("Name : ");
+        lblReviewProfessor1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblReviewProfessor1.setForeground(new java.awt.Color(0, 153, 255));
+        lblReviewProfessor1.setText("Raise Waste Segregation Request >");
+        lblReviewProfessor1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblReviewProfessor1MouseClicked(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        jLabel3.setText("Email id: ");
+        lblMyGrades1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        lblMyGrades1.setForeground(new java.awt.Color(0, 153, 255));
+        lblMyGrades1.setText("Performance Indices >");
+        lblMyGrades1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMyGrades1MouseClicked(evt);
+            }
+        });
+        lblMyGrades1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblMyGrades1KeyPressed(evt);
+            }
+        });
 
-        lblName.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        lblName.setText("jLabel4");
-
-        lblEmail.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        lblEmail.setText("jLabel4");
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Work Cordinator Work Area");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(351, 351, 351)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMyGrades)
-                            .addComponent(lblCourses))
-                        .addGap(160, 160, 160)
+                            .addComponent(lblCourses)
+                            .addComponent(lblReviewProfessor1))
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMyGrades1)
                             .addComponent(lblReviewProfessor)
-                            .addComponent(lblViewCertificates)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lblGreetings))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(12632, Short.MAX_VALUE))
+                            .addComponent(lblViewCertificates))))
+                .addContainerGap(12858, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(lblProfilePic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(lblGreetings))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCourses)
-                            .addComponent(lblReviewProfessor))
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblViewCertificates)
-                            .addComponent(lblMyGrades))))
-                .addGap(18, 18, 18)
+                .addGap(100, 100, 100)
+                .addComponent(jLabel1)
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblName))
-                .addGap(24, 24, 24)
+                    .addComponent(lblCourses)
+                    .addComponent(lblReviewProfessor))
+                .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblEmail))
-                .addContainerGap(941, Short.MAX_VALUE))
+                    .addComponent(lblViewCertificates)
+                    .addComponent(lblMyGrades))
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblReviewProfessor1)
+                    .addComponent(lblMyGrades1))
+                .addContainerGap(964, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -193,18 +180,37 @@ public class WasteCordinatorWorkArea extends BaseJPanel {
          Utility.switchPanel(new UserTrashJPanel(system), system.getWorkArea());     
 
     }//GEN-LAST:event_lblMyGradesMouseClicked
+
+    private void lblReviewProfessor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReviewProfessor1MouseClicked
+        // TODO add your handling code here:
+        
+        int i = JOptionPane.showConfirmDialog(this, "Do you want to raise a segregation request?");
+        if(i == 0){
+            WorkRequest segregationRequest = system.createWorkRequest(WorkRequestType.WASTE_PROCESSING_REQUEST, system.getLoggedInUser());
+            ((WasteProcessingRequest)segregationRequest).addActualWasteToRequest(system.fetchListOfEmptyWasteType());
+            JOptionPane.showMessageDialog(this, "Request Raised!!");
+        }
+    }//GEN-LAST:event_lblReviewProfessor1MouseClicked
+
+    private void lblMyGrades1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMyGrades1MouseClicked
+        // TODO add your handling code here:
+       Utility.switchPanel(new PerformancesIndices(system), system.getWorkArea());
+
+    }//GEN-LAST:event_lblMyGrades1MouseClicked
+
+    private void lblMyGrades1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblMyGrades1KeyPressed
+        // TODO add your handling code here:
+               
+    }//GEN-LAST:event_lblMyGrades1KeyPressed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblCourses;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblGreetings;
     private javax.swing.JLabel lblMyGrades;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblProfilePic;
+    private javax.swing.JLabel lblMyGrades1;
     private javax.swing.JLabel lblReviewProfessor;
+    private javax.swing.JLabel lblReviewProfessor1;
     private javax.swing.JLabel lblViewCertificates;
     // End of variables declaration//GEN-END:variables
 

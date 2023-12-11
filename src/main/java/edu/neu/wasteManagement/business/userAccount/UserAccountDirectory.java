@@ -41,6 +41,15 @@ public class UserAccountDirectory {
                 
     }
     
+    public boolean userAccountExists(UserAccount user){
+        //Iteration over all useraccounts
+        for(UserAccount acc : users){
+            if(user.equals(acc))
+                return true;
+        }
+        return false;
+    }
+    
     public UserAccount findUserAccountByPerson(Person person){
         for(UserAccount user : users){
             if(user.getPerson().equals(person))
@@ -70,5 +79,20 @@ public class UserAccountDirectory {
         public void deleteUserAccount(UserAccount selectedUserAccount) {
         this.users.remove(selectedUserAccount);
     }
+
+    public void associateUser(UserAccount user) {
+        System.out.println("Associated user with org");
+        users.add(user);
+    }
+
+    public List<UserAccount> findAllUserAccountByRole(RoleType roleType) {
+        List<UserAccount> userAcc = new ArrayList<>();
+        for(UserAccount user : users)
+            if(user.getRole().getRoleType().equals(roleType))
+                userAcc.add(user);
+        return userAcc;
+    }
+    
+
 
 }

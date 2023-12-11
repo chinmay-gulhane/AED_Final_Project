@@ -41,4 +41,57 @@ public class CityRegistry {
     public void setCities(List<City> cities) {
         this.cities = cities;
     }
+
+    public County getCountyByName(String name) {
+        for(City c : cities)
+            if(c.countyExists(name))
+                return c.getCountyByName(name);      
+        return null;
+    }
+    
+    public City findCityByName(String cityName) {
+        for (City city : cities) {
+            if (city.getName().equals(cityName)) {
+                return city;
+            }
+        }
+        return null;
+    }
+    
+    public List<County> getAllCounties() {
+        List<County> allCounties = new ArrayList<>();
+        for (City city : cities) {
+            allCounties.addAll(city.getCounties());
+        }
+        return allCounties;
+    }
+    
+    public List<Neighbourhood> getAllNeighbourhoods() {
+        List<Neighbourhood> allNeighbourhoods = new ArrayList<>();
+        for (City city : cities) {
+            for (County county : city.getCounties()) {
+                allNeighbourhoods.addAll(county.getNeighbourhoods());
+            }
+        }
+        return allNeighbourhoods;
+    }
+    
+    public County findCountyByName(String countyName) {
+        for (City city : cities) {
+            for (County county : city.getCounties()) {
+                if (county.getName().equals(countyName)) {
+                    return county;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Neighbourhood getNeighbourhoodByName(String name) {
+        for(City c : cities)
+            if(c.neighbourHoodExists(name))
+                return c.getNeighbourhoodByName(name);
+        return null;
+    }
+   
 }

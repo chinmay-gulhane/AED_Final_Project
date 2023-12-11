@@ -29,7 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     private Ecosystem system;
 
-    public MainJFrame() throws Exception {
+    public MainJFrame() {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         setRouter();
@@ -120,7 +120,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     
     private void setRouter() {
-        JPanel router = new RouterJPanel(system);
+        JPanel router = new RouterJPanel(system, dB4OUtil);
         mainWorkArea.add("LoginScreen",router);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
@@ -130,8 +130,12 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainWorkArea;
     // End of variables declaration//GEN-END:variables
 
-    private void initialSetup() throws Exception {
-         this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", new Admin(), true);
+    private void initialSetup() {
+        try {
+            this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", new Admin(), true);
+        } catch (Exception ex) {
+           
+        }
     }
     
 }

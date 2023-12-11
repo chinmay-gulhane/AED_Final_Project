@@ -4,14 +4,18 @@
  */
 package edu.neu.wasteManagement.business.workQueue;
 
+import java.util.List;
+
 /**
  *
  * @author ingale.r
  */
 
 public class Waste {
+
+   
     public enum WasteType {
-        RECYCLABLE, LANDFILL, REPURPOSED, ORGANIC, HAZARDOUS, E_WASTE, COMPOSTABLE, OTHER
+        RECYCLABLE_PAPER, RECYCLABLE_GLASS, RECYCLABLE_METAL, LANDFILL, REPURPOSED, ORGANIC, HAZARDOUS, E_WASTE, COMPOSTABLE, OTHER
     }
 
     private WasteType type;
@@ -21,6 +25,9 @@ public class Waste {
         this.type = type;
         this.amount = amount;
     }
+    
+        public Waste(){}
+
 
     // Getters and setters for type and amount
     public WasteType getType() {
@@ -41,10 +48,10 @@ public class Waste {
 
     @Override
     public String toString() {
-        return "Waste{" +
-                "type=" + type +
-                ", amount=" + amount +
-                '}';
+        return this.type.toString();
+       
     }
+    
+
     
 }

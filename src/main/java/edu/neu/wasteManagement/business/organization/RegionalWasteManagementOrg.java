@@ -18,6 +18,9 @@ import java.util.List;
  * @author ingale.r
  */
 public class RegionalWasteManagementOrg extends Organization {
+    
+        public RegionalWasteManagementOrg(){}
+
 
     private County county;
 

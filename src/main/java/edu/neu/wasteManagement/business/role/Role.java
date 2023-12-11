@@ -13,7 +13,11 @@ import javax.swing.JPanel;
  */
 public abstract class Role {
     private RoleType roleType;
-
+    
+    public Role(RoleType type){
+        this.roleType = type;
+    }
+    public Role(){}
     public RoleType getRoleType() {
         return roleType;
     }

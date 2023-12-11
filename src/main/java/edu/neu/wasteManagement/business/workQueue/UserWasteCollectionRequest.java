@@ -18,13 +18,16 @@ public class UserWasteCollectionRequest extends WorkRequest{
 
     public UserWasteCollectionRequest() {
         super();
-        this.estimatedWasteToCollect = new ArrayList<>();
-        this.actualWasteCollected = new ArrayList<>();
+        this.wasteToCollect = new ArrayList<>();
     }
 
     private Neighbourhood hood;
-    private List<Waste> estimatedWasteToCollect;
-    private List<Waste> actualWasteCollected;
+    private List<Waste> wasteToCollect;
+
+    public List<Waste> getWasteToCollect() {
+        return wasteToCollect;
+    }
+    
     
     public Neighbourhood getHood() {
         return hood;
@@ -34,19 +37,13 @@ public class UserWasteCollectionRequest extends WorkRequest{
         this.hood = hood;
     }
     
-    public void addEstimatedWasteToRequest(WasteType type, double amount){
-        Waste estimatedWaste = new Waste(type, amount);
-        this.estimatedWasteToCollect.add(estimatedWaste);
-    }
-    
-    public void addActualWasteToRequest(WasteType type, double amount){
-        Waste actualWaste = new Waste(type, amount);
-        this.actualWasteCollected.add(actualWaste);
+    public void addWasteToRequest(List<Waste> wastes){
+        this.wasteToCollect.addAll(wastes);
     }
     
     public double getWasteAmount(){
         double amount = 0;
-        for(Waste actualWaste: actualWasteCollected)
+        for(Waste actualWaste: wasteToCollect)
             amount += actualWaste.getAmount();
         return amount;
     }

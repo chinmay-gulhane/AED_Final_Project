@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class EnterpriseDirectory {
    
+
     private List<Enterprise> enterpriseList;
     
      public EnterpriseDirectory(){
@@ -37,13 +38,20 @@ public class EnterpriseDirectory {
         return null;
     }
     
-    public Enterprise findEnterpriseByTypeAndNeighbourhood(Neighbourhood hood, EnterpriseType type){
-        for(Enterprise ent:this.getEnterpriseList()){
-            if(ent.getEnterpriseType().equals(type) && ((MunicipalEnterprise)ent).getHood().equals(hood))
+  public Enterprise findEnterpriseByTypeAndNeighbourhood(Neighbourhood hood, EnterpriseType type) {
+    for (Enterprise ent : this.getEnterpriseList()) {
+        if (ent.getEnterpriseType().equals(type)) {
+            if (ent instanceof MunicipalEnterprise && ((MunicipalEnterprise) ent).getHood().equals(hood)) {
                 return ent;
+            } else if (ent instanceof RetailWasteEnterprise && ((RetailWasteEnterprise) ent).getHood().equals(hood)) {
+                
+                return ent;
+            }
         }
-        return null;
     }
+    return null;
+}
+
     
     public Enterprise getEnterpriseByType(EnterpriseType type){
         for(Enterprise ent:this.getEnterpriseList()){
@@ -80,19 +88,10 @@ public class EnterpriseDirectory {
                 enterprise = new WasteManagementCorpEnterprise(name,type);
                 enterpriseList.add(enterprise);
             }
-//        else if(type==Enterprise.EnterpriseType.Government){
-//            enterprise=new GovernmentEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        } else if (type==Enterprise.EnterpriseType.Labour){
-//            enterprise=new LabourEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        } else if (type==Enterprise.EnterpriseType.WasteManagement){
-//            enterprise= new WasteManagementEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        } else if (type==Enterprise.EnterpriseType.MarketPlace){
-//            enterprise= new WasteManagementEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        } 
+             else if(type == EnterpriseType.RETAIL_WASTE_ENTERPRISE){
+                enterprise = new RetailWasteEnterprise(name,type);
+                enterpriseList.add(enterprise);
+            }
         return enterprise;
     }
 
@@ -103,5 +102,35 @@ public class EnterpriseDirectory {
         }
         return null;
     }
-    
+
+// Method to delete an enterprise by name
+    public void deleteEnterpriseByName(String name) {
+        Enterprise enterpriseToRemove = null;
+        for (Enterprise ent : this.enterpriseList) {
+            if (ent.getName().equals(name)) {
+                enterpriseToRemove = ent;
+                break;
+            }
+        }
+
+        if (enterpriseToRemove != null) {
+            this.enterpriseList.remove(enterpriseToRemove);
+        }
+    }
+
+    // Method to delete an enterprise by type
+    public void deleteEnterpriseByType(EnterpriseType type) {
+        Enterprise enterpriseToRemove = null;
+        for (Enterprise ent : this.enterpriseList) {
+            if (ent.getEnterpriseType().equals(type)) {
+                enterpriseToRemove = ent;
+                break;
+            }
+        }
+
+        if (enterpriseToRemove != null) {
+            this.enterpriseList.remove(enterpriseToRemove);
+        }
+    }
+
 }

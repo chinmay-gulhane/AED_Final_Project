@@ -4,6 +4,7 @@
  */
 package edu.neu.wasteManagement.business.workQueue;
 
+import edu.neu.wasteManagement.business.userAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class WorkQueue {
         return workRequest;
         
     }
+
     
     public String toString(){
         
@@ -39,6 +41,14 @@ public class WorkQueue {
         for(WorkRequest req: this.workRequestList)
             ret += req + "\n";
         return "Work Queue Capacity: " + this.workRequestList.size() + "\n" + ret ;
+    }
+
+    public List<WorkRequest> getWorkRequestByReceiver(UserAccount loggedInUser) {
+        List<WorkRequest> req = new ArrayList<>();
+        for(WorkRequest request : workRequestList)
+            if(request.getReceiver() != null && request.getReceiver().equals(loggedInUser))
+                    req.add(request);
+        return req;
     }
     
    

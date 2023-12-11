@@ -20,7 +20,7 @@ public class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
-    private static int counter = 0;
+    private static int counter = 1;
     
     public WorkRequest(){
         this.id = counter;
@@ -84,6 +84,6 @@ public class WorkRequest {
     }
     
     public String toString(){
-        return "WR Type: " + this.getClass().getSimpleName() + " Sender: " + this.sender + " Reciever: " + this.receiver;
+        return this.getId() + "";
     }
 }

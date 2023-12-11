@@ -13,11 +13,15 @@ import edu.neu.wasteManagement.business.territory.Neighbourhood;
 import edu.neu.wasteManagement.business.userAccount.Person;
 import edu.neu.wasteManagement.persistence.DB4OUtil;
 import edu.neu.wasteManagement.utility.Validations;
+import java.awt.Font;
 import static java.time.Clock.system;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -28,12 +32,69 @@ public class SignUpJPanel extends BaseJPanel {
     /**
      * Creates new form SignUpJPanel
      */
-    
     private DB4OUtil dB4OUtil;
+    private String selectedCity;
+    private String selectedCounty;
+
     public SignUpJPanel(Ecosystem system) {
         super(system);
         this.dB4OUtil = DB4OUtil.getInstance();
         initComponents();
+        populateCityTable();
+
+        cityComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                System.out.println("item state changed");
+                cityComboBoxItemStateChanged(evt);
+            }
+        });
+
+        countyComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                countyComboBoxItemStateChanged(evt);
+            }
+        });
+    }
+
+    private void populateCityTable() {
+        List<City> cities = system.getCityReg().getCities();
+        for (City city : cities) {
+            cityComboBox.addItem(city.getName());
+        }
+        cityComboBox.setSelectedIndex(-1);
+    }
+    
+    private void cityComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {
+        selectedCity = (String) cityComboBox.getSelectedItem();
+        populateCountyComboBox(selectedCity);
+    }
+
+    private void countyComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {
+        selectedCounty = (String) countyComboBox.getSelectedItem();
+        populateNeighComboBox(selectedCity, selectedCounty);
+    }
+
+    private void populateCountyComboBox(String selectedCity) {
+        countyComboBox.removeAllItems();
+        City city = system.getCityReg().findCityByName(selectedCity);
+        if (city != null) {
+            for (County county : city.getCounties()) {
+                countyComboBox.addItem(county.getName());
+            }
+        }
+    }
+
+    private void populateNeighComboBox(String selectedCity, String selectedCounty) {
+        neighComboBox.removeAllItems();
+        City city = system.getCityReg().findCityByName(selectedCity);
+        if (city != null) {
+            County county = city.getCountyByName(selectedCounty);
+            if (county != null) {
+                for (Neighbourhood neighborhood : county.getNeighbourhoods()) {
+                    neighComboBox.addItem(neighborhood.getName());
+                }
+            }
+        }
     }
 
     /**
@@ -58,9 +119,9 @@ public class SignUpJPanel extends BaseJPanel {
         lblPassword3 = new javax.swing.JLabel();
         lblPassword4 = new javax.swing.JLabel();
         txtAddr = new javax.swing.JTextField();
-        txtNeighbourhood = new javax.swing.JTextField();
-        txtCounty = new javax.swing.JTextField();
-        txtCity = new javax.swing.JTextField();
+        cityComboBox = new javax.swing.JComboBox<>();
+        neighComboBox = new javax.swing.JComboBox<>();
+        countyComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -68,27 +129,29 @@ public class SignUpJPanel extends BaseJPanel {
         lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWelcome.setText("Welcome to trashIQ !");
 
-        lblName.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblName.setText("Name");
+        lblName.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblName.setText("Name:");
 
-        txtName.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        txtName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
 
-        lblEmail.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblEmail.setText("Email");
+        lblEmail.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblEmail.setText("Email:");
 
-        txtEmail.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
 
-        btnSubmit.setBackground(new java.awt.Color(105, 155, 247));
+        btnSubmit.setBackground(new java.awt.Color(0, 0, 0));
         btnSubmit.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
@@ -98,98 +161,118 @@ public class SignUpJPanel extends BaseJPanel {
             }
         });
 
-        lblPassword.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblPassword.setText("Address");
+        lblPassword.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblPassword.setText("Address:");
 
-        lblPassword1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblPassword1.setText("Password");
+        txtPassword.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
-        lblPassword2.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblPassword2.setText("Neighbourhood");
+        lblPassword1.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblPassword1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblPassword1.setText("Password:");
 
-        lblPassword3.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblPassword3.setText("County");
+        lblPassword2.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblPassword2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblPassword2.setText("Neighbourhood:");
 
-        lblPassword4.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
-        lblPassword4.setText("City");
+        lblPassword3.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblPassword3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblPassword3.setText("County:");
+
+        lblPassword4.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
+        lblPassword4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblPassword4.setText("City:");
+
+        txtAddr.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        cityComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        cityComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cityComboBoxActionPerformed(evt);
+            }
+        });
+
+        neighComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        countyComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        countyComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countyComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(btnSubmit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblPassword1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPassword4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPassword3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(txtEmail)
+                    .addComponent(txtName)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSubmit)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cityComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(countyComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(neighComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAddr))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblName)
-                                .addComponent(lblEmail))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPassword)
-                                    .addComponent(lblPassword1)
-                                    .addComponent(lblPassword2)
-                                    .addComponent(lblPassword4)
-                                    .addComponent(lblPassword3))
-                                .addGap(3, 3, 3)))
-                        .addGap(99, 99, 99)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNeighbourhood, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 96, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtEmail, txtName});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(50, 50, 50)
                 .addComponent(lblWelcome)
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPassword1)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPassword)
-                    .addComponent(txtAddr, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPassword2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNeighbourhood)
-                        .addGap(1, 1, 1)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                .addComponent(btnSubmit))
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmail))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword1)))
+                    .addComponent(lblName))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPassword4)
+                            .addComponent(cityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPassword3)
+                            .addComponent(countyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPassword2)
+                            .addComponent(neighComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblPassword))
+                .addGap(34, 34, 34)
+                .addComponent(btnSubmit)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblEmail, lblName, lblPassword, lblPassword1, lblPassword2, lblPassword3, lblPassword4});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtEmail, txtName});
 
@@ -210,37 +293,46 @@ public class SignUpJPanel extends BaseJPanel {
             String email = txtEmail.getText();
             String password = txtPassword.getText();
             String address = txtAddr.getText();
-            String City = txtCity.getText();
-            String Neighbourhood = txtNeighbourhood.getText();
-            String County = txtCounty.getText();
-            
-            if(!checkValidate()){
+            String City = (String) cityComboBox.getSelectedItem();
+            String Neighbourhood = (String) neighComboBox.getSelectedItem();
+            String County = (String) countyComboBox.getSelectedItem();
+
+            if (!checkValidate()) {
                 JOptionPane.showMessageDialog(this, "Please enter valid details !!");
                 return;
+            } else {
+                system.getUserAccountDir().addUserAccount(name, password, new PrincipalUser(), true);
+                Neighbourhood neighbourhood = new Neighbourhood(Neighbourhood);
+                County county = new County(County);
+                City city = new City(City);
+                Person person = new Person(name, email, neighbourhood, county, city, address);
+                system.getUserAccountDir().findUserAccount(name, password).setPerson(person);
             }
-            else 
-            {system.getUserAccountDir().addUserAccount(name, password, new PrincipalUser(), true);
-            Neighbourhood neighbourhood = new Neighbourhood(Neighbourhood);
-            County  county = new County(County);      
-            City city = new City(City);
-            Person person = new Person(name,email,neighbourhood, county,city, address);
-            system.getUserAccountDir().findUserAccount(name, password).setPerson(person);
-            }
-            
+
             JOptionPane.showMessageDialog(this, "Sign up completed!");
-             
+
             clearFields();
-           
+
         } catch (Exception ex) {
             Logger.getLogger(SignUpJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
         dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_btnSubmitActionPerformed
-    
+
+    private void countyComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countyComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_countyComboBoxActionPerformed
+
+    private void cityComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cityComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox<String> cityComboBox;
+    private javax.swing.JComboBox<String> countyComboBox;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
@@ -249,31 +341,25 @@ public class SignUpJPanel extends BaseJPanel {
     private javax.swing.JLabel lblPassword3;
     private javax.swing.JLabel lblPassword4;
     private javax.swing.JLabel lblWelcome;
+    private javax.swing.JComboBox<String> neighComboBox;
     private javax.swing.JTextField txtAddr;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtCounty;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtNeighbourhood;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
-     
- 
-    public boolean checkValidate(){
-        return Validations.isStringValid(txtName.getText()) &&
-        Validations.isStringValid(txtEmail.getText()) &&
-        Validations.isEmailValid(txtEmail.getText()) &&
-        Validations.isStringValid(txtPassword.getText()) &&
-        Validations.isValidPassword(txtPassword.getText());
+
+    public boolean checkValidate() {
+        return Validations.isStringValid(txtName.getText())
+                && Validations.isStringValid(txtEmail.getText())
+                && Validations.isEmailValid(txtEmail.getText())
+                && Validations.isStringValid(txtPassword.getText())
+                && Validations.isValidPassword(txtPassword.getText());
     }
-    
-    public void clearFields(){
+
+    public void clearFields() {
         txtName.setText("");
         txtEmail.setText("");
         txtPassword.setText("");
     }
 
 }
-
- 
-

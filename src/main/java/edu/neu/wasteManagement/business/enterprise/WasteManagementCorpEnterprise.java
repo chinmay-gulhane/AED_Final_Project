@@ -16,6 +16,9 @@ import java.util.List;
 public class WasteManagementCorpEnterprise extends Enterprise{
     
     private County county;
+    
+    public WasteManagementCorpEnterprise(){}
+
 
     public County getCounty() {
         return county;
@@ -38,5 +41,6 @@ public class WasteManagementCorpEnterprise extends Enterprise{
     public List<Role> getSupportedRole() {
         return null;
     }
+    
     
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author ingale.r
  */
 public class OrganizationDirectory {
+    
     private ArrayList<Organization> organizationList;
 
     public OrganizationDirectory() {
@@ -35,6 +36,10 @@ public class OrganizationDirectory {
             organization = new RegionalWasteManagementOrg(orgName, Type.REGIONAL_WASTE_MANAGEMENT_ORG);
             organizationList.add(organization);
         }
+        else if (Type.RETAIL_WASTE_PROCESSING_ORG== type){
+            organization = new RetailWasteProcessingOrg(orgName, Type.RETAIL_WASTE_PROCESSING_ORG);
+            organizationList.add(organization);
+        }
         organization.setType(type);
         return organization;
     }
@@ -45,6 +50,10 @@ public class OrganizationDirectory {
                 return organization; 
         }
         return null;
+    }
+    
+    public void deleteOrganization(Organization organizationToDelete) {
+        organizationList.remove(organizationToDelete);
     }
     
     public String toString(){

@@ -78,8 +78,14 @@ public class Person {
         this.city=city;
         this.address=address;
     }
+    
+    public Person(String name, String email,String address) {
+        this.name = name;
+        this.email = email;    
+        this.address=address;
+    }
 
-//    public Person() {
-//    }
+    public Person() {
+    }
     
 }

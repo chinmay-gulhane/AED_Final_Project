@@ -67,12 +67,12 @@ public class WasteConvertJPanel extends BaseJPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel9.setText("Waste");
-        add(jLabel9);
 
         btnAddProduct.setText(">");
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +80,6 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnAddProductActionPerformed(evt);
             }
         });
-        add(btnAddProduct);
 
         btnBack3.setBackground(new java.awt.Color(0, 0, 0));
         btnBack3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
@@ -91,7 +90,6 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnBack3ActionPerformed(evt);
             }
         });
-        add(btnBack3);
 
         tblWaste.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,8 +101,6 @@ public class WasteConvertJPanel extends BaseJPanel {
         ));
         jScrollPane2.setViewportView(tblWaste);
 
-        add(jScrollPane2);
-
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
@@ -115,10 +111,61 @@ public class WasteConvertJPanel extends BaseJPanel {
         ));
         jScrollPane3.setViewportView(tblProduct);
 
-        add(jScrollPane3);
-
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel10.setText("Product");
-        add(jLabel10);
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Convert Waste");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 44, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnBack3)
+                                .addGap(478, 478, 478))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))))
+                        .addGap(0, 33, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61)
+                .addComponent(btnBack3)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
@@ -163,6 +210,7 @@ public class WasteConvertJPanel extends BaseJPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
     private javax.swing.JButton btnBack3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;

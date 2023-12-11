@@ -116,16 +116,16 @@ public class ConfigureASystem {
 
      
        //  -------- Create Waste Collection Request ----------
-//       WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
+       WorkRequest garbageCollectRequest = system.createWorkRequest(WorkRequestType.USER_WASTE_COLLECTION_REQUEST,andy);
         // Assign Waste collection Request to Waste Collector
-//       garbageCollectRequest.setReceiver(wasteCollector);
+       garbageCollectRequest.setReceiver(wasteCollector);
        
          // Waste Collector - Mark Status as completed
-//       garbageCollectRequest.setStatus("Completed");
+       garbageCollectRequest.setStatus("Completed");
 
        // ----------- Create Retail Waste Collection Request ----------
 //       WorkRequest retailCollectRequest = system.createWorkRequest(WorkRequestType.RETAIL_WASTE_COLLECTION_REQUEST, retail);
-//        retailCollectRequest.setReceiver(wasteCollector);
+//       retailCollectRequest.setReceiver(wasteCollector);
 
        // Waste Collector - Mark Status as completed
        
@@ -139,21 +139,21 @@ public class ConfigureASystem {
        processingRequest.setReceiver(wasteSegregator);
         
        // Waste Collector - Mark Status as completed
-//       processingRequest.setStatus("Completed");
+       processingRequest.setStatus("Completed");
        
        
        // -------- Municipal to Waste Management -------
        
-       // Step 1 - Create MUNICIPAL_WASTE_COLLECTION_REQUEST
+//       // Step 1 - Create MUNICIPAL_WASTE_COLLECTION_REQUEST
 //       WorkRequest municipalWasteColReq = system.createWorkRequest(WorkRequestType.MUNICIPAL_WASTE_COLLECTION_REQUEST, wasteCordinator);
 //       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.RECYCLABLE_GLASS, 15);
 //       ((MunicipalWasteCollectionRequest)municipalWasteColReq).addActualWasteToRequest(Waste.WasteType.E_WASTE, 1);
 //       System.out.println(regionalWasteManagementOrg.getWorkQueue());
-//        
-       
-       // --------- Display the User's statistic -------
-       system.addOrganizationEnterprise(marketplace, greenLiving);
-       system.addOrganizationEnterprise(municipalWasteOrg, municipalWasteEnt);
+//       
+//       
+//       // --------- Display the User's statistic -------
+//       system.addOrganizationEnterprise(marketplace, greenLiving);
+//       system.addOrganizationEnterprise(municipalWasteOrg, municipalWasteEnt);
        
        
        // Raise WCR

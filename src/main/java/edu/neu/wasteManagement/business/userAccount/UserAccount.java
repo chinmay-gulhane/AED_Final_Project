@@ -28,6 +28,16 @@ public class UserAccount {
     private String salt = BCrypt.gensalt();
     private Neighbourhood neighbourhood;
     private WorkQueue queue;
+    private double TotalTrash;
+
+    public double getTotalTrash() {
+        return TotalTrash;
+    }
+
+    public void setTotalTrash(double TotalTrash) {
+        this.TotalTrash = TotalTrash;
+    }
+    
     
     public UserAccount(String username, String password, Role role, boolean Active) throws Exception {
         this.usedPasswords = new ArrayList<>();
@@ -135,5 +145,9 @@ public class UserAccount {
 
     public Neighbourhood getNeighbourhood() {
         return neighbourhood;
+    }
+
+    public void setTotalTrashGenerated(double trashGenerated) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

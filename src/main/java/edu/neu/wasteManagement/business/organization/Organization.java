@@ -22,6 +22,15 @@ public abstract class Organization {
     private EmployeeDirectory employeeDir;
     private UserAccountDirectory userAccountDir;
     private ProductCatalog catalog;
+    private double TrashGenerated;
+
+    public double getTrashGenerated() {
+        return TrashGenerated;
+    }
+
+    public void setTrashGenerated(double TrashGenerated) {
+        this.TrashGenerated = TrashGenerated;
+    }
 
     public UserAccountDirectory getUserAccountDir() {
         return userAccountDir;

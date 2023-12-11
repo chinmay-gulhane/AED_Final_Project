@@ -133,7 +133,7 @@ public class SignUpJPanel extends BaseJPanel {
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblName.setText("Name:");
 
-        txtName.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        txtName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -144,14 +144,14 @@ public class SignUpJPanel extends BaseJPanel {
         lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblEmail.setText("Email:");
 
-        txtEmail.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
 
-        btnSubmit.setBackground(new java.awt.Color(105, 155, 247));
+        btnSubmit.setBackground(new java.awt.Color(0, 0, 0));
         btnSubmit.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
@@ -164,6 +164,8 @@ public class SignUpJPanel extends BaseJPanel {
         lblPassword.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblPassword.setText("Address:");
+
+        txtPassword.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         lblPassword1.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
         lblPassword1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -181,12 +183,18 @@ public class SignUpJPanel extends BaseJPanel {
         lblPassword4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblPassword4.setText("City:");
 
+        txtAddr.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        cityComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         cityComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityComboBoxActionPerformed(evt);
             }
         });
 
+        neighComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        countyComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         countyComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 countyComboBoxActionPerformed(evt);
@@ -197,7 +205,7 @@ public class SignUpJPanel extends BaseJPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+            .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,24 +219,25 @@ public class SignUpJPanel extends BaseJPanel {
                             .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPassword)
-                        .addComponent(txtAddr)
-                        .addComponent(txtEmail)
-                        .addComponent(txtName)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(txtEmail)
+                    .addComponent(txtName)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSubmit)
-                        .addComponent(cityComboBox, 0, 219, Short.MAX_VALUE))
-                    .addComponent(neighComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(countyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cityComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(countyComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(neighComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAddr))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(50, 50, 50)
                 .addComponent(lblWelcome)
-                .addGap(40, 40, 40)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +269,7 @@ public class SignUpJPanel extends BaseJPanel {
                     .addComponent(lblPassword))
                 .addGap(34, 34, 34)
                 .addComponent(btnSubmit)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblEmail, lblName, lblPassword, lblPassword1, lblPassword2, lblPassword3, lblPassword4});

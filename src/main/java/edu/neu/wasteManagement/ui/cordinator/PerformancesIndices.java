@@ -63,7 +63,6 @@ public class PerformancesIndices extends BaseJPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPerformances = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnTopCourses = new javax.swing.JButton();
         btnTopProfessors = new javax.swing.JButton();
         btnTopStudents = new javax.swing.JButton();
 
@@ -105,24 +104,10 @@ public class PerformancesIndices extends BaseJPanel {
         });
         jScrollPane1.setViewportView(tblPerformances);
 
-        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("STHeiti", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Top Performances");
-
-        btnTopCourses.setBackground(new java.awt.Color(105, 155, 247));
-        btnTopCourses.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
-        btnTopCourses.setForeground(new java.awt.Color(255, 255, 255));
-        btnTopCourses.setText("Top Organization Trash Processed");
-        btnTopCourses.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTopCoursesMouseClicked(evt);
-            }
-        });
-        btnTopCourses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTopCoursesActionPerformed(evt);
-            }
-        });
 
         btnTopProfessors.setBackground(new java.awt.Color(105, 155, 247));
         btnTopProfessors.setFont(new java.awt.Font("STHeiti", 1, 18)); // NOI18N
@@ -167,36 +152,32 @@ public class PerformancesIndices extends BaseJPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
+                .addContainerGap(190, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnTopStudents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTopProfessors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTopCourses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addComponent(jLabel1)))
-                .addGap(94, 94, 94))
+                            .addComponent(btnTopProfessors))))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel1)
-                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(200, 200, 200)
                         .addComponent(btnTopStudents)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnTopProfessors)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnTopCourses)))
-                .addContainerGap(780, Short.MAX_VALUE))
+                        .addGap(100, 100, 100)
+                        .addComponent(btnTopProfessors))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(829, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -208,16 +189,6 @@ public class PerformancesIndices extends BaseJPanel {
     private void tblPerformancesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPerformancesKeyReleased
 
     }//GEN-LAST:event_tblPerformancesKeyReleased
-
-    private void btnTopCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTopCoursesMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnTopCoursesMouseClicked
-
-    private void btnTopCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopCoursesActionPerformed
-        // TODO add your handling code here:
-        populateTopTrashProcessed();
-    }//GEN-LAST:event_btnTopCoursesActionPerformed
 
     private void btnTopProfessorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTopProfessorsMouseClicked
         // TODO add your handling code here:
@@ -249,7 +220,6 @@ public class PerformancesIndices extends BaseJPanel {
     }//GEN-LAST:event_btnTopStudentsMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTopCourses;
     private javax.swing.JButton btnTopProfessors;
     private javax.swing.JButton btnTopStudents;
     private javax.swing.JLabel jLabel1;

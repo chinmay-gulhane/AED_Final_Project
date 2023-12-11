@@ -84,7 +84,6 @@ public class WasteConvertJPanel extends BaseJPanel {
 
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("Waste");
-        add(jLabel9);
 
         btnAddProduct.setText(">");
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +91,6 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnAddProductActionPerformed(evt);
             }
         });
-        add(btnAddProduct);
 
         btnBack3.setBackground(new java.awt.Color(0, 0, 0));
         btnBack3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
@@ -103,7 +101,6 @@ public class WasteConvertJPanel extends BaseJPanel {
                 btnBack3ActionPerformed(evt);
             }
         });
-        add(btnBack3);
 
         jLabel10.setText("Product");
         add(jLabel10);
@@ -163,6 +160,7 @@ public class WasteConvertJPanel extends BaseJPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
     private javax.swing.JButton btnBack3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;

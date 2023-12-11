@@ -350,7 +350,10 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
         selectedRequest = (WorkRequest) model.getValueAt(selectedRowIndex, 0);
         
         if(canComplete()) btnComplete.setEnabled(true);
-        if(canAssign()) btnAssign.setEnabled(true);
+        if(canAssign()) {
+            btnAssign.setEnabled(true);
+            cmbAssignee.setEnabled(true);
+        }
         btnRefresh.setEnabled(true);
         txtSearchbox.setEnabled(false);
         populateAssignee();
@@ -441,7 +444,7 @@ public class ManageWasteRequestsJPanel extends BaseJPanel {
 
     private void initSetup() {
         changePageStateByUserRole();
-        
+        cmbAssignee.setEnabled(false);
     }
     
        

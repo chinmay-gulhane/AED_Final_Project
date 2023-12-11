@@ -303,6 +303,9 @@ public class Ecosystem extends Organization implements Serializable{
         RoleType roleType = loggedIn.getRole().getRoleType();
         if(roleType.equals(RoleType.ADMIN) || roleType.equals(RoleType.PRINCIPAL_USER)) return true;
         
+        if(loggedIn.getNeighbourhood() == null) 
+            return false;
+        
         for(Enterprise ent : enterpriseDir.getEnterpriseList())
             for(Organization org : ent.getOrganizationDir().getOrganizationList())
                 if(org.getUserAccountDir().userAccountExists(loggedIn))

@@ -131,7 +131,11 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initialSetup() {
-         this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", new Admin(), true);
+        try {
+            this.system.getUserAccountDir().addUserAccount("admin", "A1bcdf", new Admin(), true);
+        } catch (Exception ex) {
+           
+        }
     }
     
 }
